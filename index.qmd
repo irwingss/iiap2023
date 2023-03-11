@@ -1936,4 +1936,7 @@ $$ u_i \sim N(0,D) $$
 
 - $D$ matriz de varianza-covarianza de eff. aleatorios.
 :::
-<!-- :::: -->
+::::
+
+
+# Gracias por su atención 
