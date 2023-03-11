@@ -1,0 +1,26 @@
+---
+title: "Modelos Lineales"
+format: html
+---
+
+## Instalación de librerías
+
+```{r}
+
+```
+
+
+## Activación de librerías
+
+
+# Modelos lineales
+
+## Ejemplo 01:
+
+### Creación
+
+```{r}
+
+```
+
+### Asunciones teóricas
