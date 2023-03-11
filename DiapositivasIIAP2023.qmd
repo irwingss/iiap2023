@@ -1,0 +1,1939 @@
+---
+title: "<br>Capacitación y actualización del equipo de investigación en programas estadísticos" 
+subtitle: "IIAP 2023"
+author: "Profesor: Irwing S. Saldaña"
+date: 03/02/2023
+lang: es
+title-slide-attributes:
+    data-background-image: fondo.png
+    data-background-size: cover
+    data-background-opacity: "1"
+logo: logo.jpg
+format: 
+  revealjs:
+    theme: [simple, miestilo.scss]
+    chalkboard:
+      theme: chalkboard
+      boardmarker-width: 5
+    incremental: true
+    scrollable: true
+    slide-number: true
+    fig-format: svg
+editor: source
+execute: 
+  cache: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# Modelos lineales {background-image=fondoh1.png}
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(easystats)
+library(cowplot)
+library(png)
+library(fitdistrplus)
+library(JWileymisc)
+library(GGally)
+library(glmnet)
+
+
+img <- readPNG("logo_masterx.png")
+
+```
+
+
+
+## Modelo lineal
+
+Un modelo lineal sigue la siguiente ecuación:
+
+$$ 
+ \Large{y =\beta_0 + \sum_{i=1}^{n}(\beta_i*x_i) + \varepsilon}
+$$
+<center>Donde: $\varepsilon \sim \mathcal{N}(0,\sigma)$, $\beta_0$ es el intercepto en $Y$, y $\beta_i$ la pendiente de la variable $X_i$.</center><br>
+
+- Abstracción de la realidad más simple posible.
+
+- Pocos eventos naturales son lineales.
+
+- La distribución asociada al modelo lineal es la **distribución Gaussiana o Normal**.
+
+- El cálculo de los coeficientes $\beta_i$ se realiza mediante OLS o ML.
+
+
+## Teoría básica OLS: cálculo de coeficientes {}
+
+La forma más sencilla de encontrar los coeficientes de una función
+lineal es utilizando el método de los mínimos cuadrados ordinarios
+(OLS). Para esta sección utilizaremos las formulas definidas a
+continuación:
+
+::: {.nonincremental}
+-   La fórmula de un modelo lineal se define como:
+
+$$
+\large{y_i = \beta_0 + \sum_{i=1}^n{(\beta_ix_i)}+\varepsilon_i}
+$$ 
+
+- Para el **cálculo del coeficiente de una variable $X$ ($\beta_i$)**, se utilizan los
+valores de cada observación $x$, el promedio del vector de la variable x
+$\bar{x}$, los valores de cada observación $y$, el promedio del vector
+de la variable $X$ $\bar{y}$, en la siguiente fórmula:
+
+$$
+\large{\hat\beta_i=\frac{\sum_i (x_i\bar{x})(y_i\bar{y})}{\sum_i (x_i\bar{x})^2}}
+$$
+:::
+
+## {}
+
+::: {.nonincremental}
+-   Una vez calculados los coeficientes $\beta_i$ se realiza el **cálculo de $\beta_0$:**
+
+$$
+\large{\hat\beta_0=\bar{y} - \hat\beta_1\bar{x}}
+$$
+
+-   Un paso previo para el cálculo del p-valor asociado a un coeficiente
+    del modelo lineal, es el **estimar el error estándar del coeficiente**.
+    Esto es homólogo al cálculo de la desviación estándar del
+    coeficiente, por lo que la raíz cuadrada de la fórmula de la
+    varianza del coeficiente nos ayudará en el cálculo de
+    $\widehat{\text{se}}(\hat{b})$:
+
+$$
+\large{\widehat{\text{se}}(\hat{b_i})  = \sqrt{\widehat{\textrm{Var}}(\hat{b_i})} = \sqrt{\frac{n \hat{\sigma}^2}{n\sum x_i^2 - (\sum x_i)^2}}}
+$$ 
+:::
+
+## {}
+
+::: {.nonincremental}
+- Donde $\hat{\sigma}^2$ es el error cuadrado medio, definido por la
+fórmula:
+
+$$
+\large{\hat{\sigma}^2 = \frac{1}{n-2} \sum_i \hat{\varepsilon}_i^2}
+$$
+
+-   De manera similar, se calcula el error estándar del intercepto
+    $\widehat{\text{se}}(\hat{b_0})$:
+
+$$
+\large{\widehat{\text{se}}(\hat{b_0})  = \sqrt{\widehat{\textrm{Var}}(\hat{b_0})} = \sqrt{\frac{\hat{\sigma}^2\bar{x}^2}{\sum_{i=1}^n(x_i-\bar{x})^2}}}
+$$ 
+:::
+
+
+## Asunciones teóricas del modelo lineal
+
+- A1: Variable dependiente numérica continua.
+- A2: Linealidad de la relación.
+- A3: Normalidad de los residuales.
+- A4: Independencia de los residuales.
+- A5: Homocedasticidad de los residuales.
+- A6: Ausencia de valores influyentes.
+- A7: No multicolinearidad entre las variables independientes.
+
+## {}
+
+:::: {.columns}
+::: {.column  width="55%"}
+```{r}
+#| label: fig-asunciones-lm
+#| fig-cap: Multiplot de asunciones teóricas.
+#| fig-align: center
+#| fig-width: 5
+#| fig-height: 5.5
+#| out-width: 100%
+#| echo: false
+n1 <- rep(1:100,2)
+a1 <- 0
+b1 <- 1
+sigma21 <- n1^1.3
+eps1 <- rnorm(n1,mean=0,sd=10)
+y1 <- a1 + b1 * n1 + eps1
+datos1 <- data.frame(y1,n1)
+
+model1 <- lm(y1~n1)
+check_model(model1)
+
+```
+:::
+
+::: {.column width="45%"}
+
+<h2>Revisión rápida de las asunciones teóricas</h2>
+
+```{r}
+#| eval: false
+#| echo: true
+
+modelo <- lm(y ~ x, 
+             data = mis_datos)
+performance::check_model(modelo)
+```
+
+:::
+::::
+
+## A2: Linealidad de la relación {}
+
+```{r}
+#| label: fig-00linealidad
+#| fig-cap: <b>Falta de linealidad</b> en la relación entre X e Y. Es un monotónico pero no lineal.
+#| fig-align: center
+#| out-width: 100%
+#| echo: false
+
+n0 <- rep(1:100,2)
+a0 <- 0
+b0 <- 1
+sigma20 <- n0^1.3
+set.seed(1989)
+eps0 <- rnorm(n0,mean=0,sd=sqrt(sigma20))
+set.seed(17590)
+y0 <- a0 + b0 *n0^2 + eps0 + rnorm(n0)
+datos0 <- data.frame(y0,n0)
+
+g1<-ggplot(data=datos0,aes(x=n0, y=y0))+
+  theme_minimal()+
+ geom_jitter(size=4, alpha=0.7, color="#4eb8d2",width = 20,height = 30)+
+  geom_smooth(method="lm",formula =  y ~ x + I(x^2), se=TRUE,
+              color = 'black', size=1.2)+
+  labs(x="X", y="Y")
+
+ggdraw() +
+  draw_plot(g1) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+```
+
+
+## A5: Homocedasticidad de los residuales {}
+
+```{r}
+#| label: fig-01homocedasticidad
+#| fig-cap: "Relación entre X e Y es <b>homocedástica</b>. Línea negra cuantil 0.5; líneas punteadas azules cuantiles 0.25 y 0.75; líneas punteadas naranja cuantiles 0.05 y 0.95."
+#| fig-align: center
+#| out-width: 100%
+#| echo: false
+
+n1 <- rep(1:100,2)
+a1 <- 0
+b1 <- 1
+sigma21 <- n1^1.3
+eps1 <- rnorm(n1,mean=0,sd=10)
+y1 <- a1 + b1 * n1 + eps1
+datos1 <- data.frame(y1,n1)
+
+model1 <- lm(y1~n1)
+
+g2<-ggplot(data=datos1,aes(x=n1, y=y1))+
+  theme_minimal()+
+ geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+  geom_quantile(quantiles = .5, color = 'black', size=1.2)+
+  geom_quantile(quantiles = c(.25, .75),
+                colour = "#4e00ff", lty = 2, size=1) +
+  geom_quantile(quantiles = c(.05, .95),
+                colour = "#ff4800", lty = 2, size=1)+
+  labs(x="X", y="Y")
+
+
+ggdraw() +
+  draw_plot(g2) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+
+```
+
+## A5: Homocedasticidad de los residuales {}
+
+```{r}
+#| label: fig-02heterocedasticidad
+#| fig-cap: Este gráfico presenta <b>problemas de Heterocedasticidad</b>. Línea negra cuantil 0.5; líneas punteadas azules cuantiles 0.25 y 0.75; líneas punteadas naranja cuantiles 0.05 y 0.95.
+#| fig-align: center
+#| out-width: 100%
+#| echo: false
+
+n2 <- rep(1:100,2)
+a2 <- 0
+b2 <- 1
+sigma22 <- n2^1.3
+eps2 <- rnorm(n2,mean=0,sd=sqrt(sigma22))
+y2 <- a2 + b2 * n2 + eps2
+datos2 <- data.frame(y2,n2)
+
+g3 <- ggplot(data=datos2,aes(x=n2, y=y2))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+  geom_quantile(quantiles = .5, color = 'black', size=1.2)+
+  geom_quantile(quantiles = c(.25, .75),
+                colour = "#4e00ff", lty = 2, size=1) +
+  geom_quantile(quantiles = c(.05, .95),
+                colour = "#ff4800", lty = 2, size=1)+
+  labs(x="X", y="Y")
+
+ggdraw() +
+  draw_plot(g3) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+```
+
+
+## A5: Homocedasticidad de los residuales {}
+
+```{r}
+#| label: fig-03heterochequeo
+#| fig-cap: Gráfico de Residuales vs Valores ajustados.
+#| fig-align: right
+#| out-width: 100%
+#| echo: false
+
+check_model(model1, panel=TRUE, check="homogeneity", colors=c("4eb8d2","4e00ff","ff4800"))
+```
+
+
+## A7: Problema de multicolinearidad {}
+
+```{r}
+#| label: fig-05multicolinearidad
+#| fig-cap: Este gráfico presenta <b>problemas de Heterocedasticidad</b>. Línea negra cuantil 0.5; líneas punteadas azules cuantiles 0.25 y 0.75; líneas punteadas naranja cuantiles 0.05 y 0.95.
+#| fig-align: center
+#| out-width: 100%
+#| echo: false
+
+n2 <- rep(1:100,2)
+a2 <- 0
+b2 <- 1
+sigma22 <- n2^1.3
+eps2 <- rnorm(n2,mean=0,sd=sqrt(sigma22))
+y2 <- a2 + b2 * n2 + eps2
+datos2 <- data.frame(y2,n2)
+
+g3 <- ggplot(data=datos2,aes(x=n2, y=y2))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+  geom_quantile(quantiles = .5, color = 'black', size=1.2)+
+  geom_quantile(quantiles = c(.25, .75),
+                colour = "#4e00ff", lty = 2, size=1) +
+  geom_quantile(quantiles = c(.05, .95),
+                colour = "#ff4800", lty = 2, size=1)+
+  labs(x="X", y="Y")
+
+ggdraw() +
+  draw_plot(g3) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+```
+
+
+## A7: Problema de multicolinearidad {}
+
+```{r}
+#| label: fig-05multico-test
+#| fig-cap: Variance Inflation Factor (VIF) para identificar problemas de multicolinearidad.
+#| fig-align: center
+#| out-width: 100%
+#| echo: false
+
+
+model5 <- lm(Petal.Width~Sepal.Width+Sepal.Length+Petal.Length+Species, data=iris)
+
+check_model(model5, panel=TRUE, check = "vif")
+```
+
+## Razones para escoger un modelo lineal
+
+- Mi variable dependiente (respuesta, o Y) es numérica continua (**mediciones**).
+- El fenómeno evaluado puede producir **valores numéricos negativos**.
+- Los gráficos relacionando la variable dependiente con cada variable independiente numérica muestran **linealidad** (no monotonicidad).
+
+## Chequeo de distribución: Gráfico de Cullen y Frey
+
+```{r}
+#| label: fig-06cullenfrey
+#| fig-cap: El punto azul oscuro son los datos observados. Los amarillos, los 1000 bootstrap realizados sobre los datos.
+#| out-width: 100%
+#| echo: false
+library(fitdistrplus)
+invisible(descdist(iris$Sepal.Length, boot = 1000,discrete=FALSE)) 
+```
+
+```{r}
+#| label: fig-06cullenfrey-code
+#| eval: false
+#| echo: true
+fitdistrplus::descdist(observaciones, boot = 1000, discrete = FALSE) #distribuciones continuas
+fitdistrplus::descdist(observaciones, boot = 1000, discrete = TRUE) #distribuciones discretas
+```
+
+## Comparación de distribuciones de probabilidades
+
+:::: {.columns}
+::: {.column}
+```{r}
+#| echo: false
+#| fig-height: 3.5
+#| fig-width: 3.5
+#| fig-align: center
+library(JWileymisc)
+di1<-JWileymisc::testDistribution(iris$Sepal.Length, distr="normal", extremevalues="empirical")
+plot(di1)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+library(JWileymisc)
+comp1 <- 
+  testDistribution(observ, 
+    distr="normal", 
+    extremevalues="empirical")
+plot(comp1)
+```
+
+:::
+::: {.column}
+```{r}
+#| echo: false
+#| fig-height: 3.5
+#| fig-width: 3.5
+#| fig-align: center
+di2<-JWileymisc::testDistribution(iris$Sepal.Length, distr="gamma",extremevalues="empirical")
+plot(di2)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+library(JWileymisc)
+comp2 <-  
+  testDistribution(observ, 
+    distr="gamma", 
+    extremevalues="empirical")
+plot(comp2)
+```
+:::
+::::
+
+## Alternativas al modelo lineal
+
+Existen alternativas para cuando se violan las asunciones teóricas del modelo lineal. Asegúrate de encontrar el modelo adecuado en lugar de forzar los datos a un modelo que no le corresponde:
+
+- A1: Variable dependiente numérica continua $\rightarrow$ **(GLM)**.
+- A2: Linealidad de la relación $\rightarrow$ **(Modelamiento no lineal \ Transformación)**.
+- A3: Normalidad de los residuales $\rightarrow$ **(GLM)**.
+- A4: Independencia de los residuales $\rightarrow$ **(Efectos mixtos)**. 
+- A5: Homocedasticidad de los residuales $\rightarrow$ **(WLS)**.
+- A6: Ausencia de valores influyentes $\rightarrow$ **(Data cleaning)**.
+- A7: No multicolinearidad entre las variables independientes $\rightarrow$ **(Modelos Log lineares)**.
+
+# Regresiones logarítmicas {background-image=fondoh1.png}
+
+## Introducción a regresiones logarítmicas
+
+:::: {.columns}
+::: {.column width="30%"}
+Los modelos logarítmicos se utilizan en situaciones en las que existe un **rápido decaimiento/aumento** en la relación entre dos variables, implicando una evidente falta de linealidad en dicha relación. Pueden ser:
+
+- Regresión Log-linear.
+- Regresión Linear-log.
+- Regresión Log-log.
+
+:::
+
+::: {.column width="70%"}
+
+```{r}
+#| label: fig-04logreg
+#| fig-cap: Relación no lineal entre X e Y. El modelo lineal clásico no ajusta correctamente los datos.
+#| fig-align: center
+#| fig-width: 5
+#| fig-height: 3.7
+#| out-width: 100%
+#| echo: false
+
+y <- log(300:1,2)
+set.seed(123)
+x <- 1:300 + rnorm(300, 20, 25)
+
+datos4 <- data.frame(Y=y, X=x)
+
+g4 <- ggplot(data=datos4,aes(x=X, y=Y))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method="lm",se=FALSE, 
+              color = 'black', size=1.2)
+ 
+ggdraw() +
+  draw_plot(g4) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+
+```
+
+:::
+::::
+
+## {}
+
+**Ecuación del modelo Linear clásico:**
+$$
+ \normalsize{y =\beta_0 + \sum_{i=1}^{n}(\beta_i*x_i) + \varepsilon}
+$$
+
+
+**Ecuación del modelo Log-Linear:**
+$$
+ \normalsize{\log(y) =\beta_0 + \sum_{i=1}^{n}(\beta_i*x_i) + \varepsilon}
+$$
+
+
+**Ecuación del modelo Linear-Log:**
+$$
+ \normalsize{y =\beta_0 + \sum_{i=1}^{n}(\beta_i*\log(x_i)) + \varepsilon}
+$$
+**Ecuación del modelo Log-Log:**
+$$
+ \normalsize{\log(y) =\beta_0 + \sum_{i=1}^{n}(\beta_i*\log(x_i)) + \varepsilon}
+$$
+
+
+## {}
+
+::: {.fragment}
+::: {.nonincremental}
+**Ecuación del modelo lineal clásico:**
+
+- Una unidad de aumento en $X$ genera $\beta$ unidades de cambio en $Y$.
+:::
+:::
+
+::: {.fragment}
+::: {.nonincremental}
+**Ecuación del modelo Log-Linear:**
+
+- Una unidad de aumento en $X$ ($\Delta_X = 1$) genera un cambio porcentual en $Y$ ($\Delta_Y$) especificado como:$\Delta_Y = 100*(e^{\beta*\Delta_X}-1)$
+:::
+:::
+
+::: {.fragment}
+::: {.nonincremental}
+**Ecuación del modelo Linear-Log:**
+
+- Un 1% de aumento en $X$ ($\Delta_X = 1 + \text{aumento} = 1 + 0.01 = 1.01$) genera un cambio de $\beta*\Delta_X$ unidades de cambio en $Y$ ($\Delta_Y$). Por consiguiente:$\Delta_Y = \beta*\Delta_X$
+
+
+:::
+:::
+
+::: {.fragment}
+::: {.nonincremental}
+**Ecuación del modelo Log-Log:**
+
+- Un 1% de aumento en $X$ ($\Delta_X = 1 + \text{aumento} = 1 + 0.01 = 1.01$) genera un cambio porcentual en $Y$ ($\Delta_Y$) especificado como:$\Delta_Y = 100*(e^{\beta*\ln{\Delta_X}}-1)$
+
+:::
+:::
+
+## {}
+
+:::: {.columns}
+::: {.column width="30%"}
+
+<h2>**¿Cuándo usar Log-Linear?**</h2>
+
+Se recomienda utilizar la regresión Log-Linear cuando la distribución de la variable de respuesta sigue una distribución de Poisson $Y \sim \text{Poisson}(\lambda)$ o Exponencial Negativa $Y \sim \text{Exp}(\lambda)$, y cuando la relación entre la variable de respuesta y las variables predictoras no es lineal.
+:::
+
+::: {.column width="70%"}
+```{r}
+#| label: fig-05loglinear
+#| fig-cap: El modelo lineal presenta errores de predicción en las colas de la nube de puntos (A). La regresión log-linear corrige estos errores (B). 
+#| fig-align: center
+#| fig-width: 5
+#| fig-height: 3.9
+#| out-width: 100%
+#| echo: false
+
+
+g5 <- ggplot(data=mtcars,aes(y=disp, x=mpg))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method="lm",se=FALSE, 
+              color = 'black', size=1.2)+
+  labs(title="y ~ x", tag="A", x="X", y="Y")+
+  theme(plot.title = element_text(face=2, size=8, hjust = 0.5),
+        plot.tag = element_text(size=8))
+
+g6 <- ggplot(data=mtcars,aes(y=log(disp), x=mpg))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method="lm",se=FALSE, 
+              color = 'black', size=1.2)+
+  labs(title="log(y) ~ x", tag="B", x="X", y="Y")+
+  theme(plot.title = element_text(face=2, size=8, hjust = 0.5),
+        plot.tag = element_text(size=8))
+
+arreglo5 <- ggpubr::ggarrange(g5, g6, ncol=1)
+
+ggdraw() +
+  draw_plot(arreglo5) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+
+```
+:::
+::::
+
+
+## {}
+
+:::: {.columns}
+::: {.column width="30%"}
+
+<h2>**¿Cuándo usar Linear-Log?**</h2>
+
+Se recomienda utilizar la regresión Linear-Log cuando la relación entre las variables dependiente $Y$ e independiente $X$ es exponencial, conociendo que la variable dependiente encaja con las asunciones del modelo lineal.
+:::
+
+::: {.column width="70%"}
+```{r}
+#| label: fig-06linearlog
+#| fig-cap: El modelo lineal no ajusta correctamente la nube de puntos (A). La relación entre las variables es no lineal y logarítmica, y se corrige con el modelo Log-Log. 
+#| fig-align: center
+#| fig-width: 5
+#| fig-height: 3.9
+#| out-width: 100%
+#| echo: false
+
+x<-2:16
+  
+y<-c(69, 60, 44, 38, 33, 28, 23, 20, 
+    17, 15, 13, 12, 11, 10, 9.5)
+
+datos6<-data.frame(X=x, Y=y)
+
+g61 <- ggplot(data=datos6,aes(y=Y, x=X))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method="lm",se=FALSE, 
+              color = 'black', size=1.2)+
+  labs(title="y ~ x", tag="A", x="X", y="Y")+
+  theme(plot.title = element_text(face=2, size=8, hjust = 0.5),
+        plot.tag = element_text(size=8))
+
+g62 <- ggplot(data=datos6,aes(y=Y, x=log(X)))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method="lm",se=FALSE, 
+              color = 'black', size=1.2)+
+  labs(title="y ~ log(x)", tag="B", x="X", y="Y")+
+  theme(plot.title = element_text(face=2, size=8, hjust = 0.5),
+        plot.tag = element_text(size=8))
+
+arreglo6 <- ggpubr::ggarrange(g61, g62, ncol=1)
+
+ggdraw() +
+  draw_plot(arreglo6) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+```
+:::
+::::
+
+
+## {}
+
+:::: {.columns}
+::: {.column width="30%"}
+
+<h2>**¿Cuándo usar Log-Log?**</h2>
+
+Se recomienda utilizar la regresión Log-Log cuando se espera que la relación entre las variables sea no lineal y logarítmica (alta correlación entre los logaritmos de ambas variables), y cuando se espera que los cambios porcentuales sean más importantes que los cambios absolutos.
+:::
+
+::: {.column width="70%"}
+```{r}
+#| label: fig-07loglog
+#| fig-cap: El modelo lineal no ajusta correctamente la nube de puntos (A). La relación entre las variables es no lineal y logarítmica, y se corrige con la regresíón Log-Log. 
+#| fig-align: center
+#| fig-width: 5
+#| fig-height: 3.9
+#| out-width: 100%
+#| echo: false
+
+set.seed(213)
+Y <- rpois(150,25)
+set.seed(123)
+X <- rnorm(150,2,0.4)*(Y^5)
+
+datos7 <- data.frame(Y,X)
+g7 <- ggplot(data=datos7,aes(x=X/10000, y=Y))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method="lm",se=FALSE, 
+              color = 'black', size=1.2)+
+  labs(title="y ~ x", tag="A", x="X")+
+  theme(plot.title = element_text(face=2, size=8, hjust = 0.5),
+        plot.tag = element_text(size=8))
+
+g8 <- ggplot(data=datos7,aes(x=log(X/10000), y=log(Y)))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method="lm",se=FALSE, 
+              color = 'black', size=1.2)+
+  labs(title="log(y) ~ log(x)", tag="B", x="X")+
+  theme(plot.title = element_text(face=2, size=8, hjust = 0.5),
+        plot.tag = element_text(size=8))
+
+arreglo78 <- ggpubr::ggarrange(g7, g8, ncol=1)
+
+ggdraw() +
+  draw_plot(arreglo78) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+
+```
+:::
+::::
+
+# Weighed Least Squares<br>(WLS) {background-image=fondoh1.png}
+
+## Regresión Lineal Ponderada
+
+:::: {.columns}
+::: {.column width="30%"}
+- Todos los $\varepsilon_i$ del modelo OLS tienen la misma función de probabilidad, y por tanto la misma varianza  (homocedasticidad).
+- Si no se cumple, nosotros le otorgamos a cada observación un peso para uniformizar la varianza.
+- No afecta los $\beta_i$, afecta los errores estándar.
+:::
+
+::: {.column width="70%"}
+```{r}
+#| label: fig-08WLS
+#| fig-cap: Problema de heterocedasticidad.
+#| fig-align: center
+#| out-width: 100%
+#| fig-width: 5
+#| fig-height: 3.9
+#| echo: false
+
+n2 <- rep(1:100,2)
+a2 <- 0
+b2 <- 1
+sigma22 <- n2^1.3
+eps2 <- rnorm(n2,mean=0,sd=sqrt(sigma22))
+y2 <- a2 + b2 * n2 + eps2
+datos2 <- data.frame(y2,n2)
+
+g3 <- ggplot(data=datos2,aes(x=n2, y=y2))+
+  theme_minimal()+
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+  geom_quantile(quantiles = .5, color = 'black', size=1.2)+
+  geom_quantile(quantiles = c(.25, .75),
+                colour = "#4e00ff", lty = 2, size=1) +
+  geom_quantile(quantiles = c(.05, .95),
+                colour = "#ff4800", lty = 2, size=1)+
+  labs(x="X", y="Y")+
+  annotate(label ="Baja\nvarianza", geom = "text", x=10, y=50, size=3, face=2)+
+  annotate(label ="Alta\nvarianza", geom = "text", x=80, y=140, size=3, face=2)+
+  coord_cartesian(clip = "off")
+
+ggdraw() +
+  draw_plot(g3) +
+  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
+```
+:::
+::::
+
+## Teoría básica: ¿dónde se modifican los pesos?
+
+:::{.nonincremental}
+
+- Permitiendo que $\large{y_i = \beta_0 + \sum_{i=1}^n{(\beta_ix_i)}+\varepsilon_i}$ 
+
+- Conociendo que la PDF Gaussiana con Máxima Verosimilitud es:
+
+$$
+\large{L=\prod_{i=1}^n \mathbb{P}(\varepsilon_i)\Bigg[-\frac{1}{2} \sum_{i=1}^n \frac{\varepsilon^2}{\sigma^2}\Bigg]}
+$$
+Siendo $\large{X^2=\sum_{i=1}^n\frac{(O_i-C_i)^2}{\sigma^2}}$, entonces:
+
+$w_i=\frac{1}{\sigma^2}$ la función Chi-cuadrado se despeja: $X^2=\sum_{i=1}^nw_i\varepsilon^2$, y sabiendo que $\varepsilon_i=y_i-(\beta_0+\beta_ix_i)$, se aplican derivadas a la función gaussiana para obtener:
+
+$$\large{b_0=\bar{y}_w-b_i\bar{x}_iw}$$
+Donde:$\bar{y}$ y $\bar{x}$ son los **promedios ponderados**.
+<center>
+$\large{\bar{y}=\frac{\sum{w_iy_i}}{\sum{w_i}}}$  y $\large{\bar{x}=\frac{\sum{w_ix_i}}{\sum{w_i}}}$
+</center>
+:::
+
+## Definir pesos en nuestro modelo{}
+
+Se utilizará el enfoque donde $w_i=\frac{1}{\sigma^2}$ pero reemplazando considerando como estimador de la varianza el valor ajustado $\bar{y}$ por una regresión OLS previa de la siguient manera:
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: 1-15|2|5|7|10|12|15
+
+# Creando modelo preliminar
+mod_previo <- lm(y ~ x, data = datos)
+
+# Extrayendo los datos necesarios
+resid_abs <- abs(mod_previo$residuals)
+
+y_hat <- mod_previo$fitted.values
+
+# Obteniendo los pesos
+mod_w <-lm(resid_abs ~ y_hat)
+
+w <-  1 / mod_w$fitted.values^2
+
+# Generando regresión WLS
+mod_wls <- lm(y ~ x, data = datos, weights = w)
+```
+
+
+
+# Regresiones Lasso & Ridge {background-image=fondoh1.png}
+
+## Problema de Multicolinearidad {}
+
+```{r, echo=FALSE}
+data("iris") 
+
+iris <- iris %>% 
+  mutate(Petal.Width = Petal.Width*Sepal.Width)
+```
+
+```{r}
+#| echo: true
+
+# Funciones para modificar los gráficos de ggpairs
+lowerFn <- function(data, mapping, method = "lm", ...) {
+  p <- ggplot(data = data, mapping = mapping) +
+    geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+    geom_smooth(method = method, color = "black", ...)
+  p
+}
+
+diagFn <- function(data, mapping, ...) {
+    p <- ggplot(data = data, mapping = mapping) +
+    geom_density(fill="#4e00ff", color="#4e00ff")
+  p
+}
+
+```
+
+## Problema de Multicolinearidad {}
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+# Generando gráfico EDA con ggpairs
+# de la librería GGally
+ggpairs(iris[,-5],
+        lower = list(continuous = wrap(lowerFn)),
+        diag = list(continuous = wrap(diagFn)),
+        upper = list(continuous = wrap("cor", size = 6)))+
+  theme_minimal()
+```
+
+## Alternativas para resolver<br>problemas de multicolinearidad {}
+
+- Si la multicolinearidad es dependiente de tu diseño de muestreo/experimental, considera ampliar la muestra o mejorar el diseño.
+
+- Si la multicolinearidad se debe a la relación entre variables únicamente, puedes aplicar métodos de selección de variables: **Step-wise regression**.
+
+- Si no es óptimo reducir la cantidad de variables en el modelo, usa **Ridge regression** para aplicar penalidades sobre cada variable y reducir su colinearidad.
+
+- Si puedes reducir la cantidad de variables y deseas     que la penalidad sea la encargada de eliminar (anular) las variables colineares en el modelo, utiliza **Lasso regression**.
+
+## Regresión Lasso (regularización L1) y <br> Regresión Ridge (regularización L2){}
+
+Las regresiones con regularización penalizan a cada variable independiente para reducir su efecto en el modelo.
+
+- La **regresión Lasso (L1)** puede penalizar a los coeficientes hasta convertirlos en 0. Esto implica que también reduce el número de variables independientes utilizadas en el modelo.
+
+- La **regresión Ridge (L2)** penaliza a los coeficientes con tendencia a ser 0, pero nunca lo alcanza. No reduce variables independientes.
+
+- Los **coeficientes** de ambas regresiones siempre son **menores que el modelo OLS**.
+
+- El valor $\lambda$ **(lambda) reduce el efecto** de las variables independientes sobre la variable dependiente. Por lo tanto, un alto valor de $\lambda$ crea regresiones con menor pendiente.
+
+## {}
+
+```{r}
+#| echo: false
+#| eval: true
+  
+library(ggplot2)
+library(glmnet)
+# 
+# # Generar datos aleatorios
+# set.seed(123)
+# n <- 100
+# x <- rnorm(n)
+
+set.seed(123)
+x <- matrix(rnorm(100*10,mean = 3, sd = 4), ncol=10)
+y <- rnorm(100)
+
+x[,1] <- x[,1]*y 
+
+# y <- 2*x + rnorm(n)
+
+# Regresión lineal clásica
+lm.fit <- lm(y ~ x)
+
+# Regresión ridge con diferentes valores de lambda
+ridge.fit1 <- glmnet(as.matrix(cbind(1, x)), y, alpha=0, lambda=0)
+ridge.fit2 <- glmnet(as.matrix(cbind(1, x)), y, alpha=0, lambda=0.1)
+ridge.fit3 <- glmnet(as.matrix(cbind(1, x)), y, alpha=0, lambda=1)
+
+
+# Regresión lasso con diferentes valores de lambda
+lasso.fit1 <- glmnet(as.matrix(cbind(1, x)), y, alpha=1, lambda=0)
+lasso.fit2 <- glmnet(as.matrix(cbind(1, x)), y, alpha=1, lambda=0.1)
+lasso.fit3 <- glmnet(as.matrix(cbind(1, x)), y, alpha=1, lambda=1)
+
+# Coeficientes ajustados para cada modelo
+lm.coef <- coef(lm.fit)
+ridge.coef1 <- coef(ridge.fit1)
+ridge.coef2 <- coef(ridge.fit2)
+ridge.coef3 <- coef(ridge.fit3)
+
+lasso.coef1 <- coef(lasso.fit1)
+lasso.coef2 <- coef(lasso.fit2)
+lasso.coef3 <- coef(lasso.fit3)
+
+# Predicciones de cada modelo
+secu100 <-function(x, long=100){
+  seq(min(x), max(x), length.out = long)
+}
+
+x_new <- lapply(as.data.frame(x), secu100)|>as.data.frame()
+  
+lm.predict <- lm.coef[1] + lm.coef[2] * x_new
+ridge.predict1 <- predict(ridge.fit1, newx = as.matrix(cbind(1, x_new)))
+ridge.predict2 <- predict(ridge.fit2, newx = as.matrix(cbind(1, x_new)))
+ridge.predict3 <- predict(ridge.fit3, newx = as.matrix(cbind(1, x_new)))
+
+lasso.predict1 <- predict(lasso.fit1, newx = as.matrix(cbind(1, x_new)))
+lasso.predict2 <- predict(lasso.fit2, newx = as.matrix(cbind(1, x_new)))
+lasso.predict3 <- predict(lasso.fit3, newx = as.matrix(cbind(1, x_new)))
+
+n <- 100
+
+# Combinar datos en un data frame
+data <- data.frame(as.data.frame(x), s0 = y, model = rep("observaciones", n),
+                   type = rep("OLS", 100),
+                   prediction = rep(lm.predict, each = 1))
+
+names(data)[1:10]<-c(paste0("V",1:10))
+
+data <- rbind(data[,c(1:14)],
+              data.frame(x_new, y = ridge.predict1, model = rep("Ridge (lambda = 0)", nrow(x_new)), type = rep("Ridge", 100),
+                         prediction.V1 = rep(ridge.predict1, each = 1)))
+
+data <- rbind(data[,c(1:14)],
+              data.frame(x_new, y = ridge.predict2, model = rep("Ridge (lambda = 0.1)", nrow(x_new)),type = rep("Ridge", length(x_new)),
+                         prediction.V1 = rep(ridge.predict2, each = 1)))
+data <- rbind(data[,c(1:14)],
+              data.frame(x_new, y = ridge.predict3, model = rep("Ridge (lambda = 1)", nrow(x_new)),type = rep("Ridge", length(x_new)),
+                         prediction.V1 = rep(ridge.predict3, each = 1)))
+
+data <- rbind(data[,c(1:14)],
+              data.frame(x_new, y = ridge.predict3, model = rep("Lasso (lambda = 0)", nrow(x_new)),type = rep("Lasso", length(x_new)),
+                         prediction.V1 = rep(ridge.predict3, each = 1)))
+
+data <- rbind(data[,c(1:14)],
+              data.frame(x_new, y = ridge.predict3, model = rep("Lasso (lambda = 0.1)", nrow(x_new)),type = rep("Lasso", length(x_new)),
+                         prediction.V1 = rep(ridge.predict3, each = 1)))
+
+data <- rbind(data[,c(1:14)],
+              data.frame(x_new, y = ridge.predict3, model = rep("Lasso (lambda = 1)", nrow(x_new)),type = rep("Lasso", length(x_new)),
+                         prediction.V1 = rep(ridge.predict3, each = 1)))
+```
+
+
+```{r}
+#| label: fig-09ridgelasso
+#| echo: false
+#| fig-align: center
+#| fig-cap: Comparativa entre las regresiones OLS (línea negra), Ridge y Lasso. Notar que las regresiones Lasso se superponen totalmente.
+  
+# Crear gráfico con ggplot
+g9 <-ggplot(data = data, aes(V1, s0)) +
+  geom_point(data = data %>%  filter(model=="observaciones"), alpha = 0.5) +
+  geom_line(data = data %>% 
+             filter(model !="observaciones" & type == "Ridge"),  aes(y = prediction.V1, color = model), size = 0.9) +
+  geom_line(data = data %>% 
+              filter(model !="observaciones" & type == "Lasso"),  aes(y = prediction.V1, color = model), size = 0.9) +
+  
+  labs(title = "Regresión lineal clásica vs Regresión Ridge vs Regresión Lasso",
+       x = "V1", y = "y", color = "Modelo") +
+  theme_minimal() +
+  geom_smooth(data=data %>% 
+                filter(model == "observaciones"), method="lm", color="black",se = FALSE)+
+  # facet_wrap(~type) +
+  scale_color_material_d()
+
+ggdraw() +
+  draw_plot(g9) +
+  draw_image(img, x = 0.67, y = 0.06, width = 0.11, height = 0.11)  
+```
+
+
+
+## Regresión Ridge (regularización L2) {}
+
+```{r}
+#| echo: false
+set.seed(123)
+x <- matrix(rnorm(100*10), ncol=10)|>as.data.frame()
+y <- rnorm(100)
+```
+
+Coeficientes **OLS (modelo lineal clásico)**:
+
+```{r}
+modelo <- lm(y~.,data = x)
+coefficients(modelo) |> round(3)
+```
+
+<br>
+
+Considerando una matriz de variables independientes llamada x, y una variable dependiente y, los coeficientes de penalizado con el método **L2** (**Regresión ridge**):
+
+```{r}
+#| echo: true
+# Ridge regression 
+ridge.fit <- glmnet(x, y, alpha=0, lambda=0.1)
+predict(ridge.fit, type="coefficients", s=0.1)[1:10,] |> round(3)
+```
+
+## Regresión Lasso (regularización L1) {}
+
+Coeficientes **OLS (modelo lineal clásico)**:
+
+```{r}
+modelo <- lm(y~., data=x)
+coefficients(modelo) |> round(3)
+```
+
+<br>
+
+Considerando una matriz de variables independientes llamada x, y una variable dependiente y, los coeficientes de penalizado con el método **L1** (**Regresión ridge**):
+
+```{r}
+#| echo: true
+# Lasso regression 
+laso.fit <- glmnet(x, y, alpha=1, lambda=0.1)
+predict(laso.fit, type="coefficients", s=0.1)[1:10,] |> round(3)
+```
+
+# Modelos Generalizados Lineales (GLM) {background-image=fondoh1.png}
+
+## Reconocimiento de la familia de distribución
+
+Un concepto clave para comprender los modelos GLM es identificar la familia de distribución de probabilidades a la que nuestros datos de la variable dependiente $Y$ son más afines.
+
+:::: {.columns}
+::: {.column}
+```{r}
+#| echo: false
+#| fig-height: 3.3
+#| fig-width: 3.5
+#| fig-align: center
+#| out-width: 100%
+library(JWileymisc)
+di1<-JWileymisc::testDistribution(iris$Sepal.Length, distr="normal", extremevalues="empirical")
+plot(di1)
+```
+:::
+
+::: {.column}
+<br>
+<br>
+<br>
+```{r}
+#| eval: false
+#| echo: true
+library(JWileymisc)
+comp1 <- 
+  testDistribution(observ, 
+    distr="normal", 
+    extremevalues="empirical")
+plot(comp1)
+```
+:::
+::::
+
+## ¿Cuándo $Y$ no es Gaussiana?
+
+:::: {.columns}
+::: {.column width=30%}
+- Cuando la variable respuesta es una proporción de un total de conteos: [0,1]
+
+- Cuando la respuesta es binaria (0 o 1): éxito o fracaso.
+
+- Cuando la respuesta es un conteo. Son discretos y no negativos.
+
+- Cuando la respuesta es continua y positiva (datos con asimetría).
+:::
+
+::: {.column width=70%}
+::: {.fragment}
+::: {.nonincremental}
+```{r}
+#| out-width: 100%
+#| fig-align: center
+knitr::include_graphics("figs/Densidad.png")
+```
+:::
+:::
+:::
+::::
+
+## Distribuciones de probabilidades en GLM 1
+
+1. **Normal (Gaussiana):** es la distribución de probabilidad más comúnmente utilizada en modelos de regresión lineal clásicos. Se utiliza cuando se espera que la variable de respuesta tenga una distribución normal.
+
+2. **Gamma:** se utiliza para variables de respuesta continuas y positivas que no siguen una distribución normal, como los tiempos de espera o las tasas de eventos.
+
+3. **Inversa Gamma:** se utiliza para variables de respuesta continuas que siguen una distribución normal con varianza heterogénea.
+
+4. **Inversa Gaussiana:** se utiliza para variables de respuesta continuas que siguen una distribución normal con varianza heterogénea.
+
+5. **Lognormal:** se utiliza para variables de respuesta continuas y positivas que no siguen una distribución normal, pero que tienen una distribución lognormal.
+
+6. **Exponencial:** se utiliza para variables de respuesta continuas y positivas que siguen una distribución exponencial, como los tiempos de falla o los tiempos de espera entre eventos.
+
+## Distribuciones de probabilidades en GLM 1
+
+```{r}
+#| label: fig-010dist1
+#| fig-align: center
+#| echo: false
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 5
+#| fig-cap: Principales distribuciones de probabilidades continuas, incluyendo la distribución normal y distribuciones sesgadas.
+
+# Cargar las librerías necesarias
+library(MASS)
+library(GGally)
+library(statmod)
+library(tidyverse)
+
+# Generar datos simulados de cada distribución
+set.seed(123)
+x_gaussian <- rnorm(1000)
+x_gamma <- rgamma(1000, shape = 2, rate = 1)
+x_inv_gamma <- 1/rgamma(1000, shape = 2, rate = 1)
+x_inv_gauss <- qinvgauss(runif(1000), mean = 1, dispersion = 1)
+x_lognormal <- rlnorm(1000, meanlog = 0, sdlog = 1)
+x_exponential <- rexp(1000, rate = 1)
+
+# # Graficar las distribuciones teóricas y los histogramas de los datos simulados
+# ggpairs(data.frame(x_gaussian, x_gamma, x_inv_gamma, x_inv_gauss, x_lognormal, x_exponential))
+# 
+
+# Grafico final
+theme_set(theme_minimal())
+
+qplotDens <- function(dens, main=NULL){
+  qplot(dens, geom="density", color = I("#4e00ff"), adjust =2,
+        fill = I("#4eb8d2"), linewidth=1, main = main)+
+    labs(x="", y="")
+  }
+
+dists <- list(x_gaussian, x_gamma, x_inv_gamma, 
+              x_inv_gauss, x_lognormal,x_exponential)
+
+mains <- c("Dist. Gaussiana", "Dist. Gamma", "Dist. Inversa Gamma", "Dist. Inversa Gaussiana","Dist. Lognormal","Dist. Exponencial")
+
+lista_vac <- dplyr::lst()
+
+# for(i in 1:6) {
+#   plot <- qplotDens(dens=dists[[i]], main=mains[i])
+#   lista_vac[[i]] <- plot
+# }
+
+lista_vac[[1]] <- qplotDens(dists[[1]], main = mains[1])
+lista_vac[[2]] <- qplotDens(dists[[2]], main = mains[2])
+lista_vac[[3]] <- qplotDens(dists[[3]], main = mains[3])
+lista_vac[[4]] <- qplotDens(dists[[4]], main = mains[4])
+lista_vac[[5]] <- qplotDens(dists[[5]], main = mains[5])
+lista_vac[[6]] <- qplotDens(dists[[6]], main = mains[6])
+
+g10 <- ggpubr::ggarrange(plotlist = lista_vac)
+
+
+ggdraw() +
+  draw_plot(g10) +
+  draw_image(img, x = 0.87, y = -0.04, width = 0.11, height = 0.11)  
+
+```
+
+## Distribuciones de probabilidades en GLM 2
+
+7. **Beta:** se utiliza para variables de respuesta continuas que están acotadas entre 0 y 1, como la proporción de personas que aprueban un examen.
+
+8. **Weibull:** se utiliza para variables de respuesta continuas y positivas que siguen una distribución de Weibull, como los tiempos de falla o los tiempos de espera entre eventos.
+
+9. **Tweedie:** es una distribución general que incluye muchas de las distribuciones mencionadas anteriormente como casos especiales. Se utiliza cuando la variable de respuesta puede ser positiva, continua o discreta, y cuando se espera que tenga una varianza que depende de la media.
+
+## Distribuciones de probabilidades en GLM 2
+
+```{r}
+#| label: fig-011dist2
+#| fig-align: center
+#| echo: false
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 5
+#| fig-cap: Distribuciones de probabilidades continuas menos frecuentes, incluyendo la distribución normal para la comparación.
+
+# Cargar las librerías necesarias
+library(MASS)
+library(GGally)
+library(statmod)
+library(tidyverse)
+
+# Generar datos simulados de cada distribución
+set.seed(123)
+x_gaussian <- rnorm(1000)
+x_beta <-rbeta(1000, 2, 5)
+x_weibull <- rweibull(1000, shape = 2, scale = 1)
+x_tweedie <- tweedie::rtweedie(n, mu=1, phi=1.5, p=1.3)
+
+# Grafico final
+theme_set(theme_minimal())
+
+qplotDens <- function(dens, main=NULL){
+  qplot(dens, geom="density", color = I("#4e00ff"), adjust =2,
+        fill = I("#4eb8d2"), linewidth=1, main = main)+
+    labs(x="", y="")
+  }
+
+dists <- list(x_gaussian, x_beta, x_weibull, x_tweedie)
+
+mains <- c("Dist. Gaussiana", "Dist. Beta",
+           "Dist. Weibull", "Dist. Tweedie")
+
+lista_vac <- dplyr::lst()
+
+lista_vac[[1]] <- qplotDens(dists[[1]], main = mains[1])
+lista_vac[[2]] <- qplotDens(dists[[2]], main = mains[2])
+lista_vac[[3]] <- qplotDens(dists[[3]], main = mains[3])
+
+qplotHisto<- function(dens, main=NULL){
+  qplot(dens, geom="histogram", color = I("#4e00ff"),
+        fill = I("#4eb8d2"), linewidth=1, main = main)+
+    labs(x="", y="")
+}
+
+lista_vac[[4]] <- qplotHisto(dists[[4]], main = mains[4])
+
+g11 <- ggpubr::ggarrange(plotlist = lista_vac)
+
+ggdraw() +
+  draw_plot(g11) +
+  draw_image(img, x = 0.87, y = -0.04, width = 0.11, height = 0.11)  
+```
+
+
+## Distribuciones de probabilidades en GLM 3
+
+1. **Bernoulli (Binomial):** se utiliza para variables de respuesta binarias (éxito/fallo, sí/no) o para variables que se pueden clasificar en dos categorías.
+
+2. **Poisson:** se utiliza para variables de respuesta con conteos discretos, como el número de eventos en un intervalo de tiempo o en una área.
+
+3. **Binomial Negativa:** se utiliza para variables de respuesta con conteos discretos que tienen una varianza mayor que su media, como el número de bacterias en una muestra.
+
+4. **Geométrica:** se utiliza para variables de respuesta con conteos discretos que representan el número de ensayos hasta el primer éxito.
+
+5. **Logística (Binomial):** se utiliza para variables de respuesta binarias o categóricas que se pueden modelar como una función de la probabilidad de éxito.
+
+::: {.fragment}
+::: {.incremental}
+<div style="width:1024px; height:120px; border:1px solid #4e00ff; background:#cff8ff; padding: 10px;">
+Puedes visitar un simulador de distribuciones [aquí.](https://www.randomservices.org/random/apps/SpecialSimulator.html)
+
+Para mayor detalle matemático sobre cada distribución de la familia exponencial, clic [aquí.](https://www.randomservices.org/random/special/GeneralExponential.html#)
+</div>
+:::
+:::
+
+
+## Distribuciones de probabilidades en GLM 3
+
+```{r}
+#| label: fig-012dist3
+#| fig-align: center
+#| echo: false
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 5
+#| fig-cap: Distribuciones de probabilidades discretas.
+
+set.seed(123)
+
+# Simulación de datos
+n <- 1000
+p <- 0.5
+lambda <- 2
+theta <- 1
+
+x_bernoulli <- rbinom(n, 1, p)
+x_poisson <- rpois(n, lambda)
+x_negbin <- rnbinom(n, size = 5, prob = 0.5)
+x_geom <- rgeom(n, p)
+set.seed(123)
+n <- 100
+p <- 0.5
+x_logistic <- rbinom(n, size = 10, prob = p)
+
+# Grafico final
+theme_set(theme_minimal())
+
+qplotHisto<- function(dens, main=NULL){
+  qplot(dens, geom="histogram", color = I("#4e00ff"),
+        fill = I("#4eb8d2"), linewidth=1, main = main)+
+    labs(x="", y="")
+}
+
+dists <- list(x_bernoulli, x_logistic, x_poisson, x_negbin, x_geom)
+
+mains <- c("Dist. Bernoulli", "Dist. Binomial",
+           "Dist. Poisson", "Dist. Binomial Negativa",
+           "Dist. Geométrica")
+
+lista_vac <- dplyr::lst()
+
+lista_vac[[1]] <- qplotHisto(dists[[1]], main = mains[1])
+lista_vac[[2]] <- qplotHisto(dists[[2]], main = mains[2])
+lista_vac[[3]] <- qplotHisto(dists[[3]], main = mains[3])
+lista_vac[[4]] <- qplotHisto(dists[[4]], main = mains[4])
+lista_vac[[5]] <- qplotHisto(dists[[5]], main = mains[5])
+
+g12 <- ggpubr::ggarrange(plotlist = lista_vac)
+
+ggdraw() +
+  draw_plot(g12) +
+  draw_image(img, x = 0.87, y = -0.04, width = 0.11, height = 0.11)  
+```
+
+## Teoría de los GLM: aspectos matemáticos
+
+- La distribución de probabilidades de la variable $Y$ debe estar dentro de la familia exponencial. 
+
+- El componente sistemático sigue siendo lineal $\eta = \beta_0+\sum_{i=1}^n{(\beta_i*x_i)} + \varepsilon$.
+
+- La variable dependiente $Y$ ($\mu_i$) se ajusta a linealidad de $\eta$ a través de una función de enlace $g(Y)$
+
+- Por lo tanto, la función de enlace:
+$$
+g(\mu) = \eta
+$$
+- Y la función de varianza (con parámetro de dispersión):
+$$ 
+Var(Y) = \phi \mu
+$$
+
+## Teoría de los GLM: función de enlace
+
+```{r}
+#| label: tbl-01FuncEnlace
+#| tbl-cap: Funciones de enlace empleadas en modelos GLM.
+
+library(kableExtra)
+
+# Crear la tabla con todas las funciones de enlace
+tabla_enlaces <- data.frame(
+  Enlace = c("Identidad", "Logit", "Probit", "Complemento Log-Log", "Raíz cuadrada", "Logaritmo", "Raíz cuadrada inversa", "Complemento Log-Log (modificado)"),
+  Función = c("$\\mu$", "$\\ln\\left(\\frac{\\mu}{1-\\mu}\\right)$",
+            "$\\Phi^{-1}(\\mu)$", "$\\ln(-\\ln(1-\\mu))$", "$\\sqrt{\\mu}$", "$\\ln(\\mu)$", "$\\frac{1}{\\sqrt{\\mu}}$",
+            "$\\ln(-\\ln\\mu)$"),
+  Inversa = c("$\\mu$", "$\\frac{1}{1+e^{-\\eta}}$",
+              "$\\Phi(\\eta)$", "$1-e^{-e^\\eta}$", "$\\mu^2$", "$e^\\eta$", "$\\frac{1}{\\mu^2}$", "$1-e^{-e^{-\\eta}}$")
+)
+
+kable(tabla_enlaces, format="markdown", mathjax = TRUE,
+      align = c("l","c","c"))
+
+```
+
+
+## Regresión GLM para var. Binarias: introducción
+
+#### Función de enlace: logit
+
+- Los modelos logísticos son un tipo de modelo estadístico utilizado para modelar la relación entre una variable binaria (0 o 1) y una o más variables predictoras.
+
+- Binomial y Bernoulli.
+
+- El modelo de regresión logística se define como:
+
+::: {.fragment}
+::: {.incremental}
+$$ \ln \left( \frac{p}{1-p} \right) = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$
+
+Donde:
+
+$p$ es la probabilidad de éxito (1)
+$x_1, \dots, x_p$ son las variables predictoras
+$\beta_0, \dots, \beta_p$ son los coeficientes de regresión
+El modelo se ajusta mediante el método de máxima verosimilitud y los coeficientes se interpretan como log odds ratios.
+:::
+:::
+
+## Regresión GLM para var. Binarias: interpretación
+
+- Considerando $\eta = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n$, la probabilidad de éxito se puede obtener como:
+
+::: {.fragment}
+::: {.incremental}
+$$ p = \frac{e^{\eta}}{1+e^{\eta}} $$
+:::
+:::
+
+- El coeficiente $\beta_j$ representa el cambio en el **log odds ratio** por cada unidad de cambio en $x_i$.
+
+- El coeficiente $e^{\beta_j}$ representa el cambio expresado en **odds ratio** por cada unidad de cambio en $x_i$.
+
+## Regresión GLM para var. Binarias: concepto de odds
+
+1. **Probabilidad:** es la medida de incertidumbre de que un evento suceda. Toma valores entre 0 y 1. Por ejemplo: *Probabilidad de que llueva en un día nublado: 80%*
+
+::: {.fragment}
+::: {.incremental}
+$$p = 0.8$$
+:::
+:::
+
+2. **Posibilidad (odds):** es la razón de dos probabilidades. Se interpreta como la relación entre la probabilidad de que ocurra un evento $p$ y la probabilidad de que no ocurra $q = 1 - p$. Considera que siempre $p + q = 1$. Toma valores entre 0 e $+\infty$. Por ejemplo: *La probabilidad de que llueva en un día nublado es 4 veces la probabilidad de que no llueva*, o en su defecto *La probabilidad de que llueva en un día nublado es 3 veces más la probabilidad de que no llueva*:
+
+::: {.fragment}
+::: {.incremental}
+$$Odds = \frac{p}{q} = \frac{p}{1-p} = \frac{0.8}{0.2}$$
+:::
+:::
+
+
+## Regresión GLM para var. Binarias: <br>concepto de odds ratio
+
+3. **Ratio de Posibilidades (odds ratio):** es la razón de las posibilidades (odds) de que ocurra un evento en un grupo en comparación con un grupo de referencia (nivel base). Toma valores entre $-\infty$ e $+\infty$, siendo 1 el valor central de no efecto. Por ejemplo: *La probabilidad de que llueva en un día nublado es 36 veces la probabilidad de que llueva en un día soleado*, o en su defecto *La probabilidad de que llueva en un día nublado es 35 veces más la probabilidad de que llueva en un día soleado*:
+
+::: {.fragment}
+::: {.incremental}
+$$OR = \frac{odds_1}{odds_2} = \frac{\frac{p_1}{1 - p_1}}{\frac{p_2}{1 - p_2}} = \frac{\frac{0.8}{0.2}}{\frac{0.1}{0.9}} = \frac{4}{0.111} = 36$$
+:::
+:::
+
+## Regresión GLM para var. Binarias: <br>interpretación Odds y Odds ratio
+
+#### Odds
+
+- Si $\beta_i = 0$ entonces $e^{\beta_1}=1$, implicando **efecto nulo**. Es decir, $X$ e $Y$ no están asociadas.
+
+- Si $\beta_i > 0$ entonces $e^{\beta_1}>1$, implicando **incremento esperado en las probabilidades**.
+
+- Si $\beta_i < 0$ entonces $e^{\beta_1}<1$, implicando **disminución esperada en las probabilidades**.
+
+
+#### Odds ratio
+
+- Si $\beta_i = 0$ entonces $e^{\beta_1}=1$, **no hay diferencias** entre el efecto del nivel de estudio vs el nivel base. Causan el mismo efecto sobre $Y$.
+
+- Si $\beta_i > 0$ entonces $e^{\beta_1}>1$, implicando **incremento esperado en las probabilidades** cuando la observación pertenece al nivel de estudio respecto al nivel base.
+
+- Si $\beta_i < 0$ entonces $e^{\beta_1}<1$, implicando **disminución esperada en las probabilidades** cuando la observación pertenece al nivel de estudio respecto al nivel base.
+
+
+## Regresión GLM para var. de Conteos: Poisson
+
+#### Función de enlace: logaritmo natural
+
+- La variable que sigue esta distribución proviene de un **proceso de conteos**.
+
+- La distribución de Poisson es discreta, toma **valores enteros no negativos**.
+
+- Es número de ocurrencias de un evento en un **intervalo de tiempo o espacio dado**.
+
+- Los eventos ocurren de manera **independiente** y a una **tasa constante** promedio lambda ($\lambda$). 
+
+- Asume que la media y la varianza son iguales, lo que se conoce como **equidispersión**.
+
+## Regresión GLM para var. de Conteos: <br>efecto multiplicativo
+
+- El modelo de poisson es para una sola variable $X$ sería: $\log(\mu)=\beta_0+\beta_ix_i+\varepsilon$
+
+- Para despejar $\mu$ se exponencian ambos componentes ($\varepsilon$ no se considera en el cálculo): 
+
+::: {.fragment}
+::: {.incremental}
+$$
+\begin{align}
+\mu&=e^{\beta_0+\beta_ix_i}\\
+\mu&=e^{\beta_0}*e^{\beta_ix_i}
+\end{align}
+$$
+:::
+:::
+
+- Considera $\beta_0 = -0.339$ y $\beta_i = 0.256$
+
+::: {.fragment}
+::: {.incremental}
+$$
+\begin{align}
+\log(\mu)&=-0.339+0.256x_i\\
+\mu&=e^{-0.339+0.256x_i}\\
+\mu&=e^{-0.339}*e^{0.256x_i}
+\end{align}
+$$
+:::
+:::
+
+## Regresión GLM para var. de Conteos: <br>efecto multiplicativo
+
+- Por lo tanto, una unidad de aumento en $x_i$ genera un aumento en conteo por un factor de $e^{0.256*1}=1.292$ unidades, con una confianza del 95%. 
+
+- En otras palabras, la tasa de aumento de $\mu$ es de $1.292 - 1 = 0.292 = 29.2%$ por cada unidad de aumento de $x_i$.
+
+## Regresión GLM para var. de Conteos: interpretación
+
+- Si $\beta_i = 0$ entonces $e^{\beta_1}=1$, implicando **efecto nulo**. Es decir, $X$ e $Y$ no están asociadas.
+
+- Si $\beta_i > 0$ entonces $e^{\beta_1}>1$, implicando **incremento esperado en el conteo de** $Y$ por cada unidad de $X$.
+
+- Si $\beta_i < 0$ entonces $e^{\beta_1}<1$, implicando **disminución esperada en el conteo de** $Y$ por cada unidad de $X$.
+
+## Regresión GLM para var. de Conteos: datos de ratio
+
+- Cuando la exposición cambia de observación a observación: $c = \text{conteo}$ y $t = \text{tiempo de muestreo}$.
+
+- La variable $Y$ realmente es una tasa de ocurrencia, $Y/t$, por tanto:
+
+::: {.fragment}
+::: {.incremental}
+$$
+E(Y/t)=\frac{1}{t}*E(Y)=\frac{E(Y)}{t}=\frac{\mu}{t}
+$$
+:::
+:::
+
+- Gracias al vínculo de enlace logarítmico, $t$ ingresa al modelo como offset: 
+
+::: {.fragment}
+::: {.incremental}
+$$
+\begin{align}
+\log(E(Y/t)) = \log(\mu/t) &= \beta_0+\beta_ix_i \\
+\log(\mu) - \log(t)&= \beta_0+\beta_ix_i \\
+\log(\mu) &= \beta_0+\beta_ix_i + \log(t)\\
+\mu &= e^{\beta_0}+e^{\beta_ix_i} + e^{\log(t)}\\
+\mu &= e^{\beta_0}+e^{\beta_ix_i} + t\\
+\end{align}
+$$
+:::
+:::
+
+## Regresión GLM para var. de Conteos: sobredispersión
+
+:::: {.columns}
+::: {.column width=65%}
+
+::: {.fragment}
+::: {.incremental}
+```{r}
+#| label: fig-13sobredis
+#| out-width: 90%
+#| fig-width: 5
+#| fig-height: 3.7
+#| fig-align: center
+#| fig-cap: Cuando hay mayor varianza de la esperada por la distribución de poisson se tiene sobredispersión, y esta genera gráficos heterocedásticos como el aquí mostrado.
+
+# Generar datos simulados con sobredispersión
+set.seed(123)
+n <- 1000
+x <- rnorm(n)
+lambda <- exp(0.5 + 0.3 * x)
+y <- rnbinom(n, mu = lambda, size = 2)
+
+# Ajustar modelo Poisson y obtener la desviación
+library(glm2)
+model_poisson <- glm2(y ~ x, family = poisson)
+dev_poisson <- sum(resid(model_poisson, type = "pearson")^2)
+
+# Ajustar modelo NB y obtener la desviación
+model_nb <- MASS::glm.nb(y ~ x)
+dev_nb <- sum(resid(model_nb, type = "pearson")^2)
+
+# Crear data frame para plot
+df <- data.frame(x = x, y = y, lambda = lambda)
+
+# Crear plot
+library(ggplot2)
+
+g13 <- ggplot(df, aes(x, y)) +
+  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
+  stat_function(fun = function(x) exp(0.5 + 0.3 * x), color = "black", lwd = 1.2) +
+  labs(x = "X",
+       y = "Y") +
+  scale_y_continuous(limits = c(0, max(y))) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, hjust = 0.5),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
+
+ggdraw() +
+  draw_plot(g13) +
+  draw_image(img, x = 0.87, y = -0.04, 
+             width = 0.11, height = 0.11)  
+
+```
+:::
+:::
+
+:::
+
+::: {.column width=35%}
+- El parámetro de dispersión $\phi$ se asume como $\phi=1$ en un modelo de Poisson. Esto debido a que $\mu = Var$, por tanto $mu/Var = 1$ (**equidispersión**).
+
+- Si la dispersión es mayor que 1, el modelo de Poisson puede subestimar la varianza y, por lo tanto, sobreestimar la significancia de las variables explicativas.
+
+- Solución: utilizar un modelo **binomial negativo**.
+:::
+::::
+
+## Regresión GLM para var. de Continuas: distribuciones
+
+- Si la variable es de respuesta es numérica continua, puedes revisar la función de densidad de la misma para compararla con las principales distribuciones, como lo vimos anteriormente:
+
+::: {.fragment}
+::: {.incremental}
+
+```{r}
+#| label: fig-014contidistri
+#| fig-align: center
+#| echo: false
+#| out-width: 100%
+#| fig-width: 9
+#| fig-height: 3.6
+#| fig-cap: Comparativa de las principales distribuciones de probabilidades continuas.
+
+# Cargar las librerías necesarias
+library(MASS)
+library(GGally)
+library(statmod)
+library(tidyverse)
+
+# Generar datos simulados de cada distribución
+set.seed(123)
+x_gaussian <- rnorm(1000)
+x_gamma <- rgamma(1000, shape = 2, rate = 1)
+x_inv_gamma <- 1/rgamma(1000, shape = 2, rate = 1)
+x_inv_gauss <- qinvgauss(runif(1000), mean = 1, dispersion = 1)
+x_lognormal <- rlnorm(1000, meanlog = 0, sdlog = 1)
+x_exponential <- rexp(1000, rate = 1)
+
+# # Graficar las distribuciones teóricas y los histogramas de los datos simulados
+# ggpairs(data.frame(x_gaussian, x_gamma, x_inv_gamma, x_inv_gauss, x_lognormal, x_exponential))
+# 
+
+# Grafico final
+theme_set(theme_minimal())
+
+qplotDens <- function(dens, main=NULL){
+  qplot(dens, geom="density", color = I("#4e00ff"), adjust =2,
+        fill = I("#4eb8d2"), linewidth=1, main = main)+
+    labs(x="", y="")
+  }
+
+dists <- list(x_gaussian, x_gamma, x_inv_gamma, 
+              x_inv_gauss, x_lognormal,x_exponential)
+
+mains <- c("Dist. Gaussiana", "Dist. Gamma", "Dist. Inversa Gamma", "Dist. Inversa Gaussiana","Dist. Lognormal","Dist. Exponencial")
+
+distsDF <- data.frame(
+              valores = c(x_gaussian, x_gamma, x_inv_gamma, 
+              x_inv_gauss, x_lognormal,x_exponential),
+              distribucion = rep(c("Dist. Gaussiana", "Dist. Gamma", "Dist. Inversa Gamma", "Dist. Inversa Gaussiana","Dist. Lognormal","Dist. Exponencial"), each = 1000))  
+
+colores1 <- c(
+    "#e31e39", "#049abf", 
+    "#4e00ff", "#fdb626", 
+    "#2ead00", "#ff4800")
+  
+
+g14 <- ggplot(distsDF, aes(x = valores, fill=distribucion,
+                    color=distribucion))+
+  geom_density(alpha=0.2, adjust=3, lwd=1)+
+  xlim(-4,4)+
+  labs(x="Observaciones",y="Densidad",
+       fill="Distribución\nde Probabilidades",
+       color="Distribución\nde Probabilidades")+
+  # facet_grid(distribucion~.)+
+  geom_vline(xintercept = 0, color="black",
+             lwd=0.8, lty=2)+
+  theme(strip.text = element_blank(),
+        axis.text.y = element_blank())+
+  scale_color_manual(values = colores1)+
+  scale_fill_manual(values = colores1)
+    
+ggdraw() +
+  draw_plot(g14) +
+  draw_image(img, x = 0.87, y = -0.01, width = 0.11, height = 0.11)  
+```
+:::
+:::
+
+## Regresión GLM para var. de Continuas: modelamiento
+
+Una alternativa más certera es el utilizar el criterio de información de Akaike (AIC) para comparar el ajuste de los modelos. A menos AIC, mejor el ajusto del modelo hacia los datos. (Usa `?stats::family`):
+
+```{r}
+#| eval: false
+#| echo: true
+
+# Ajustar modelo GLM gaussiano
+model_gaussian <- glm(y ~ x, family = gaussian())
+
+# Ajustar modelo GLM lognormal
+model_lognorm <- glm(y ~ x, family = gaussian(link = "log"))
+
+# Ajustar modelo GLM gamma
+model_gamma <- glm(y ~ x, family = Gamma())
+
+# Ajustar modelo GLM gamma-inverso
+model_gamma_inv <- glm(y ~ x, family = inverse.gaussian())
+```
+
+## Regresión GLM para var. de Continuas: modelamiento
+
+Una alternativa más certera es el utilizar el criterio de información de Akaike (AIC) para comparar el ajuste de los modelos. A menos AIC, mejor el ajusto del modelo hacia los datos. (Usa `?stats::family`):
+
+```{r}
+#| eval: false
+#| echo: true
+
+# Ajustar modelo GLM gaussiano-inverso
+model_gaussian_inv <- glm(y ~ x, family = gaussian(link = "inverse"))
+
+# Ajustar modelo GLM exponencial
+model_exponential <- glm(y ~ x, family = Gamma(link = "log"))
+
+# Comparar ajuste de modelos con AIC
+MuMIn::model.sel(model_gaussian, model_lognorm, 
+                 model_gamma, model_gamma_inv, 
+                 model_gaussian_inv, model_exponential)
+```
+
+## Regresión GLM para var. de Continuas: modelamiento
+
+Una alternativa más certera es el utilizar el criterio de información de Akaike (AIC) para comparar el ajuste de los modelos. A menos AIC, mejor el ajusto del modelo hacia los datos. (Usa `?stats::family`):
+
+```{r}
+#| echo: false
+#| eval: true
+
+# Generar datos aleatorios
+set.seed(123)
+x <- rnorm(100)
+y <- rgamma(100, shape = 2, scale = 1)
+
+# Ajustar modelo GLM gaussiano
+model_gaussian <- glm(y ~ x, family = gaussian())
+
+# Ajustar modelo GLM lognormal
+model_lognorm <- glm(y ~ x, family = gaussian(link = "log"))
+
+# Ajustar modelo GLM gamma
+model_gamma <- glm(y ~ x, family = Gamma())
+
+# Ajustar modelo GLM gamma-inverso
+model_gamma_inv <- glm(y ~ x, family = inverse.gaussian())
+
+# Ajustar modelo GLM gaussiano-inverso
+model_gaussian_inv <- glm(y ~ x, family = gaussian(link = "inverse"))
+
+# Ajustar modelo GLM exponencial
+model_exponential <- glm(y ~ x, family = Gamma(link = "log"))
+
+# Comparar ajuste de modelos con AIC
+MuMIn::model.sel(model_gaussian, model_lognorm, model_gamma, model_gamma_inv, model_gaussian_inv, model_exponential)
+```
+
+## Modelo de Hurdle: exceso de ceros
+
+```{r}
+#| label: fig-15excesoceros
+#| fig-align: center
+#| fig-cap: Los modelos de Hurdle permiten lidiar con el exceso de ceros, lo cual es un problema frecuente en procesos de conteo (comúnmente ajustados con Poisson o Binomial Negativa).
+
+library(ggplot2)
+set.seed(123)
+
+# Generamos una muestra de datos con exceso de ceros
+x <- rnbinom(1000, mu = 10, size = 1)
+
+
+# Graficamos un histograma
+g15 <- ggplot(data.frame(x), aes(x = x)) + 
+  geom_histogram(fill = "#4eb8d2", lwd=0.8,
+                 color="#4e00ff",binwidth = 1) + 
+  scale_x_continuous(breaks = seq(0, max(x), by = 10)) +
+  labs(title = "Histograma de datos con exceso de ceros", x = "Valores", y = "Frecuencia")+
+  theme_minimal()
+
+ 
+ggdraw() +
+  draw_plot(g15) +
+  draw_image(img, x = 0.87, y = 0.11, width = 0.11, height = 0.11)  
+
+```
+
+## Modelo de Hurdle: Los modelos internos
+
+:::: {.columns}
+:::  {.column width=35%}
+
+El modelo de Hurdle se compone de dos partes: 
+
+- **Parte Poisson:** (conditional, modelo de conteos) que modela la variable de respuesta para los valores mayores que cero. Es decir, modela los conteos (valores positivos).
+
+- **Parte Binomial:**  (zero inflated, modelo logístico) modela la probabilidad de que la variable de respuesta $Y$ sea cero. Determina si la variable de respuesta es cero o mayor que cero.
+
+:::
+
+:::  {.column width=65%}
+```{r}
+#| out-width: 80%
+knitr::include_graphics("figs/Hurdle model IRR.png")
+```
+:::
+::::
+
+# Modelos con efectos mixtos<br>(LMM y GLMM) {background-image=fondoh1.png}
+
+## Introducción a efectos mixtos
+
+### Efectos fijos
+
+Los modelos que hemos visto hasta el momento solo involucran un tipo de variable independiente $X$: los efectos fijos.
+
+```{r}
+#| eval: false
+#| echo: true
+glm(y ~ x1 + x2 + x3, family = binomial(link = "logit"))
+
+lm(y ~ x1 + x2 + x3)
+```
+
+- Siempre tenemos interés interpretativo en los efectos fijos.
+
+- Son factores o variables numéricas.
+
+## Introducción a efectos mixtos
+
+### Efectos aleatorios
+
+Los efectos aleatorios:
+
+- Incluyen variables factores (var. categóricas), con al menos 5 niveles.
+
+- No tenemos interés interpretativo en los efectos aleatorios.
+
+- Se usan para modelar la variabilidad en los datos que no puede ser explicada por las variables independientes $X$ (efectos fijos).
+
+- Dependiendo de la librería en R que se utilice, la sintaxis puede variar. Usaremos:
+
+::: {.fragment}
+::: {.incremental}
+```{r}
+#| eval: false
+#| echo: true
+glmer(y ~ x1 + x2 + x3 + (1|ea1), family = binomial(link = "logit"))
+
+lmer(y ~ x1 + x2 + x3 + (1|ea1))
+```
+:::
+:::
+
+## Introducción a efectos mixtos: tipos de efectos mixtos
+
+Realizando gráficos exploratorios se puede predecir cuál será el mejor tipo de efecto aleatorio para nuestro modelo.
+
+```{r}
+#| label: fig-16effmixtos
+#| out-width: 80%
+#| fig-cap: Efectos aleatorios con pendientes e interceptos aleatorios (A). Efectos aleatorios solo con interceptos aleatorios (B). Modificado de [Harrison et al. (2018)](https://peerj.com/articles/4794/).
+knitr::include_graphics("figs/effmixtos.png")
+```
+
+## Pros y Cons de los modelos de efectos mixtos
+
+### Ventajas
+
+- Proporciona una estimación más precisa de los parámetros del modelo.
+
+- Permite modelar la correlación entre las observaciones dentro de cada unidad de nivel superior. Correlación intra-clase (ICC).
+
+- Proporciona una manera de modelar la variabilidad no explicada por las variables independientes.
+
+### Desventajas
+
+- La especificación del modelo puede ser compleja y requiere conocimientos preliminares, una comprensión de los datos y de las suposiciones subyacentes del modelo.
+
+- Son computacionalmente intensivos (GLMM usa integrales).
+
+## Modelos Lineales de efectos mixtos (LMM)
+
+La forma más general de un modelo LMM puede expresarse como:
+
+$$y = X\beta + Z\gamma + \varepsilon$$
+
+Donde $y$ es el vector de respuestas, $X$ y $Z$ son las **matrices de efectos fijos y aleatorios**, respectivamente, $\beta$ y $\gamma$ son los vectores de parámetros desconocidos para los efectos fijos y aleatorios, respectivamente, y $\varepsilon$ es el vector de errores. 
+Tanto $\varepsilon$ y $\gamma$ se asume que sigue una distribución normal estándar $X \sim \mathcal{N}(\mu = 0,\,\sigma^{2})$.
+
+#### Considera:
+
+- En el modelo final LMM utilizar la **máxima verosimilitud restringida (REML)**, que es una forma de estimación (insesgada) de la verosimilitud que tiene en cuenta los grados de libertad perdidos por la estimación de los efectos aleatorios. 
+
+## Modelos Generalizados Lineales de efectos mixtos (GLMM)
+
+:::: {.columns} 
+::: {.column width=40%}
+La especificación de un modelo GLMM se puede escribir en términos matemáticos:
+
+$$ y_i \mid b_i \sim F $$
+$$ g(\theta_i) = x_i \beta + z_i u_i $$
+$$ u_i \sim N(0,D) $$
+:::
+::: {.column width=60%}
+::: {.fragment}
+::: {.incremental}
+
+#### Sean:
+
+:::
+:::
+
+- $y_i$ variable respuesta (dependiente).
+- $b_i$ vector de covariables aleatorias.
+- $F$ función de densidad de probabilidad de la distribución condicional.
+- $\theta_i$ función de la media condicional.
+
+- $g(\cdot)$ función de enlace.
+- $x_i$ vector de covariables fijas (independientes). 
+- $\beta$ vector de coeficientes de regresión fijos.
+
+- $z_i$ vector de covariables aleatorias.
+- $u_i$ vector de efectos aleatorios. 
+
+- $D$ matriz de varianza-covarianza de eff. aleatorios.
+:::
+::::

@@ -1,0 +1,77 @@
+/*-- scss:defaults --*/
+
+// fonts
+// $font-family-sans-serif: "Palatino Linotype", "Book Antiqua", Palatino,
+//  FreeSerif, serif !default;
+
+// colors
+// $body-bg: #fff !default;
+$body-color: #000 !default;
+$link-color: #002fff!default;
+$selection-bg: red !default;
+$presentation-heading-color: #358f09;
+
+
+// tamaños
+$presentation-font-size-root: 26px;
+$presentation-h1-font-size: 3em;
+$presentation-h2-font-size: 1.9em;
+$presentation-font-smaller: 0.8;
+$code-block-font-size: 0.9em;
+
+// headings
+// $presentation-heading-font: "Palatino Linotype", "Book Antiqua", Palatino,
+//  FreeSerif, serif !default;
+$presentation-heading-color: #383d3d !default;
+
+
+/*-- scss:rules --*/
+
+.reveal p {
+  text-align: justify;
+}
+
+.reveal ol, .reveal dl, .reveal ul {
+    display: inline-block;
+    text-align: justify !important;;
+    margin: 0 0 0 1em;
+}
+
+.title {
+  color: #358f09 !important;
+}
+
+h4 {
+  color: #fc7600 !important;
+}
+
+h3 {
+  color: #fc7600 !important;
+}
+
+.subtitle {
+  text-align: center !important;
+  color: #fc7600 !important;
+  font-size: 50px;
+  font-weight: 400;
+}
+
+.author {
+  color: #4d4d4d;
+}
+
+.date {
+  text-align: center !important;
+  color: #4d4d4d;
+}
+
+.reveal .footer > * {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center !important;
+}
+
+/*.math {
+  font-size: 30pt;
+}*/
+
