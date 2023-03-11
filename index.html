@@ -1487,24 +1487,22 @@ Models ranked by AICc(x) </code></pre>
 <li class="fragment">En el modelo final LMM utilizar la <strong>máxima verosimilitud restringida (REML)</strong>, que es una forma de estimación (insesgada) de la verosimilitud que tiene en cuenta los grados de libertad perdidos por la estimación de los efectos aleatorios.</li>
 </ul>
 </section>
-<section id="modelos-generalizados-lineales-de-efectos-mixtos-glmm" class="slide level2">
+<section id="modelos-generalizados-lineales-de-efectos-mixtos-glmm" class="slide level2 smaller">
 <h2>Modelos Generalizados Lineales de efectos mixtos (GLMM)</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
 <p>La especificación de un modelo GLMM se puede escribir en términos matemáticos:</p>
 <p><span class="math display">\[ y_i \mid b_i \sim F \]</span> <span class="math display">\[ g(\theta_i) = x_i \beta + z_i u_i \]</span> <span class="math display">\[ u_i \sim N(0,D) \]</span></p>
-</div><div class="column" style="width:60%;">
-<div class="fragment">
-<section id="sean" class="incremental">
-<h4>Sean:</h4>
-</section>
-</div>
+<h4 id="sean">Sean:</h4>
+<div class="columns">
+<div class="column">
 <ul>
 <li class="fragment"><p><span class="math inline">\(y_i\)</span> variable respuesta (dependiente).</p></li>
 <li class="fragment"><p><span class="math inline">\(b_i\)</span> vector de covariables aleatorias.</p></li>
-<li class="fragment"><p><span class="math inline">\(F\)</span> función de densidad de probabilidad de la distribución condicional.</p></li>
+<li class="fragment"><p><span class="math inline">\(F\)</span> función de densidad de probabilidad<br>de la distribución condicional.</p></li>
 <li class="fragment"><p><span class="math inline">\(\theta_i\)</span> función de la media condicional.</p></li>
 <li class="fragment"><p><span class="math inline">\(g(\cdot)\)</span> función de enlace.</p></li>
+</ul>
+</div><div class="column">
+<ul>
 <li class="fragment"><p><span class="math inline">\(x_i\)</span> vector de covariables fijas (independientes).</p></li>
 <li class="fragment"><p><span class="math inline">\(\beta\)</span> vector de coeficientes de regresión fijos.</p></li>
 <li class="fragment"><p><span class="math inline">\(z_i\)</span> vector de covariables aleatorias.</p></li>

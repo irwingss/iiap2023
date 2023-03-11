@@ -1903,31 +1903,27 @@ Tanto $\varepsilon$ y $\gamma$ se asume que sigue una distribución normal está
 
 - En el modelo final LMM utilizar la **máxima verosimilitud restringida (REML)**, que es una forma de estimación (insesgada) de la verosimilitud que tiene en cuenta los grados de libertad perdidos por la estimación de los efectos aleatorios. 
 
-## Modelos Generalizados Lineales de efectos mixtos (GLMM)
 
-:::: {.columns} 
-::: {.column width=40%}
+## Modelos Generalizados Lineales de efectos mixtos (GLMM) {.smaller}
+
 La especificación de un modelo GLMM se puede escribir en términos matemáticos:
 
 $$ y_i \mid b_i \sim F $$
 $$ g(\theta_i) = x_i \beta + z_i u_i $$
 $$ u_i \sim N(0,D) $$
-:::
-::: {.column width=60%}
-::: {.fragment}
-::: {.incremental}
 
 #### Sean:
 
-:::
-:::
-
+:::: {.columns} 
+::: {.column}
 - $y_i$ variable respuesta (dependiente).
 - $b_i$ vector de covariables aleatorias.
-- $F$ función de densidad de probabilidad de la distribución condicional.
+- $F$ función de densidad de probabilidad<br>de la distribución condicional.
 - $\theta_i$ función de la media condicional.
 
 - $g(\cdot)$ función de enlace.
+:::
+::: {.column}
 - $x_i$ vector de covariables fijas (independientes). 
 - $\beta$ vector de coeficientes de regresión fijos.
 
@@ -1937,6 +1933,5 @@ $$ u_i \sim N(0,D) $$
 - $D$ matriz de varianza-covarianza de eff. aleatorios.
 :::
 ::::
-
 
 # Gracias por su atención 
