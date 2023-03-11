@@ -17,7 +17,7 @@ format:
       theme: chalkboard
       boardmarker-width: 5
     incremental: true
-    scrollable: true
+    scrollable: false
     slide-number: true
     fig-format: svg
 editor: source
