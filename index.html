@@ -495,25 +495,26 @@ Donde: <span class="math inline">\(\varepsilon \sim \mathcal{N}(0,\sigma)\)</spa
 <section id="section-2" class="slide level2">
 <h2></h2>
 <div class="columns">
-<div class="column" style="width:55%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-asunciones-lm_1b9f6244ec1f8cb2cfe73fd97d27de55">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-asunciones-lm_cb7e7fdb0e272ebcd09caf3b09bbefb9">
 <div class="cell-output-display">
 <div id="fig-asunciones-lm" class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/fig-asunciones-lm-1.svg" style="width:100.0%"></p>
+<p><img data-src="figs/multiplot.png" style="width:97.0%"></p>
 <p></p><figcaption>Figura&nbsp;1: Multiplot de asunciones teóricas.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:45%;">
+</div><div class="column" style="width:50%;">
 <h2>
 Revisión rápida de las asunciones teóricas
 </h2>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-3_f61830f57e0ed263c9280dc61debbbe0">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-3_9b25c86cf9d91145035457fc4a85946f">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, </span>
 <span id="cb1-2"><a href="#cb1-2"></a>             <span class="at">data =</span> mis_datos)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(modelo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(performance)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">check_model</span>(modelo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -553,9 +554,9 @@ Revisión rápida de las asunciones teóricas
 <section id="chequeo-de-distribución-gráfico-de-cullen-y-frey" class="slide level2">
 <h2>Chequeo de distribución: Gráfico de Cullen y Frey</h2>
 
-<img data-src="index_files/figure-revealjs/fig-06cullenfrey-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;8: El punto azul oscuro son los datos observados. Los amarillos, los 1000 bootstrap realizados sobre los datos.</p><div class="cell" data-hash="index_cache/revealjs/fig-06cullenfrey-code_fc2eb1b1bc8ffea04b813847625444b7">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(observaciones, <span class="at">boot =</span> <span class="dv">1000</span>, <span class="at">discrete =</span> <span class="cn">FALSE</span>) <span class="co">#distribuciones continuas</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(observaciones, <span class="at">boot =</span> <span class="dv">1000</span>, <span class="at">discrete =</span> <span class="cn">TRUE</span>) <span class="co">#distribuciones discretas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img data-src="index_files/figure-revealjs/fig-06cullenfrey-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;8: El punto azul oscuro son los datos observados. Los amarillos, los 1000 bootstrap realizados sobre los datos.</p><div class="cell" data-hash="index_cache/revealjs/fig-06cullenfrey-code_22ce06fb47c89eba4d2a54aec2909b47">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(observaciones, <span class="at">boot =</span> <span class="dv">1000</span>, <span class="at">discrete =</span> <span class="cn">FALSE</span>) <span class="co">#DC</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(observaciones, <span class="at">boot =</span> <span class="dv">1000</span>, <span class="at">discrete =</span> <span class="cn">TRUE</span>) <span class="co">#DD</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="comparación-de-distribuciones-de-probabilidades" class="slide level2">
@@ -1489,10 +1490,16 @@ Models ranked by AICc(x) </code></pre>
 </section>
 <section id="modelos-generalizados-lineales-de-efectos-mixtos-glmm" class="slide level2">
 <h2>Modelos Generalizados Lineales de efectos mixtos (GLMM)</h2>
-<p>:::: {.columns} ::: {.column width=40%} La especificación de un modelo GLMM se puede escribir en términos matemáticos:</p>
-<p><span class="math display">\[ y_i \mid b_i \sim F \]</span> <span class="math display">\[ g(\theta_i) = x_i \beta + z_i u_i \]</span> <span class="math display">\[ u_i \sim N(0,D) \]</span> ::: ::: {.column width=60%} ::: {.fragment} ::: {.incremental}</p>
-<h4 id="sean">Sean:</h4>
-<p>::: :::</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>La especificación de un modelo GLMM se puede escribir en términos matemáticos:</p>
+<p><span class="math display">\[ y_i \mid b_i \sim F \]</span> <span class="math display">\[ g(\theta_i) = x_i \beta + z_i u_i \]</span> <span class="math display">\[ u_i \sim N(0,D) \]</span></p>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<section id="sean" class="incremental">
+<h4>Sean:</h4>
+</section>
+</div>
 <ul>
 <li class="fragment"><p><span class="math inline">\(y_i\)</span> variable respuesta (dependiente).</p></li>
 <li class="fragment"><p><span class="math inline">\(b_i\)</span> vector de covariables aleatorias.</p></li>
@@ -1503,8 +1510,10 @@ Models ranked by AICc(x) </code></pre>
 <li class="fragment"><p><span class="math inline">\(\beta\)</span> vector de coeficientes de regresión fijos.</p></li>
 <li class="fragment"><p><span class="math inline">\(z_i\)</span> vector de covariables aleatorias.</p></li>
 <li class="fragment"><p><span class="math inline">\(u_i\)</span> vector de efectos aleatorios.</p></li>
-<li class="fragment"><p><span class="math inline">\(D\)</span> matriz de varianza-covarianza de eff. aleatorios. ::: <!-- :::: --></p></li>
+<li class="fragment"><p><span class="math inline">\(D\)</span> matriz de varianza-covarianza de eff. aleatorios.</p></li>
 </ul>
+</div>
+</div>
 
 <img src="logo.jpg" class="slide-logo r-stretch"><div class="footer footer-default">
 

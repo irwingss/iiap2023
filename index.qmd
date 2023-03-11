@@ -140,31 +140,21 @@ $$
 
 ## {}
 
+
+
 :::: {.columns}
-::: {.column  width="55%"}
+::: {.column  width="50%"}
 ```{r}
 #| label: fig-asunciones-lm
 #| fig-cap: Multiplot de asunciones teóricas.
 #| fig-align: center
-#| fig-width: 5
-#| fig-height: 5.5
-#| out-width: 100%
+#| out-width: 97%
 #| echo: false
-n1 <- rep(1:100,2)
-a1 <- 0
-b1 <- 1
-sigma21 <- n1^1.3
-eps1 <- rnorm(n1,mean=0,sd=10)
-y1 <- a1 + b1 * n1 + eps1
-datos1 <- data.frame(y1,n1)
-
-model1 <- lm(y1~n1)
-check_model(model1)
-
+knitr::include_graphics("figs/multiplot.png")
 ```
 :::
 
-::: {.column width="45%"}
+::: {.column width="50%"}
 
 <h2>Revisión rápida de las asunciones teóricas</h2>
 
@@ -174,7 +164,8 @@ check_model(model1)
 
 modelo <- lm(y ~ x, 
              data = mis_datos)
-performance::check_model(modelo)
+library(performance)
+check_model(modelo)
 ```
 
 :::
@@ -363,8 +354,8 @@ invisible(descdist(iris$Sepal.Length, boot = 1000,discrete=FALSE))
 #| label: fig-06cullenfrey-code
 #| eval: false
 #| echo: true
-fitdistrplus::descdist(observaciones, boot = 1000, discrete = FALSE) #distribuciones continuas
-fitdistrplus::descdist(observaciones, boot = 1000, discrete = TRUE) #distribuciones discretas
+fitdistrplus::descdist(observaciones, boot = 1000, discrete = FALSE) #DC
+fitdistrplus::descdist(observaciones, boot = 1000, discrete = TRUE) #DD
 ```
 
 ## Comparación de distribuciones de probabilidades
@@ -1117,7 +1108,7 @@ knitr::include_graphics("figs/Densidad.png")
 #| echo: false
 #| out-width: 100%
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 4.5
 #| fig-cap: Principales distribuciones de probabilidades continuas, incluyendo la distribución normal y distribuciones sesgadas.
 
 # Cargar las librerías necesarias
@@ -1192,7 +1183,7 @@ ggdraw() +
 #| echo: false
 #| out-width: 100%
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 4.5
 #| fig-cap: Distribuciones de probabilidades continuas menos frecuentes, incluyendo la distribución normal para la comparación.
 
 # Cargar las librerías necesarias
@@ -1275,7 +1266,7 @@ Para mayor detalle matemático sobre cada distribución de la familia exponencia
 #| echo: false
 #| out-width: 100%
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 4.5
 #| fig-cap: Distribuciones de probabilidades discretas.
 
 set.seed(123)
@@ -1913,7 +1904,9 @@ $$ y_i \mid b_i \sim F $$
 $$ g(\theta_i) = x_i \beta + z_i u_i $$
 $$ u_i \sim N(0,D) $$
 :::
+
 ::: {.column width=60%}
+
 ::: {.fragment}
 ::: {.incremental}
 
@@ -1936,4 +1929,4 @@ $$ u_i \sim N(0,D) $$
 
 - $D$ matriz de varianza-covarianza de eff. aleatorios.
 :::
-<!-- :::: -->
+::::
