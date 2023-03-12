@@ -804,7 +804,7 @@ Revisión rápida de las asunciones teóricas
 </section>
 <section id="definir-pesos-en-nuestro-modelo" class="slide level2">
 <h2>Definir pesos en nuestro modelo</h2>
-<p>Se utilizará el enfoque donde <span class="math inline">\(w_i=\frac{1}{\sigma^2}\)</span> pero reemplazando considerando como estimador de la varianza el valor ajustado <span class="math inline">\(\bar{y}\)</span> por una regresión OLS previa de la siguient manera:</p>
+<p>Se utilizará el enfoque donde <span class="math inline">\(w_i=\frac{1}{\sigma^2}\)</span> pero considerando como estimador de la varianza el valor ajustado <span class="math inline">\(\bar{y}\)</span> por una regresión OLS previa de la siguiente manera:</p>
 <div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-21_1552793bb4685ac669a9a1cf3d538699">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1-15|2|5|7|10|12|15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Creando modelo preliminar</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>mod_previo <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> datos)</span>

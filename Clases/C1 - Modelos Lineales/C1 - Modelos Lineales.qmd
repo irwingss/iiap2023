@@ -1,6 +1,8 @@
 ---
 title: "Módulo 01: Modelos Lineales"
 format: html
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Instalación de librerías
@@ -11,16 +13,180 @@ format: html
 
 
 ## Activación de librerías
+```{r}
+library(openxlsx)
+library(tidyverse)
+library(performance)
+library(JWileymisc)
+```
 
 
-# Modelos lineales
+# 1. MODELOS LINEALES
 
-## Ejemplo 01:
+## 1.1. Ejemplo 01 ----------------------------------------------------------------
 
-### Creación
+**Porcentaje de cobertura vegetal de cactus en función de los años**
+
+*Artículo:* Liang, M., Feng, X., & Gornish, E. S. (2021). Rainfall pulses mediate long‐term plant community compositional dynamics in a semi‐arid rangeland. Journal of Applied Ecology, 58(4), 708-717.
+
+*Variables:* 
+Var explicativa: YEAR (Año)
+Var respuesta: COV (%Cobertura)
+
+*Preguntas a responder:* 
+- ¿Cuáles la relación que existe entre el paso de los años y el porcentaje de cobertura vegetal del grupo Cactaceae? 
+
+- ¿Qué tanto explica el paso de los años las variaciones en cobertura vegetal del grupo Cactaceae?
+
+- ¿Qué efecto tiene el paso de un año sobre el porcentaje de cobertura vegetal del grupo Cactaceae?
+
+### 1.1.A. Preliminares
+
+```{r}
+# Carga de la base de datos "paper1-rainfall-expulse.xlsx"
+rfx <- read.xlsx("Clases/C1 - Modelos Lineales/Datos/paper1-rainfall-expulse.xlsx")
+
+# Extracción de la información
+rfx_2 <- rfx %>%
+  group_by(pfg, YEAR) %>%
+  summarise(
+    COV = mean(cover, na.rm = TRUE),
+    SD = mean(sd, na.rm = TRUE),
+    SE = mean(se, na.rm = TRUE)
+  ) %>%
+  filter(pfg %in% c("CHOLLA", "OTHCACTUS")) %>%
+  mutate(pfg = fct_recode(pfg,
+    "Cholla" = "CHOLLA",
+    "Other cacti" = "OTHCACTUS"
+  ))
+
+# Exploración del gráfico mostrado en el artículo
+ rfx_2 %>%
+  ggplot(aes(x = YEAR, y = COV, color = pfg)) +
+  geom_line(color = "gray60", aes(group = pfg), lwd = 0.7) +
+  geom_errorbar(aes(ymin = (COV - SE), ymax = (COV + SE)),
+    alpha = 0.35, width = 0
+  ) +
+  geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
+  geom_smooth(aes(lty = pfg),
+    method = "lm", 
+    formula = y ~ x + poly(x, 2),
+    se = FALSE, lwd = 1.2
+  ) +
+  scale_linetype_manual(values = c(2, 1)) +
+  scale_x_continuous(breaks = seq(1950, 2020, 10)) +
+  scale_color_manual(values = c("#8a4715", "#f0b165")) +
+  labs(x = "Year", y = "Cacti cover (%)", lty = "", color = "") +
+  theme_test() +
+  theme(
+    legend.position = c(0.15, 0.95),
+    legend.background = element_blank()
+  ) +
+  # facet_wrap(~pfg)+
+  annotate(geom = "text", label="italic(R) ^ 2 == 0.090", 
+           x=1995, y=3.5, parse =TRUE, color="#8a4715", size = 5)+
+   annotate(geom = "text", label="italic(R) ^ 2 == 0.353", 
+           x=1995, y=0.5, parse =TRUE, color="#f0b165", size = 5)
+
+```
+
+### 1.1.B. Creación de modelos lineales
+
+```{r}
+# Modelo lineal (Cylindropuntia spp. - Cholla)
+mod1_lm_ch <- lm(COV ~ YEAR, data= rfx_2 %>% filter(pfg == "Cholla")) 
+summary(mod1_lm_ch)
+
+# Modelo lineal (otros cactus)
+mod1_lm_oc <- lm(COV ~ YEAR, data= rfx_2 %>% filter(pfg == "Other cacti")) 
+summary(mod1_lm_oc)
+
+# Modelo cuadrático (no lineal) (Cylindropuntia spp. - Cholla)
+mod1_cuad_ch <- lm(COV ~ YEAR + poly(YEAR,2), data= rfx_2 %>% filter(pfg == "Cholla")) 
+summary(mod1_cuad_ch)
+
+# Modelo cuadrático (no lineal) (otros cactus)
+mod1_cuad_oc <- lm(COV ~ YEAR + poly(YEAR,2), data= rfx_2 %>% filter(pfg == "Other cacti")) 
+summary(mod1_cuad_oc)
+```
+
+
+### 1.1.C. Asunciones teóricas
+
+```{r}
+# Chequeo global
+check_model(mod1_lm_ch)
+check_model(mod1_lm_oc)
+
+# A1: Variable dependiente numérica continua 
+# A2: Linealidad de la relación (Gráfico Residuales Est. vs Valores ajustados)
+qplot(x=YEAR, y=COV, data= rfx_2 %>% filter(pfg == "Cholla"))+geom_smooth()
+qplot(x=YEAR, y=COV, data= rfx_2 %>% filter(pfg == "Other cacti"))+geom_smooth()
+
+check_model(mod1_lm_ch, check = "linearity")
+check_model(mod1_lm_oc, check = "linearity")
+
+# A3: Normalidad de los residuales (Shapiro)
+check_normality(mod1_lm_ch)
+check_normality(mod1_lm_oc)
+
+# A4: Independencia de los residuales
+# A5: Homocedasticidad de los residuales (Breusch-Pagan test)
+check_heteroscedasticity(mod1_lm_ch)
+check_heteroscedasticity(mod1_lm_oc)
+
+# A6: Ausencia de valores influyentes (Distancia de Cook)
+check_outliers(mod1_lm_ch)
+check_outliers(mod1_lm_oc)
+```
+
+### 1.1.D. Comparación de distribuciones de probabilidades
+
+```{r}
+comp1 <- 
+  testDistribution(rfx_2 %>% filter(pfg == "Cholla") %>% pull(COV), 
+    distr="normal", 
+    extremevalues="empirical")
+plot(comp1)
+
+comp2 <- 
+  testDistribution(rfx_2 %>% filter(pfg == "Other cacti") %>% pull(COV), 
+    distr="normal", 
+    extremevalues="empirical")
+plot(comp2)
+```
+
+## 1.2. Ejemplo 02 ----------------------------------------------------------------
 
 ```{r}
 
 ```
 
-### Asunciones teóricas
+
+## 1.3. Ejemplo 03 ----------------------------------------------------------------
+
+```{r}
+
+```
+
+
+# 2. REGRESIONES LOGARÍTMICAS:
+
+
+## 2.1. Ejemplo 04 ----------------------------------------------------------------
+
+```{r}
+
+```
+
+
+# 3. REGRESIÓN LINEAL PONDERADA (WLS):
+
+
+## 3.1. Ejemplo 05 ----------------------------------------------------------------
+
+```{r}
+
+```
+
+
