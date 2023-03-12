@@ -759,7 +759,7 @@ $\large{\bar{y}=\frac{\sum{w_iy_i}}{\sum{w_i}}}$  y $\large{\bar{x}=\frac{\sum{w
 
 ## Definir pesos en nuestro modelo{}
 
-Se utilizará el enfoque donde $w_i=\frac{1}{\sigma^2}$ pero reemplazando considerando como estimador de la varianza el valor ajustado $\bar{y}$ por una regresión OLS previa de la siguient manera:
+Se utilizará el enfoque donde $w_i=\frac{1}{\sigma^2}$ pero considerando como estimador de la varianza el valor ajustado $\bar{y}$ por una regresión OLS previa de la siguiente manera:
 
 ```{r}
 #| eval: false
