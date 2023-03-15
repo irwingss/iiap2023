@@ -537,11 +537,7 @@ Revisión rápida de las asunciones teóricas
 <section id="a7-problema-de-multicolinearidad" class="slide level2">
 <h2>A7: Problema de multicolinearidad</h2>
 
-<img data-src="index_files/figure-revealjs/fig-05multicolinearidad-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;6: Este gráfico presenta <b>problemas de Heterocedasticidad</b>. Línea negra cuantil 0.5; líneas punteadas azules cuantiles 0.25 y 0.75; líneas punteadas naranja cuantiles 0.05 y 0.95.</p></section>
-<section id="a7-problema-de-multicolinearidad-1" class="slide level2">
-<h2>A7: Problema de multicolinearidad</h2>
-
-<img data-src="index_files/figure-revealjs/fig-05multico-test-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;7: Variance Inflation Factor (VIF) para identificar problemas de multicolinearidad.</p></section>
+<img data-src="index_files/figure-revealjs/fig-05multico-test-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;6: Variance Inflation Factor (VIF) para identificar problemas de multicolinearidad.</p></section>
 <section id="razones-para-escoger-un-modelo-lineal" class="slide level2">
 <h2>Razones para escoger un modelo lineal</h2>
 <ul>
@@ -553,7 +549,7 @@ Revisión rápida de las asunciones teóricas
 <section id="chequeo-de-distribución-gráfico-de-cullen-y-frey" class="slide level2">
 <h2>Chequeo de distribución: Gráfico de Cullen y Frey</h2>
 
-<img data-src="index_files/figure-revealjs/fig-06cullenfrey-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;8: El punto azul oscuro son los datos observados. Los amarillos, los 1000 bootstrap realizados sobre los datos.</p><div class="cell" data-hash="index_cache/revealjs/fig-06cullenfrey-code_22ce06fb47c89eba4d2a54aec2909b47">
+<img data-src="index_files/figure-revealjs/fig-06cullenfrey-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;7: El punto azul oscuro son los datos observados. Los amarillos, los 1000 bootstrap realizados sobre los datos.</p><div class="cell" data-hash="index_cache/revealjs/fig-06cullenfrey-code_22ce06fb47c89eba4d2a54aec2909b47">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(observaciones, <span class="at">boot =</span> <span class="dv">1000</span>, <span class="at">discrete =</span> <span class="cn">FALSE</span>) <span class="co">#DC</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(observaciones, <span class="at">boot =</span> <span class="dv">1000</span>, <span class="at">discrete =</span> <span class="cn">TRUE</span>) <span class="co">#DD</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -562,16 +558,16 @@ Revisión rápida de las asunciones teóricas
 <h2>Comparación de distribuciones de probabilidades</h2>
 <div class="columns">
 <div class="column">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-12_e5dea04113d76998cf01be28c285e375">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-11_3ac9bd51ec6ac56146c9610ae8f9572b">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.svg"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.svg"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-13_9e94781ba8334d792cb4c2358b2c3ac1">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-12_72e653914534f56e6e17f192f42849e1">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(JWileymisc)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>comp1 <span class="ot">&lt;-</span> </span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">testDistribution</span>(observ, </span>
@@ -580,16 +576,16 @@ Revisión rápida de las asunciones teóricas
 <span id="cb3-6"><a href="#cb3-6"></a><span class="fu">plot</span>(comp1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-14_7340f2118b140d31e688c14d1f4ff01a">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-13_061819f2fd4109214d9e100aa58bc452">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.svg"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.svg"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-15_13cc09ed001ba2ef1aecda9abd943620">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-14_96d266f8e0bef83f9a5c7e16ab01a30b">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(JWileymisc)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>comp2 <span class="ot">&lt;-</span>  </span>
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">testDistribution</span>(observ, </span>
@@ -634,7 +630,7 @@ Revisión rápida de las asunciones teóricas
 <div id="fig-04logreg" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="index_files/figure-revealjs/fig-04logreg-1.svg" style="width:100.0%"></p>
-<p></p><figcaption>Figura&nbsp;9: Relación no lineal entre X e Y. El modelo lineal clásico no ajusta correctamente los datos.</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;8: Relación no lineal entre X e Y. El modelo lineal clásico no ajusta correctamente los datos.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -705,7 +701,7 @@ Revisión rápida de las asunciones teóricas
 <div id="fig-05loglinear" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="index_files/figure-revealjs/fig-05loglinear-1.svg" style="width:100.0%"></p>
-<p></p><figcaption>Figura&nbsp;10: El modelo lineal presenta errores de predicción en las colas de la nube de puntos (A). La regresión log-linear corrige estos errores (B).</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;9: El modelo lineal presenta errores de predicción en las colas de la nube de puntos (A). La regresión log-linear corrige estos errores (B).</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -727,7 +723,7 @@ Revisión rápida de las asunciones teóricas
 <div id="fig-06linearlog" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="index_files/figure-revealjs/fig-06linearlog-1.svg" style="width:100.0%"></p>
-<p></p><figcaption>Figura&nbsp;11: El modelo lineal no ajusta correctamente la nube de puntos (A). La relación entre las variables es no lineal y logarítmica, y se corrige con el modelo Log-Log.</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;10: El modelo lineal no ajusta correctamente la nube de puntos (A). La relación entre las variables es no lineal y logarítmica, y se corrige con el modelo Log-Log.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -749,7 +745,7 @@ Revisión rápida de las asunciones teóricas
 <div id="fig-07loglog" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="index_files/figure-revealjs/fig-07loglog-1.svg" style="width:100.0%"></p>
-<p></p><figcaption>Figura&nbsp;12: El modelo lineal no ajusta correctamente la nube de puntos (A). La relación entre las variables es no lineal y logarítmica, y se corrige con la regresíón Log-Log.</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;11: El modelo lineal no ajusta correctamente la nube de puntos (A). La relación entre las variables es no lineal y logarítmica, y se corrige con la regresíón Log-Log.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -777,7 +773,7 @@ Revisión rápida de las asunciones teóricas
 <div id="fig-08WLS" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="index_files/figure-revealjs/fig-08WLS-1.svg" style="width:100.0%"></p>
-<p></p><figcaption>Figura&nbsp;13: Problema de heterocedasticidad.</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;12: Problema de heterocedasticidad.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -805,7 +801,7 @@ Revisión rápida de las asunciones teóricas
 <section id="definir-pesos-en-nuestro-modelo" class="slide level2">
 <h2>Definir pesos en nuestro modelo</h2>
 <p>Se utilizará el enfoque donde <span class="math inline">\(w_i=\frac{1}{\sigma^2}\)</span> pero considerando como estimador de la varianza el valor ajustado <span class="math inline">\(\bar{y}\)</span> por una regresión OLS previa de la siguiente manera:</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-21_1552793bb4685ac669a9a1cf3d538699">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-20_a78fad38ff61b83c78100e5172729d8e">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1-15|2|5|7|10|12|15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Creando modelo preliminar</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>mod_previo <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> datos)</span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
@@ -830,10 +826,10 @@ Revisión rápida de las asunciones teóricas
 </section>
 <section id="problema-de-multicolinearidad" class="slide level2">
 <h2>Problema de Multicolinearidad</h2>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-22_35417f332aa401c262d5bad74bc20cfb">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-21_329f6daba2515c0d083016f5dd6ccc78">
 
 </div>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-23_b8ec802f0385a0ada5eb21d2ebdeec4f">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-22_b075bdbd53e7768355fcbfe32871a79e">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Funciones para modificar los gráficos de ggpairs</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>lowerFn <span class="ot">&lt;-</span> <span class="cf">function</span>(data, mapping, <span class="at">method =</span> <span class="st">"lm"</span>, ...) {</span>
 <span id="cb6-3"><a href="#cb6-3"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> data, <span class="at">mapping =</span> mapping) <span class="sc">+</span></span>
@@ -851,7 +847,7 @@ Revisión rápida de las asunciones teóricas
 </section>
 <section id="problema-de-multicolinearidad-1" class="slide level2">
 <h2>Problema de Multicolinearidad</h2>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-24_0e9d71fa92b96e9c13b3ebdf0a87c51b">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-23_e6127345fd844a0aee1cc3d0cadaf244">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Generando gráfico EDA con ggpairs</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co"># de la librería GGally</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="fu">ggpairs</span>(iris[,<span class="sc">-</span><span class="dv">5</span>],</span>
@@ -862,9 +858,9 @@ Revisión rápida de las asunciones teóricas
 </div>
 
 </section>
-<section id="problema-de-multicolinearidad-1-output" class="slide level2 output-location-slide"><h2>Problema de Multicolinearidad</h2><div class="cell output-location-slide" data-hash="index_cache/revealjs/unnamed-chunk-24_0e9d71fa92b96e9c13b3ebdf0a87c51b">
+<section id="problema-de-multicolinearidad-1-output" class="slide level2 output-location-slide"><h2>Problema de Multicolinearidad</h2><div class="cell output-location-slide" data-hash="index_cache/revealjs/unnamed-chunk-23_e6127345fd844a0aee1cc3d0cadaf244">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.svg"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.svg"></p>
 </div>
 </div></section><section id="alternativas-para-resolver-problemas-de-multicolinearidad" class="slide level2">
 <h2>Alternativas para resolver<br>problemas de multicolinearidad</h2>
@@ -887,18 +883,18 @@ Revisión rápida de las asunciones teóricas
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-25_6427ab7ef6160927073bf59abfa4c9d6">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-24_8a449d38e7eef6ebfe475f7e9066e64a">
 
 </div>
 
-<img data-src="index_files/figure-revealjs/fig-09ridgelasso-1.svg" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;14: Comparativa entre las regresiones OLS (línea negra), Ridge y Lasso. Notar que las regresiones Lasso se superponen totalmente.</p></section>
+<img data-src="index_files/figure-revealjs/fig-09ridgelasso-1.svg" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;13: Comparativa entre las regresiones OLS (línea negra), Ridge y Lasso. Notar que las regresiones Lasso se superponen totalmente.</p></section>
 <section id="regresión-ridge-regularización-l2" class="slide level2">
 <h2>Regresión Ridge (regularización L2)</h2>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-27_f82fd5d63beaeb6e8853117ca1e66fbb">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-26_6a76a28bc007c8586e9f26dea4740bab">
 
 </div>
 <p>Coeficientes <strong>OLS (modelo lineal clásico)</strong>:</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-28_559e5a44d250c4e63d82357d8dce6d60">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-27_2972594ddddc58dfe3ee563d6a64660b">
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)          V1          V2          V3          V4          V5 
       0.137       0.065      -0.004      -0.147       0.138       0.070 
@@ -908,7 +904,7 @@ Revisión rápida de las asunciones teóricas
 </div>
 <p><br></p>
 <p>Considerando una matriz de variables independientes llamada x, y una variable dependiente y, los coeficientes de penalizado con el método <strong>L2</strong> (<strong>Regresión ridge</strong>):</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-29_1c971a2ac780ffcb03f3edae9d3c91df">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-28_c919ea1707fd30086fcfce5f6261b08c">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Ridge regression </span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>ridge.fit <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha=</span><span class="dv">0</span>, <span class="at">lambda=</span><span class="fl">0.1</span>)</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="fu">predict</span>(ridge.fit, <span class="at">type=</span><span class="st">"coefficients"</span>, <span class="at">s=</span><span class="fl">0.1</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,] <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -923,7 +919,7 @@ Revisión rápida de las asunciones teóricas
 <section id="regresión-lasso-regularización-l1" class="slide level2">
 <h2>Regresión Lasso (regularización L1)</h2>
 <p>Coeficientes <strong>OLS (modelo lineal clásico)</strong>:</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-30_434f917a7da4427f4112514ec600c560">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-29_a6c3140b4871d222d873a3da850a4dd1">
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)          V1          V2          V3          V4          V5 
       0.137       0.065      -0.004      -0.147       0.138       0.070 
@@ -933,7 +929,7 @@ Revisión rápida de las asunciones teóricas
 </div>
 <p><br></p>
 <p>Considerando una matriz de variables independientes llamada x, y una variable dependiente y, los coeficientes de penalizado con el método <strong>L1</strong> (<strong>Regresión ridge</strong>):</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-31_772a8a8b30142aa22525076d747d822f">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-30_8b2e009ddfccdd8e290648038c690165">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Lasso regression </span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>laso.fit <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha=</span><span class="dv">1</span>, <span class="at">lambda=</span><span class="fl">0.1</span>)</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="fu">predict</span>(laso.fit, <span class="at">type=</span><span class="st">"coefficients"</span>, <span class="at">s=</span><span class="fl">0.1</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,] <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -955,18 +951,18 @@ Revisión rápida de las asunciones teóricas
 <p>Un concepto clave para comprender los modelos GLM es identificar la familia de distribución de probabilidades a la que nuestros datos de la variable dependiente <span class="math inline">\(Y\)</span> son más afines.</p>
 <div class="columns">
 <div class="column">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-32_b67cf61903ebffed30c1d6893738bb0f">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-31_e0782e299d4ea963e4b3d86f0de6a79a">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.svg" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.svg" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column">
 <p><br> <br> <br></p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-33_d6b0225fc37db4835c73b38358b91efd">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-32_51b7205a4be19b4ab844d93a62978c55">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(JWileymisc)</span>
 <span id="cb14-2"><a href="#cb14-2"></a>comp1 <span class="ot">&lt;-</span> </span>
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">testDistribution</span>(observ, </span>
@@ -990,7 +986,7 @@ Revisión rápida de las asunciones teóricas
 </div><div class="column" style="width:70%;">
 <div class="fragment">
 <div>
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-34_9659323697bad9eed3e155441f53a623">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/unnamed-chunk-33_2147872a69845db79f5e117f84b70e46">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1018,7 +1014,7 @@ Revisión rápida de las asunciones teóricas
 <section id="distribuciones-de-probabilidades-en-glm-1-1" class="slide level2">
 <h2>Distribuciones de probabilidades en GLM 1</h2>
 
-<img data-src="index_files/figure-revealjs/fig-010dist1-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;15: Principales distribuciones de probabilidades continuas, incluyendo la distribución normal y distribuciones sesgadas.</p></section>
+<img data-src="index_files/figure-revealjs/fig-010dist1-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;14: Principales distribuciones de probabilidades continuas, incluyendo la distribución normal y distribuciones sesgadas.</p></section>
 <section id="distribuciones-de-probabilidades-en-glm-2" class="slide level2">
 <h2>Distribuciones de probabilidades en GLM 2</h2>
 <ol start="7" type="1">
@@ -1030,7 +1026,7 @@ Revisión rápida de las asunciones teóricas
 <section id="distribuciones-de-probabilidades-en-glm-2-1" class="slide level2">
 <h2>Distribuciones de probabilidades en GLM 2</h2>
 
-<img data-src="index_files/figure-revealjs/fig-011dist2-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;16: Distribuciones de probabilidades continuas menos frecuentes, incluyendo la distribución normal para la comparación.</p></section>
+<img data-src="index_files/figure-revealjs/fig-011dist2-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;15: Distribuciones de probabilidades continuas menos frecuentes, incluyendo la distribución normal para la comparación.</p></section>
 <section id="distribuciones-de-probabilidades-en-glm-3" class="slide level2">
 <h2>Distribuciones de probabilidades en GLM 3</h2>
 <ol type="1">
@@ -1052,7 +1048,7 @@ Revisión rápida de las asunciones teóricas
 <section id="distribuciones-de-probabilidades-en-glm-3-1" class="slide level2">
 <h2>Distribuciones de probabilidades en GLM 3</h2>
 
-<img data-src="index_files/figure-revealjs/fig-012dist3-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;17: Distribuciones de probabilidades discretas.</p></section>
+<img data-src="index_files/figure-revealjs/fig-012dist3-1.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;16: Distribuciones de probabilidades discretas.</p></section>
 <section id="teoría-de-los-glm-aspectos-matemáticos" class="slide level2">
 <h2>Teoría de los GLM: aspectos matemáticos</h2>
 <ul>
@@ -1307,7 +1303,7 @@ E(Y/t)=\frac{1}{t}*E(Y)=\frac{E(Y)}{t}=\frac{\mu}{t}
 <div id="fig-13sobredis" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="index_files/figure-revealjs/fig-13sobredis-1.svg" style="width:90.0%"></p>
-<p></p><figcaption>Figura&nbsp;18: Cuando hay mayor varianza de la esperada por la distribución de poisson se tiene sobredispersión, y esta genera gráficos heterocedásticos como el aquí mostrado.</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;17: Cuando hay mayor varianza de la esperada por la distribución de poisson se tiene sobredispersión, y esta genera gráficos heterocedásticos como el aquí mostrado.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -1335,7 +1331,7 @@ E(Y/t)=\frac{1}{t}*E(Y)=\frac{E(Y)}{t}=\frac{\mu}{t}
 <div id="fig-014contidistri" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="index_files/figure-revealjs/fig-014contidistri-1.svg" style="width:100.0%"></p>
-<p></p><figcaption>Figura&nbsp;19: Comparativa de las principales distribuciones de probabilidades continuas.</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;18: Comparativa de las principales distribuciones de probabilidades continuas.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -1346,7 +1342,7 @@ E(Y/t)=\frac{1}{t}*E(Y)=\frac{E(Y)}{t}=\frac{\mu}{t}
 <section id="regresión-glm-para-var.-de-continuas-modelamiento" class="slide level2">
 <h2>Regresión GLM para var. de Continuas: modelamiento</h2>
 <p>Una alternativa más certera es el utilizar el criterio de información de Akaike (AIC) para comparar el ajuste de los modelos. A menos AIC, mejor el ajusto del modelo hacia los datos. (Usa <code>?stats::family</code>):</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-41_2055b3e6f04734ff0e21e39857796c7a">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-40_3377d2d973b798c0cadfaf2725262afe">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Ajustar modelo GLM gaussiano</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>model_gaussian <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>())</span>
 <span id="cb15-3"><a href="#cb15-3"></a></span>
@@ -1363,7 +1359,7 @@ E(Y/t)=\frac{1}{t}*E(Y)=\frac{E(Y)}{t}=\frac{\mu}{t}
 <section id="regresión-glm-para-var.-de-continuas-modelamiento-1" class="slide level2">
 <h2>Regresión GLM para var. de Continuas: modelamiento</h2>
 <p>Una alternativa más certera es el utilizar el criterio de información de Akaike (AIC) para comparar el ajuste de los modelos. A menos AIC, mejor el ajusto del modelo hacia los datos. (Usa <code>?stats::family</code>):</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-42_1c567a882ab5bc4d45018703c8994d98">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-41_ba8657690ce153ac7c5c06d8fb7bca09">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Ajustar modelo GLM gaussiano-inverso</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a>model_gaussian_inv <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"inverse"</span>))</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
@@ -1379,7 +1375,7 @@ E(Y/t)=\frac{1}{t}*E(Y)=\frac{E(Y)}{t}=\frac{\mu}{t}
 <section id="regresión-glm-para-var.-de-continuas-modelamiento-2" class="slide level2">
 <h2>Regresión GLM para var. de Continuas: modelamiento</h2>
 <p>Una alternativa más certera es el utilizar el criterio de información de Akaike (AIC) para comparar el ajuste de los modelos. A menos AIC, mejor el ajusto del modelo hacia los datos. (Usa <code>?stats::family</code>):</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-43_af049349be285388ef8453ecebb0b2cc">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-42_791dcddd3ff45de9b2920284e8b2a7e4">
 <div class="cell-output cell-output-stdout">
 <pre><code>Model selection table 
                    (Intrc)        x      family df   logLik  AICc delta weight
@@ -1400,7 +1396,7 @@ Models ranked by AICc(x) </code></pre>
 <section id="modelo-de-hurdle-exceso-de-ceros" class="slide level2">
 <h2>Modelo de Hurdle: exceso de ceros</h2>
 
-<img data-src="index_files/figure-revealjs/fig-15excesoceros-1.svg" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;20: Los modelos de Hurdle permiten lidiar con el exceso de ceros, lo cual es un problema frecuente en procesos de conteo (comúnmente ajustados con Poisson o Binomial Negativa).</p></section>
+<img data-src="index_files/figure-revealjs/fig-15excesoceros-1.svg" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;19: Los modelos de Hurdle permiten lidiar con el exceso de ceros, lo cual es un problema frecuente en procesos de conteo (comúnmente ajustados con Poisson o Binomial Negativa).</p></section>
 <section id="modelo-de-hurdle-los-modelos-internos" class="slide level2">
 <h2>Modelo de Hurdle: Los modelos internos</h2>
 <div class="columns">
@@ -1411,7 +1407,7 @@ Models ranked by AICc(x) </code></pre>
 <li class="fragment"><p><strong>Parte Binomial:</strong> (zero inflated, modelo logístico) modela la probabilidad de que la variable de respuesta <span class="math inline">\(Y\)</span> sea cero. Determina si la variable de respuesta es cero o mayor que cero.</p></li>
 </ul>
 </div><div class="column" style="width:65%;">
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-45_954fe9bd2cd66192bca7a67ca5fc4cee">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-44_0a81e251b27ee336752942bc7aeb1552">
 <div class="cell-output-display">
 <p><img data-src="figs/Hurdle%20model%20IRR.png" style="width:80.0%"></p>
 </div>
@@ -1428,7 +1424,7 @@ Models ranked by AICc(x) </code></pre>
 <h2>Introducción a efectos mixtos</h2>
 <h3 id="efectos-fijos">Efectos fijos</h3>
 <p>Los modelos que hemos visto hasta el momento solo involucran un tipo de variable independiente <span class="math inline">\(X\)</span>: los efectos fijos.</p>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-46_bc8ef0de9ebae1de8b404fae0df59556">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-45_b49821142e441410e9b347d577618897">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
 <span id="cb18-2"><a href="#cb18-2"></a></span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1450,7 +1446,7 @@ Models ranked by AICc(x) </code></pre>
 </ul>
 <div class="fragment">
 <div>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-47_1666331d2d7e091434712e89b5a754a7">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-46_066185af6f181a3faa13bade141f00ed">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">glmer</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ea1), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
 <span id="cb19-2"><a href="#cb19-2"></a></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="fu">lmer</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ea1))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1462,7 +1458,7 @@ Models ranked by AICc(x) </code></pre>
 <h2>Introducción a efectos mixtos: tipos de efectos mixtos</h2>
 <p>Realizando gráficos exploratorios se puede predecir cuál será el mejor tipo de efecto aleatorio para nuestro modelo.</p>
 
-<img data-src="figs/effmixtos.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;21: Efectos aleatorios con pendientes e interceptos aleatorios (A). Efectos aleatorios solo con interceptos aleatorios (B). Modificado de <a href="https://peerj.com/articles/4794/">Harrison et al.&nbsp;(2018)</a>.</p></section>
+<img data-src="figs/effmixtos.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;20: Efectos aleatorios con pendientes e interceptos aleatorios (A). Efectos aleatorios solo con interceptos aleatorios (B). Modificado de <a href="https://peerj.com/articles/4794/">Harrison et al.&nbsp;(2018)</a>.</p></section>
 <section id="pros-y-cons-de-los-modelos-de-efectos-mixtos" class="slide level2">
 <h2>Pros y Cons de los modelos de efectos mixtos</h2>
 <h3 id="ventajas">Ventajas</h3>

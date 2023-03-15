@@ -8,6 +8,16 @@ editor_options:
 ## Instalación de librerías
 
 ```{r}
+remotes::install_github("strengejacke/strengejacke")
+remotes::install_github("easystats/easystats")
+
+install.packages("openxlsx")
+install.packages("tidyverse")
+install.packages("JWileymisc")
+install.packages("ggpmisc")
+install.packages("ggpubr")
+install.packages("GGally")
+install.packages("glmnet")
 
 ```
 
@@ -16,18 +26,73 @@ editor_options:
 ```{r}
 library(openxlsx)
 library(tidyverse)
-library(performance)
 library(JWileymisc)
+library(ggpmisc)
+library(easystats)
+library(performance)
+library(report)
+library(strengejacke)
+library(sjPlot)
+library(ggpubr)
+library(GGally)
+library(glmnet)
+```
+
+## Funciones adicionales para el curso
+
+```{r}
+regresiones_ggpmisc <- function(x) {
+  require(ggpmisc)
+  formula <- y ~ x
+  x +
+  stat_fit_deviations(formula = formula, colour = "#ff4800") +
+  stat_poly_line(formula = formula, color="black", se=FALSE) +
+  stat_poly_eq(use_label(c("eq", "adj.R2","F", "P")), formula = formula)+
+  theme_minimal()
+}
+
+
+log_plots <- function(datos, X, Y){
+   # Evaluar los nombres de las columnas
+  X <- substitute(X)
+  Y <- substitute(Y)
+  
+  G1<-qplot(data=datos,  x=!!X, y=!!Y)+ggtitle("y~x")
+  G2<-qplot(data=datos,  x=!!X, y=log(!!Y))+ggtitle("log(y)~x")
+  G3<-qplot(data=datos,  x=log(!!X), y=!!Y)+ggtitle("y~log(x)")
+  G4<-qplot(data=datos,  x=log(!!X), y=log(!!Y))+ggtitle("log(y)~log(x)")
+  
+  ggpubr::ggarrange(G1, G2, G3, G4)
+}
 ```
 
 
 # 1. MODELOS LINEALES
 
+Como dato general, les sugiero establecer siempre el **esquema analítico** antes de realizar sus procedimientos de modelamiento. Con ello dejan claro el paso a paso a seguir:
+
+1. Modificaciones Preliminares de la base de datos (de requerirse)
+
+2. Revisión de las asunciones teóricas I 
+(aquellas posibles de realizar antes del modelo)
+
+3. Creación de modelos
+
+4. Revisión de las asunciones teóricas II 
+(aquellas posibles de realizar posterior al modelo)
+
+5. Comparativa de modelos y revisión de métricas de desempeño (performance)
+
+6. Generación de gráficos predictivos
+
+7. Resumen estadístico y reporte de resultados
+
 ## 1.1. Ejemplo 01 ----------------------------------------------------------------
 
 **Porcentaje de cobertura vegetal de cactus en función de los años**
 
-*Artículo:* Liang, M., Feng, X., & Gornish, E. S. (2021). Rainfall pulses mediate long‐term plant community compositional dynamics in a semi‐arid rangeland. Journal of Applied Ecology, 58(4), 708-717.
+*Artículo:* Liang, M., Feng, X., & Gornish, E. S. (2021). Rainfall pulses mediate long‐term plant community compositional dynamics in a semi‐arid rangeland. Journal of Applied Ecology, 58(4), 708-717. [link](https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/1365-2664.13780)
+[link2](https://sci-hub.se/10.1111/1365-2664.13780)
 
 *Variables:* 
 Var explicativa: YEAR (Año)
@@ -82,7 +147,7 @@ rfx_2 <- rfx %>%
     legend.position = c(0.15, 0.95),
     legend.background = element_blank()
   ) +
-  # facet_wrap(~pfg)+
+  facet_wrap(~pfg)+
   annotate(geom = "text", label="italic(R) ^ 2 == 0.090", 
            x=1995, y=3.5, parse =TRUE, color="#8a4715", size = 5)+
    annotate(geom = "text", label="italic(R) ^ 2 == 0.353", 
@@ -90,59 +155,9 @@ rfx_2 <- rfx %>%
 
 ```
 
-### 1.1.B. Creación de modelos lineales
-
 ```{r}
-# Modelo lineal (Cylindropuntia spp. - Cholla)
-mod1_lm_ch <- lm(COV ~ YEAR, data= rfx_2 %>% filter(pfg == "Cholla")) 
-summary(mod1_lm_ch)
+# Exploración extra: Comparación de distribuciones de probabilidades
 
-# Modelo lineal (otros cactus)
-mod1_lm_oc <- lm(COV ~ YEAR, data= rfx_2 %>% filter(pfg == "Other cacti")) 
-summary(mod1_lm_oc)
-
-# Modelo cuadrático (no lineal) (Cylindropuntia spp. - Cholla)
-mod1_cuad_ch <- lm(COV ~ YEAR + poly(YEAR,2), data= rfx_2 %>% filter(pfg == "Cholla")) 
-summary(mod1_cuad_ch)
-
-# Modelo cuadrático (no lineal) (otros cactus)
-mod1_cuad_oc <- lm(COV ~ YEAR + poly(YEAR,2), data= rfx_2 %>% filter(pfg == "Other cacti")) 
-summary(mod1_cuad_oc)
-```
-
-
-### 1.1.C. Asunciones teóricas
-
-```{r}
-# Chequeo global
-check_model(mod1_lm_ch)
-check_model(mod1_lm_oc)
-
-# A1: Variable dependiente numérica continua 
-# A2: Linealidad de la relación (Gráfico Residuales Est. vs Valores ajustados)
-qplot(x=YEAR, y=COV, data= rfx_2 %>% filter(pfg == "Cholla"))+geom_smooth()
-qplot(x=YEAR, y=COV, data= rfx_2 %>% filter(pfg == "Other cacti"))+geom_smooth()
-
-check_model(mod1_lm_ch, check = "linearity")
-check_model(mod1_lm_oc, check = "linearity")
-
-# A3: Normalidad de los residuales (Shapiro)
-check_normality(mod1_lm_ch)
-check_normality(mod1_lm_oc)
-
-# A4: Independencia de los residuales
-# A5: Homocedasticidad de los residuales (Breusch-Pagan test)
-check_heteroscedasticity(mod1_lm_ch)
-check_heteroscedasticity(mod1_lm_oc)
-
-# A6: Ausencia de valores influyentes (Distancia de Cook)
-check_outliers(mod1_lm_ch)
-check_outliers(mod1_lm_oc)
-```
-
-### 1.1.D. Comparación de distribuciones de probabilidades
-
-```{r}
 comp1 <- 
   testDistribution(rfx_2 %>% filter(pfg == "Cholla") %>% pull(COV), 
     distr="normal", 
@@ -156,37 +171,557 @@ comp2 <-
 plot(comp2)
 ```
 
+### 1.1.B. Creación de modelos lineales
+
+```{r}
+# Modelo lineal (Cylindropuntia spp. - Cholla)
+mod1_lm_ch <- lm(COV ~ YEAR, data= rfx_2 %>% filter(pfg == "Cholla")) 
+summary(mod1_lm_ch)
+
+# Modelo lineal (otros cactus)
+mod2_lm_oc <- lm(COV ~ YEAR, data= rfx_2 %>% filter(pfg == "Other cacti")) 
+summary(mod2_lm_oc)
+
+# Modelo cuadrático (no lineal) (Cylindropuntia spp. - Cholla)
+mod3_cuad_ch <- lm(COV ~ YEAR + poly(YEAR,2), data= rfx_2 %>% filter(pfg == "Cholla")) 
+summary(mod3_cuad_ch)
+
+# Modelo cuadrático (no lineal) (otros cactus)
+mod4_cuad_oc <- lm(COV ~ YEAR + poly(YEAR,2), data= rfx_2 %>% filter(pfg == "Other cacti")) 
+summary(mod4_cuad_oc)
+```
+
+### 1.1.C. Asunciones teóricas
+
+```{r}
+# Chequeo global
+check_model(mod1_lm_ch)
+check_model(mod2_lm_oc)
+
+# A1: Variable dependiente numérica continua 
+range(rfx_2$COV, na.rm=TRUE)
+
+# A2: Linealidad de la relación (Gráfico Residuales Est. vs Valores ajustados)
+qplot(x=YEAR, y=COV, data=rfx_2 %>% filter(pfg == "Cholla"))+geom_smooth()
+qplot(x=YEAR, y=COV, data=rfx_2 %>% filter(pfg == "Other cacti"))+geom_smooth()
+
+check_model(mod1_lm_ch, check = "linearity")
+check_model(mod2_lm_oc, check = "linearity")
+
+# A3: Normalidad de los residuales (Shapiro)
+check_normality(mod1_lm_ch)
+check_normality(mod2_lm_oc)
+
+# A4: Independencia de los residuales
+check_autocorrelation(mod1_lm_ch) 
+check_autocorrelation(mod2_lm_oc) 
+
+# A5: Homocedasticidad de los residuales (Breusch-Pagan test)
+check_heteroscedasticity(mod1_lm_ch)
+check_heteroscedasticity(mod2_lm_oc)
+
+# A6: Ausencia de valores influyentes (Distancia de Cook)
+check_outliers(mod1_lm_ch)
+check_outliers(mod2_lm_oc)
+```
+
+### 1.1.E. Performance y comparativa de modelos
+
+```{r}
+# Para Cylindropuntia spp. - Cholla
+compare_performance(mod1_lm_ch, mod3_cuad_ch,rank = TRUE)
+AIC(mod1_lm_ch, mod3_cuad_ch)
+anova(mod1_lm_ch, mod3_cuad_ch, test="LRT")
+
+# Para Otros cactus
+compare_performance(mod2_lm_oc, mod4_cuad_oc, rank = TRUE)
+AIC(mod2_lm_oc, mod4_cuad_oc)
+anova(mod2_lm_oc, mod4_cuad_oc, test="LRT")
+```
+
+### 1.1.F. Gráficos
+
+```{r}
+g1 <- ggplot(data = rfx_2 %>% filter(pfg == "Other cacti"), 
+       mapping = aes(y = COV, x =YEAR)) +
+    geom_point(color="#4eb8d2", size=3, alpha=0.8) 
+
+g1 
+
+regresiones_ggpmisc(g1)
+```
+
+### 1.1.G. Resultados y reporte
+
+```{r}
+summary(mod2_lm_oc)
+parameters::model_parameters(mod2_lm_oc)
+report::report(mod2_lm_oc)
+report::report_table(mod2_lm_oc)
+```
+
 ## 1.2. Ejemplo 02 ----------------------------------------------------------------
 
+**Datos de concentración de nutrientes de metales pesados**
+
+Con estos modelos nos centraremos en cómo se descarta la generación de un modelo lineal cuando las variables no son adecuadas para ello.
+
+*Database:* SAMBANDH BHUSAN DHAL. (2022). Heavy Metal Nutrient Concentration data. https://doi.org/10.5281/zenodo.7317974
+[link](https://zenodo.org/record/7317974#.ZA5_GZGZND8)
+
+*Variables:* 
+Ca: Calcio
+Mg: Magnesio
+Na: Sodio
+K: Potasio
+B: Boro
+CO_3:Trióxido de carbono
+HCO_3:Bicarbonato
+SO_4: Sulfato 
+Cl: Cloro
+NO_3N: Nitrato como nitrógeno
+P: Fósforo
+pH: Potencial de Hidrógenp
+cond_umhos/cm: Conductividad µMhos/cm
+hardness_grains_CaCO_3: Dureza del suelo Carbonato de Calcio
+hardness_ppm: Dureza del suelo ppm
+Fe: Hierro
+Zn: Zinc
+Mn: Manganeso
+Cu: Cobre
+CB: Centibar
+
+*Preguntas a responder:* 
+- ¿Qué variables fisicoquímicas del suelo están relacionadas con la presencia de Manganeso?
+
 ```{r}
+# A. Preliminares
+mp <- openxlsx::read.xlsx("Clases/C1 - Modelos lineales/Datos/zenodo_metales_pesadost.xlsx") %>% 
+  na.omit() %>%
+  as.data.frame()
+
+### Revisión de distribución de var. dependiente
+comp3 <- 
+  testDistribution(sqrt(mp$Mn), 
+    distr="gamma", 
+    extremevalues="empirical")
+plot(comp3)
+
+install.packages("fitdistrplus")
+library(fitdistrplus)
+descdist(mp$Zn, boot = 1000,discrete=FALSE) 
+
+### Correlograma de variables
+corr <- cor(mp[,c(3:17,21:25)],
+            use = "complete.obs")|>round(1)
+pmat <- cor_pmat(corr)
+
+install.packages("ggcorrplot")
+library(ggcorrplot)
+ggcorrplot(corr, colors = c("#4e00ff","white","#ff4800"),
+           lab = TRUE, insig = "blank",p.mat = pmat, 
+           type = "upper")
+
+### Inspección de las relaciones lineales entre variables
+### independientes vs la var. dependiente
+names(mp)
+log_plots(mp, Ca, Fe)
+log_plots(mp, Mg, Fe)
+log_plots(mp, Na, Fe)
+log_plots(mp, B, Fe)
+log_plots(mp, CO_3, Fe)
+log_plots(mp, HCO_3, Fe)
+log_plots(mp, SO_4, Fe)
+log_plots(mp, Cl, Fe)
+log_plots(mp, NO_3N, Fe)
+log_plots(mp, P, Fe)
+log_plots(mp, pH, Fe)
+log_plots(mp, `cond_umhos/cm`, Fe)
+log_plots(mp, hardness_grains_CaCO_3, Fe)
+
+# B. Creación de modelos
+mod7 <- lm(Fe ~ ., data = mp[,c(3:17,21:25)])
+
+
+mod7_step <-MASS::stepAIC(mod7,scope = update(mod7, . ~ 1))
+summary(mod7_step)  
+
+mod8 <- update(mod7_step, . ~ . - Ca - Mg - B - hardness_ppm - Cu)
+
+# D. Performance y comparativa de modelos
+compare_performance(mod7, mod7_step, mod8, rank = TRUE)
+AIC(mod7, mod7_step, mod8) |> arrange(AIC)
+anova(mod8, mod7_step, test="LRT")
+
+# C. Asunciones teóricas
+range(mp$Mn, na.rm=TRUE) #si
+check_model(mod7_step, check = "linearity") #no
+check_normality(mod8)|>plot() #no
+check_autocorrelation(mod8) #si
+check_heteroscedasticity(mod8)|>plot() #no
+check_outliers(mod8)|>plot() #si
+
+# E. Gráficos
+sjPlot::plot_model(mod7_step, show.values = TRUE)
+sjPlot::plot_model(mod7_step, type = "pred", show.data = TRUE)
+
+# F. Resultados y reporte
+summary(modBS_lolo)
+
+100*(exp(0.41347*log(1+0.01))-1)
+
+report::report(modBS_lolo)
 
 ```
 
 
-## 1.3. Ejemplo 03 ----------------------------------------------------------------
+# 2. REGRESIONES LOGARÍTMICAS (corregir linealidad):
 
 ```{r}
+mod5_loli_oc <- lm(log(COV) ~ YEAR, data= rfx_2 %>% filter(pfg == "Other cacti")) 
+summary(mod5_loli_oc)
+summary(mod1_lm_oc)
+```
+
+## 2.1. Ejemplo 03 ----------------------------------------------------------------
+
+**Relación entre el flujo de NO y N2O en diferentes sustratos**
+
+*Database:* Zachary Payne, Ryan Mushinski, John Poehlmann, Sally Pusede, and Jonathan Raff. 2022. Effects of Vegetation on Fluxes of Nitric Oxide, Nitrogen Dioxide, and Nitrous Oxide in a Mixed Deciduous Forest Clearing. urn:node:ESS_DIVE. doi:10.15485/1902761, version: ess-dive-0f5ddcdae644a8e-20221203T024719864. [link](https://knb.ecoinformatics.org/view/doi%3A10.15485%2F1902761)
+
+*Variables:* 
+no_flux_BS: Flujo de NO en suelo desnudo
+no2_flux_BS: Flujo de NO2 en suelo desnudo
+n2o_Flux_BS: Flujo de N2O en suelo desnudo
+
+no_flux_LV: Flujo de NO en suelo con cobertura vegetal poco densa
+no2_flux_LV: Flujo de NO2 en suelo con cobertura vegetal poco densa
+n2o_Flux_LV: Flujo de N2O en suelo con cobertura vegetal poco densa
+
+no_flux_DV: Flujo de NO en suelo con cobertura vegetal densa
+no2_flux_DV: Flujo de NO2 en suelo con cobertura vegetal densa
+n2o_flux_DV: Flujo de N2O en suelo con cobertura vegetal densa
+
+*Preguntas a responder:* 
+- ¿Cuál la relación entre NO y NO2 en los diferentes substratos evaluados?
+
+```{r}
+# A. Preliminares
+
+names(flux)
+flux <- read.csv("Clases/C1 - Modelos Lineales/Datos/Figure_3_NO_NO2_N2O_Flux_Data.csv", sep = ";")
+
+# Explorando las relaciones entre NO y N2O en diferentes sustratos
+log_plots(flux, no_BS, n2o_BS)
+log_plots(flux, no_LV, n2o_LV)
+log_plots(flux, no_DV, n2o_DV)
+
+
+testDistribution(log(flux$n2o_BS), 
+    distr="normal", extremevalues="empirical") |> plot()
 
 ```
 
-
-# 2. REGRESIONES LOGARÍTMICAS:
-
-
-## 2.1. Ejemplo 04 ----------------------------------------------------------------
+### Bare Soil (BS, suelo desnudo) -------------------------
 
 ```{r}
+# B. Creación de modelos
+modBS <- lm(n2o_BS ~ no_BS,  data=flux %>% slice(-364))
+modBS_loli <- lm(log(n2o_BS) ~ no_BS, data=flux %>% slice(-364))
+modBS_lilo <- lm(n2o_BS ~ log(no_BS), data=flux %>% slice(-364))
+modBS_lolo <- lm(log(n2o_BS) ~ log(no_BS), data=flux %>% slice(-364))
 
+# D. Performance y comparativa de modelos
+compare_performance(modBS, modBS_loli, modBS_lilo, modBS_lolo, rank = TRUE)
+AIC(modBS, modBS_loli, modBS_lilo, modBS_lolo) |> arrange(AIC)
+anova(modBS_loli, modBS_lolo, test="LRT")
+
+# C. Asunciones teóricas
+range(flux$n2o_BS, na.rm=TRUE) #si
+check_model(modBS_loli, check = "linearity") #no
+check_normality(modBS_loli)|>plot() #si
+check_autocorrelation(modBS_loli) #no
+check_heteroscedasticity(modBS_loli)|>plot() #si
+check_outliers(modBS_loli)|>plot() #no 364
+
+range(flux$n2o_BS, na.rm=TRUE) #si
+check_model(modBS_lolo, check = "linearity") #si
+check_normality(modBS_lolo)|>plot() #si
+check_autocorrelation(modBS_lolo)  #no
+check_heteroscedasticity(modBS_lolo)|>plot() #si
+check_outliers(modBS_lolo)|>plot() #si
+
+# E. Gráficos
+g3 <- ggplot(data = flux  %>% slice(-364), 
+       mapping = aes(y = log(n2o_BS), 
+                     x = log(no_BS))) +
+    geom_point(color="#4eb8d2", size=3, alpha=0.8) 
+
+g3 
+
+regresiones_ggpmisc(g3)
+
+# F. Resultados y reporte
+summary(modBS_lolo)
+
+100*(exp(0.41347*log(1+0.01))-1)
+
+report::report(modBS_lolo)
+
+# Un 1% de aumento en la variable no_BS genera un aumento de 0.41% en la variable de dependiente n2o_BS. El aumento de 1% en el flujo de NO está asociado positivamente al aumento en 0.41% en el flujo de N20 en las cámaras de muestreo instaladas en el estudio.
+```
+
+### Light Vegetation (LV, vegetación poco densa) -------------------------
+
+```{r}
+# B. Creación de modelos
+modLV <- lm(n2o_LV ~ no_LV,  data=flux)
+modLV_loli <- lm(log(n2o_LV) ~ no_LV, data=flux)
+modLV_lilo <- lm(n2o_LV ~ log(no_LV), data=flux)
+modLV_lolo <- lm(log(n2o_LV) ~ log(no_LV), data=flux)
+
+# D. Performance y comparativa de modelos
+compare_performance(modLV, modLV_loli, modLV_lilo, modLV_lolo, rank = TRUE)
+compare_performance(modLV, modLV_lilo, rank = TRUE)
+
+anova(modLV, modLV_lilo, test="LRT")
+
+# C. Asunciones teóricas
+range(flux$no_LV, na.rm=TRUE) #si
+check_model(modLV, check = "linearity") #no
+check_normality(modLV)|>plot() #aprox
+check_autocorrelation(modLV)  #no
+check_heteroscedasticity(modLV)|>plot() #no
+check_outliers(modLV)|>plot() #si
+
+range(flux$n2o_BS, na.rm=TRUE) #si
+check_model(modLV_lilo, check = "linearity") #aprox
+check_normality(modLV_lilo)|>plot() #si
+check_autocorrelation(modLV_lilo)  #no
+check_heteroscedasticity(modLV_lilo)|>plot() #aprox
+check_outliers(modLV_lilo)|>plot() #si
+
+# E. Gráficos
+g4 <- ggplot(data = flux, 
+       mapping = aes(y = n2o_LV, 
+                     x = log(no_LV))) +
+    geom_point(color="#4eb8d2", size=3, alpha=0.8) +
+  ggtitle("y~log(x)")
+
+g5 <- ggplot(data = flux, 
+       mapping = aes(y = n2o_LV, 
+                     x = no_LV)) +
+    geom_point(color="#4eb8d2", size=3, alpha=0.8) +
+  ggtitle("y~x")
+
+ggarrange(
+  regresiones_ggpmisc(g4),
+  regresiones_ggpmisc(g5)
+)
+
+
+# F. Resultados y reporte
+summary(modLV_lilo)
+
+100*(exp(0.91904*log(1+0.01))-1)
+
+parameters::model_parameters(modLV_lilo)
+
+report::report(modLV_lilo)
+
+# Un 1% de aumento en la variable no_LV genera un aumento de 0.91% en la variable de dependiente n2o_LV. El aumento de 1% en el flujo de NO está asociado positivamente al aumento en 0.91% en el flujo de N20 en las cámaras de muestreo instaladas en el estudio.
+```
+
+# Bonus model: Regresión Segmentada 
+
+```{r}
+# Instala el paquete
+install.packages("segmented")
+
+# Carga la librería
+library(segmented)
+
+# Coloca el modelo lineal
+modLV <- lm(n2o_LV ~ no_LV,  data=flux)
+
+# Crea el modelo segmentado 
+# a partir del modelo lineal
+modLV_seg <- segmented(modLV, seg.Z = ~no_LV, psi = 7)
+
+# Resultados
+summary(modLV_seg)
+plot(model)
+
+# Extracción de la var. dependiente predicha
+prediccion <- data.frame(
+  no_LV = flux$no_LV, 
+  fit = broken.line(modLV_seg)$fit
+  )
+
+regresiones_ggpmisc(g5)+
+  geom_line(data = prediccion,
+            aes(y = fit), color = 'blue', lwd=1)
+```
+
+### Dense Vegetation (DV, vegetación densa) -------------------------
+
+```{r}
+# B. Creación de modelos
+qplot(y=n2o_DV, x= no_DV,  data=flux %>% filter(n2o_DV>2.5))
+modDV <- lm(n2o_DV ~ no_DV,  data=flux %>% filter(n2o_DV>2.5))
+modDV_loli <- lm(log(n2o_DV) ~ no_DV, data=flux %>% filter(n2o_DV>2.5))
+modDV_lilo <- lm(n2o_DV ~ log(no_DV), data=flux %>% filter(n2o_DV>2.5))
+modDV_lolo <- lm(log(n2o_DV) ~ log(no_DV), data=flux %>% filter(n2o_DV>2.5))
+
+# D. Performance y comparativa de modelos
+compare_performance(modDV, modDV_loli, modDV_lilo, 
+                    modDV_lolo, rank = TRUE)
+```
+
+# 3. REGRESIÓN LINEAL PONDERADA (WLS) (corregir heterocedasticidad):
+
+
+## 3.1. Ejemplo 07 ----------------------------------------------------------------
+
+**Diversidad filogenética explicada por la edad**
+
+*Database:* Braun, T., Di Segni, A., BenShoshan, M., Asaf, R., Squires, J. E., Farage Barhom, S., ... & Haberman, Y. (2017). Fecal microbial characterization of hospitalized patients with suspected infectious diarrhea shows significant dysbiosis. Scientific reports, 7(1), 1088..
+[link](https://www.nature.com/articles/s41598-017-01217-1)
+[link](https://www.researchgate.net/publication/316440732_Fecal_microbial_characterization_of_hospitalized_patients_with_suspected_infectious_diarrhea_shows_significant_dysbiosis)
+
+*Variables:* 
+phylo: diversidad filogenética alfa de la microbiota
+age: edad
+
+*Preguntas a responder:* 
+- ¿Cuál la relación la diversidad filogenética y la edad?
+
+```{r}
+# A. Preliminares
+phy <- openxlsx::read.xlsx("Clases/C1 - Modelos Lineales/Datos/phylo vs age.xlsx")
+
+# B. Creación de modelos
+# Creando modelo preliminar
+mod_previo  <- lm(phylo ~ age + poly(age), data=phy)
+
+# Extrayendo los datos necesarios
+resid_abs <- abs(mod_previo$residuals)
+
+y_hat <- mod_previo$fitted.values
+
+# Obteniendo los pesos
+mod_w <-lm(resid_abs ~ y_hat)
+
+w <-  1 / mod_w$fitted.values^2
+
+# Generando regresiones LM, NLS, WLS
+mod_lm <- lm(phylo ~ age , data = phy)
+mod_poly <- lm(phylo ~ age + poly(age,3), data = phy)
+mod_wls <- lm(phylo ~ age + poly(age,3), data = phy, weights = w)
+
+# D. Performance y comparativa de modelos
+compare_performance(mod_lm, mod_poly, mod_wls, rank = TRUE)
+AIC(mod_lm, mod_poly, mod_wls) |> arrange(AIC)
+anova(mod_wls, mod_poly, test="LRT")
+
+# C. Asunciones teóricas
+range(phy$phylo, na.rm=TRUE) #si
+check_model(mod_wls, check = "linearity") #si
+check_normality(mod_wls)|>plot() #si
+check_autocorrelation(mod_wls) #si
+check_heteroscedasticity(mod_wls)|>plot() #si
+check_outliers(mod_wls)|>plot() #si
+
+# E. Gráficos
+pred<- predict(mod_wls, type="response")
+
+phy<-data.frame(phylo=phy$phylo,
+                age=phy$age,
+                pred)
+
+g6<-ggplot(phy, aes(x=age, y=phylo))+
+  geom_point(size=4, alpha=0.4, color="deepskyblue2")+
+  geom_line(aes(y=pred), lwd=1, color="red", lty=2)+
+  theme_minimal()
+
+regresiones_ggpmisc(g6)
+
+# F. Resultados y reporte
+summary(mod_wls)
+report::report(mod_wls)
 ```
 
 
-# 3. REGRESIÓN LINEAL PONDERADA (WLS):
+
+# 4. REGRESIONES RIDGE Y LASSO (WLS) (corregir heterocedasticidad):
 
 
-## 3.1. Ejemplo 05 ----------------------------------------------------------------
+## 3.1. Ejemplo 07 ----------------------------------------------------------------
+
+**Diversidad filogenética explicada por la edad**
+
+*Database:* Braun, T., Di Segni, A., BenShoshan, M., Asaf, R., Squires, J. E., Farage Barhom, S., ... & Haberman, Y. (2017). Fecal microbial characterization of hospitalized patients with suspected infectious diarrhea shows significant dysbiosis. Scientific reports, 7(1), 1088..
+[link](https://www.nature.com/articles/s41598-017-01217-1)
+[link](https://www.researchgate.net/publication/316440732_Fecal_microbial_characterization_of_hospitalized_patients_with_suspected_infectious_diarrhea_shows_significant_dysbiosis)
+
+*Variables:* 
+phylo: diversidad filogenética alfa de la microbiota
+age: edad
+
+*Preguntas a responder:* 
+- ¿Cuál la relación la diversidad filogenética y la edad?
 
 ```{r}
+# A. Preliminares
+phy <- openxlsx::read.xlsx("Clases/C1 - Modelos Lineales/Datos/phylo vs age.xlsx")
 
+# B. Creación de modelos
+# Creando modelo preliminar
+mod_previo  <- lm(phylo ~ age + poly(age), data=phy)
+
+# Extrayendo los datos necesarios
+resid_abs <- abs(mod_previo$residuals)
+
+y_hat <- mod_previo$fitted.values
+
+# Obteniendo los pesos
+mod_w <-lm(resid_abs ~ y_hat)
+
+w <-  1 / mod_w$fitted.values^2
+
+# Generando regresiones LM, NLS, WLS
+mod_lm <- lm(phylo ~ age , data = phy)
+mod_poly <- lm(phylo ~ age + poly(age,3), data = phy)
+mod_wls <- lm(phylo ~ age + poly(age,3), data = phy, weights = w)
+
+# D. Performance y comparativa de modelos
+compare_performance(mod_lm, mod_poly, mod_wls, rank = TRUE)
+AIC(mod_lm, mod_poly, mod_wls) |> arrange(AIC)
+anova(mod_wls, mod_poly, test="LRT")
+
+# C. Asunciones teóricas
+range(phy$phylo, na.rm=TRUE) #si
+check_model(mod_wls, check = "linearity") #si
+check_normality(mod_wls)|>plot() #si
+check_autocorrelation(mod_wls) #si
+check_heteroscedasticity(mod_wls)|>plot() #si
+check_outliers(mod_wls)|>plot() #si
+
+# E. Gráficos
+pred<- predict(mod_wls, type="response")
+
+phy<-data.frame(phylo=phy$phylo,
+                age=phy$age,
+                pred)
+
+g6<-ggplot(phy, aes(x=age, y=phylo))+
+  geom_point(size=4, alpha=0.4, color="deepskyblue2")+
+  geom_line(aes(y=pred), lwd=1, color="red", lty=2)+
+  theme_minimal()
+
+regresiones_ggpmisc(g6)
+
+# F. Resultados y reporte
+summary(mod_wls)
+report::report(mod_wls)
 ```
-
-

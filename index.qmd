@@ -285,40 +285,6 @@ ggdraw() +
 check_model(model1, panel=TRUE, check="homogeneity", colors=c("4eb8d2","4e00ff","ff4800"))
 ```
 
-
-## A7: Problema de multicolinearidad {}
-
-```{r}
-#| label: fig-05multicolinearidad
-#| fig-cap: Este gráfico presenta <b>problemas de Heterocedasticidad</b>. Línea negra cuantil 0.5; líneas punteadas azules cuantiles 0.25 y 0.75; líneas punteadas naranja cuantiles 0.05 y 0.95.
-#| fig-align: center
-#| out-width: 100%
-#| echo: false
-
-n2 <- rep(1:100,2)
-a2 <- 0
-b2 <- 1
-sigma22 <- n2^1.3
-eps2 <- rnorm(n2,mean=0,sd=sqrt(sigma22))
-y2 <- a2 + b2 * n2 + eps2
-datos2 <- data.frame(y2,n2)
-
-g3 <- ggplot(data=datos2,aes(x=n2, y=y2))+
-  theme_minimal()+
-  geom_point(size=4, alpha=0.7, color="#4eb8d2")+
-  geom_quantile(quantiles = .5, color = 'black', size=1.2)+
-  geom_quantile(quantiles = c(.25, .75),
-                colour = "#4e00ff", lty = 2, size=1) +
-  geom_quantile(quantiles = c(.05, .95),
-                colour = "#ff4800", lty = 2, size=1)+
-  labs(x="X", y="Y")
-
-ggdraw() +
-  draw_plot(g3) +
-  draw_image(img, x = 0.87, y = 0.06, width = 0.11, height = 0.11)  
-```
-
-
 ## A7: Problema de multicolinearidad {}
 
 ```{r}
@@ -858,9 +824,10 @@ Las regresiones con regularización penalizan a cada variable independiente para
 #| echo: false
 #| eval: true
   
-library(ggplot2)
+library(tidyverse)
 library(glmnet)
-# 
+library(see)
+ 
 # # Generar datos aleatorios
 # set.seed(123)
 # n <- 100
@@ -967,7 +934,6 @@ g9 <-ggplot(data = data, aes(V1, s0)) +
   theme_minimal() +
   geom_smooth(data=data %>% 
                 filter(model == "observaciones"), method="lm", color="black",se = FALSE)+
-  # facet_wrap(~type) +
   scale_color_material_d()
 
 ggdraw() +

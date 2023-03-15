@@ -1,0 +1,291 @@
+Sample;Date;N. individual;Locality;Family;Specie;AB;CC;LC;LP;LO;P;Sex;Reproductive condition;Social behavior;Trophic guild;Gradient;Habitat;Elevation
+1;21/11/2016;1;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;63.27;74.6;0;13.93;20.08;35.2;Female;None;great groups;hematophagous;Semi-natural;Riparian;306
+1;21/11/2016;2;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;65.09;75.62;0;16.09;19;30.4;Female;None;great groups;hematophagous;Semi-natural;Riparian;306
+1;21/11/2016;3;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;66.12;79.74;0;14.02;18.27;39.2;Female;None;great groups;hematophagous;Semi-natural;Riparian;309
+1;21/11/2016;4;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;60.2;70.18;0;14.22;18.14;29.8;Male;None;great groups;hematophagous;Semi-natural;Riparian;306
+1;21/11/2016;5;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;62.61;80.1;0;14.42;18.69;43.5;Female;gravid;great groups;hematophagous;Semi-natural;Forest;315
+1;21/11/2016;6;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;60.18;74.73;0;13.97;20.27;30.3;Male;None;great groups;hematophagous;Semi-natural;Riparian;306
+1;21/11/2016;7;Balsa_Real_1;Phyllostomidae;Lophostoma occidentalis;56.15;71.43;11.73;13.11;30.78;33.6;Female;gravid;small groups;omnivore;Semi-natural;Riparian;308
+1;21/11/2016;8;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;59.53;74.23;0;14.55;18.25;31.4;Male;None;great groups;hematophagous;Semi-natural;Riparian;309
+1;21/11/2016;9;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;59.2;72.89;0;13.41;19.84;29.8;Female;None;great groups;hematophagous;Semi-natural;Riparian;309
+1;22/11/2016;10;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;60.87;74.52;0;15.32;17.59;32.3;Male;None;great groups;hematophagous;Natural;Riparian;360
+1;22/11/2016;11;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;65.61;80.77;0;16.78;19.99;43.5;Female;gravid;great groups;hematophagous;Natural;Riparian;364
+1;22/11/2016;12;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;60.2;74.39;0;14.32;18.82;34.7;Male;None;great groups;hematophagous;Natural;Riparian;364
+1;22/11/2016;13;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.19;65.78;0;12.04;16.68;31.2;Male;None;great groups;frugivorous;Natural;Forest;362
+1;22/11/2016;14;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;55.04;56.34;0;12.15;16.76;25.2;Female;None;great groups;frugivorous;Natural;Riparian;361
+1;22/11/2016;15;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;59.97;73.22;0;15.28;18.95;33.8;Female;None;great groups;hematophagous;Natural;Riparian;361
+1;22/11/2016;16;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;63.3;74.42;0;15.1;19.39;42.4;Female;gravid;great groups;hematophagous;Natural;Forest;370
+1;22/11/2016;17;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;61.81;72.84;0;14.72;18.93;38.3;Male;None;great groups;hematophagous;Natural;Riparian;361
+1;23/11/2016;18;La_Manga;Phyllostomidae;Artibeus fraterculus;57.15;67.71;0;10.92;17.63;27.1;Male;None;great groups;frugivorous;Semi-natural;Forest;545
+1;23/11/2016;19;La_Manga;Phyllostomidae;Artibeus fraterculus;57.49;62.45;0;11.2;17.83;29.6;Male;None;great groups;frugivorous;Semi-natural;Forest;559
+1;23/11/2016;20;La_Manga;Phyllostomidae;Artibeus fraterculus;56.92;61.34;0;10.6;17.03;28.4;Male;None;great groups;frugivorous;Semi-natural;Forest;559
+1;24/11/2016;21;El_Salto;Phyllostomidae;Artibeus fraterculus;54.73;62.47;0;11.83;15.6;30.5;Male;None;great groups;frugivorous;Semi-natural;Forest;418
+1;24/11/2016;22;El_Salto;Phyllostomidae;Artibeus fraterculus;57.15;72.73;0;11.52;16.03;33.3;Male;None;great groups;frugivorous;Semi-natural;Forest;418
+1;24/11/2016;23;El_Salto;Phyllostomidae;Artibeus fraterculus;57.7;65.61;0;11.21;17.26;42.1;Female;gravid;great groups;frugivorous;Semi-natural;Forest;425
+1;24/11/2016;24;El_Salto;Phyllostomidae;Artibeus fraterculus;56.23;64.86;0;11.12;16.45;39.8;Male;None;great groups;frugivorous;Semi-natural;Forest;418
+1;25/11/2016;25;Cabeza_de_Toro;Phyllostomidae;Micronycteris megalotis;33.17;37.76;12.21;7.56;19.52;6.2;Male;None;small groups;insectivorous;Natural;Forest;458
+1;25/11/2016;26;Cabeza_de_Toro;Phyllostomidae;Artibeus fraterculus;55.54;58.93;0;11.16;16.44;32.3;Male;None;great groups;frugivorous;Natural;Riparian;452
+1;25/11/2016;27;Cabeza_de_Toro;Phyllostomidae;Artibeus fraterculus;57.42;59.83;0;11.12;15.4;35.7;Female;None;great groups;frugivorous;Natural;Riparian;452
+1;25/11/2016;28;Cabeza_de_Toro;Phyllostomidae;Artibeus fraterculus;55.98;59.34;0;11.08;15.51;33.4;Male;None;great groups;frugivorous;Natural;Forest;480
+1;26/11/2016;29;Catanas 1;Phyllostomidae;Artibeus fraterculus;56.81;62.43;0;10.95;17.71;34.3;Female;None;great groups;frugivorous;Natural;Riparian;321
+1;26/11/2016;30;Catanas 1;Phyllostomidae;Artibeus fraterculus;55.68;59.39;0;11.24;17.8;32.4;Male;None;great groups;frugivorous;Natural;Riparian;321
+1;26/11/2016;31;Catanas 1;Phyllostomidae;Artibeus fraterculus;55.6;64.34;0;10.94;17.95;33.2;Female;None;great groups;frugivorous;Natural;Riparian;345
+1;26/11/2016;32;Catanas 1;Phyllostomidae;Artibeus fraterculus;57.33;64.4;0;11.01;16.01;33.6;Male;None;great groups;frugivorous;Natural;Riparian;355
+1;26/11/2016;33;Catanas 1;Phyllostomidae;Artibeus fraterculus;56.74;62.18;0;10.39;17.67;33.9;Male;None;great groups;frugivorous;Natural;Riparian;355
+1;26/11/2016;34;Catanas 1;Phyllostomidae;Artibeus fraterculus;57.8;59.72;0;11.27;16.3;34.4;Female;None;great groups;frugivorous;Natural;Forest;368
+1;26/11/2016;35;Catanas 1;Phyllostomidae;Lophostoma occidentalis;57.23;61.79;15.12;12.69;29.52;24.5;Female;None;small groups;omnivore;Natural;Riparian;333
+1;26/11/2016;36;Catanas 1;Phyllostomidae;Desmodus rotundus;63.4;65.39;0;15.08;17.99;37.3;Female;None;great groups;hematophagous;Natural;Riparian;355
+1;26/11/2016;37;Catanas 1;Phyllostomidae;Desmodus rotundus;59.03;59.1;0;14.55;18.02;31.2;Male;None;great groups;hematophagous;Natural;Riparian;355
+1;26/11/2016;38;Catanas 1;Phyllostomidae;Desmodus rotundus;58.79;60.93;0;13.6;18.48;35.5;Male;None;great groups;hematophagous;Natural;Riparian;345
+1;27/11/2016;39;Chaquiro;Phyllostomidae;Desmodus rotundus;54.23;57.12;0;12.09;16.74;29.8;Male;None;great groups;hematophagous;Degraded;Riparian;210
+1;27/11/2016;40;Chaquiro;Phyllostomidae;Desmodus rotundus;55.71;59.21;0;12.81;16.93;30.7;Male;None;great groups;hematophagous;Degraded;Riparian;219
+1;28/11/2016;41;Malvas_2;Phyllostomidae;Artibeus fraterculus;57.02;58.6;0;11.75;18.5;38.2;Male;None;great groups;frugivorous;Degraded;Riparian;251
+1;28/11/2016;42;Malvas_2;Phyllostomidae;Artibeus fraterculus;57.72;59.93;0;11.67;17.95;39.1;Male;None;great groups;frugivorous;Degraded;Riparian;251
+1;29/11/2016;43;Malvas_1;Phyllostomidae;Artibeus fraterculus;53.08;61.12;0;12.04;17.2;33.8;Male;None;great groups;frugivorous;Degraded;Riparian;306
+1;29/11/2016;44;Malvas_1;Phyllostomidae;Artibeus fraterculus;55.12;64.5;0;12.35;17.98;33.3;Male;None;great groups;frugivorous;Degraded;Riparian;306
+1;29/11/2016;45;Malvas_1;Phyllostomidae;Artibeus fraterculus;55.84;63.98;0;12.29;17.84;34.7;Male;None;great groups;frugivorous;Degraded;Riparian;310
+2;23/01/2017;46;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;63.69;78.24;0;14.57;16.49;34.8;Female;None;great groups;hematophagous;Semi-natural;Riparian;309
+2;23/01/2017;47;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;66.75;84.11;0;15.42;18.26;44.1;Female;gravid;great groups;hematophagous;Semi-natural;Riparian;309
+2;23/01/2017;48;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;65.43;76.45;0;16.37;17.83;33.4;Female;None;great groups;hematophagous;Semi-natural;Riparian;308
+2;23/01/2017;49;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;66.11;76.56;0;14.79;19.7;31.02;Female;None;great groups;hematophagous;Semi-natural;Riparian;306
+2;23/01/2017;50;Balsa_Real_1;Vespertilionidae;Myotis nigricans;34.12;39.32;35.72;5.95;12.55;3.4;Female;None;great groups;insectivorous;Semi-natural;Riparian;306
+2;24/01/2017;51;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;62.47;77.76;0;16.04;18.47;38.4;Female;None;great groups;hematophagous;Natural;Riparian;364
+2;24/01/2017;52;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;63.52;79.81;0;15.25;19.66;45.2;Female;gravid;great groups;hematophagous;Natural;Riparian;364
+2;24/01/2017;53;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;62.43;73.64;0;15.24;18.44;34.3;Male;scrotal testicles;great groups;hematophagous;Natural;Forest;360
+2;24/01/2017;54;Balsa_Real_2;Phyllostomidae;Desmodus rotundus;63.55;79.09;0;15.38;19.23;42.3;Female;None;great groups;hematophagous;Natural;Riparian;361
+2;24/01/2017;55;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;55.48;71.5;0;11.47;20.09;27.3;Female;None;great groups;frugivorous;Natural;Riparian;361
+2;24/01/2017;56;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.58;73.58;0;12.69;18.13;32.8;Female;None;great groups;frugivorous;Natural;Riparian;361
+2;24/01/2017;57;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;55.52;70.81;0;12.33;18.11;26.8;Female;None;great groups;frugivorous;Natural;Riparian;364
+2;24/01/2017;58;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.6;72.54;0;12.78;18.28;25.6;Female;None;great groups;frugivorous;Natural;Riparian;364
+2;24/01/2017;59;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;55.4;71.68;0;10.59;17.66;27;Female;None;great groups;frugivorous;Natural;Riparian;361
+2;24/01/2017;60;Balsa_Real_2;Phyllostomidae;Gardnerycteris crenulatum;52.85;61.43;22.24;9.39;24.23;18.2;Male;None;small groups;insectivorous;Natural;Riparian;360
+2;24/01/2017;61;Balsa_Real_2;Phyllostomidae;Gardnerycteris crenulatum;52.18;59.36;25.76;9.42;26.38;14.4;Male;None;small groups;insectivorous;Natural;Riparian;361
+2;25/01/2017;62;Malvas_1;Phyllostomidae;Artibeus fraterculus;54.92;70.2;0;11.21;18.94;27.5;Male;None;great groups;frugivorous;Degraded;Riparian;306
+2;25/01/2017;63;Malvas_1;Phyllostomidae;Artibeus fraterculus;56.32;71.94;0;11.25;19.31;26.9;Male;None;great groups;frugivorous;Degraded;Riparian;271
+2;25/01/2017;64;Malvas_1;Phyllostomidae;Artibeus fraterculus;54.09;66.91;0;10.25;17.22;32.6;Female;None;great groups;frugivorous;Degraded;Forest;275
+2;26/01/2017;65;El_Salto;Phyllostomidae;Glossophaga soricina;36.66;46.37;4.61;8.83;14.68;10.2;Female;None;small groups;nectarivore;Semi-natural;Forest;418
+2;26/01/2017;66;El_Salto;Phyllostomidae;Glossophaga soricina;36.14;45.87;4.37;8.15;13.98;9.9;Female;None;small groups;nectarivore;Semi-natural;Forest;418
+2;26/01/2017;67;El_Salto;Phyllostomidae;Artibeus fraterculus;58.87;68.02;0;11.09;15.57;34.4;Female;None;great groups;frugivorous;Semi-natural;Riparian;408
+2;26/01/2017;68;El_Salto;Phyllostomidae;Artibeus fraterculus;56.12;67.18;0;10.57;13.94;32.3;Female;None;great groups;frugivorous;Semi-natural;Forest;425
+2;26/01/2017;69;El_Salto;Phyllostomidae;Lophostoma occidentalis;56.52;60.88;12.57;12.93;26.47;27.5;Female;None;small groups;omnivore;Semi-natural;Forest;425
+2;27/01/2017;70;La_Manga;Phyllostomidae;Desmodus rotundus;58.13;80.12;0;14.08;19.24;32.7;Male;scrotal testicles;great groups;hematophagous;Semi-natural;Forest;545
+2;27/01/2017;71;La_Manga;Phyllostomidae;Artibeus fraterculus;54.43;67.81;0;11.54;17.15;31.6;Female;None;great groups;frugivorous;Semi-natural;Forest;545
+2;27/01/2017;72;La_Manga;Phyllostomidae;Artibeus fraterculus;52.21;64.91;0;10.12;16.34;29.8;Female;None;great groups;frugivorous;Semi-natural;Forest;559
+2;29/01/2017;73;Cabeza_de_Toro;Phyllostomidae;Artibeus fraterculus;58.25;71.51;0;12.17;17.57;37.9;Male;None;great groups;frugivorous;Natural;Riparian;452
+2;29/01/2017;74;Cabeza_de_Toro;Phyllostomidae;Artibeus fraterculus;55.88;71.41;0;11.35;16.75;33.4;Female;None;great groups;frugivorous;Natural;Riparian;452
+2;29/01/2017;75;Cabeza_de_Toro;Phyllostomidae;Micronycteris megalotis;32.98;37.14;11.78;7.12;18.69;6.4;Male;None;small groups;insectivorous;Natural;Forest;458
+3;13/05/2017;76;Malvas_1;Phyllostomidae;Artibeus fraterculus;56.92;65.89;0;10.95;15.6;29.99;Female;None;great groups;frugivorous;Degraded;Forest;306
+3;13/05/2017;77;Malvas_1;Phyllostomidae;Desmodus rotundus;63.26;80.62;0;12.45;15.65;29.66;Female;None;great groups;hematophagous;Degraded;Forest;306
+3;13/05/2017;78;Malvas_1;Phyllostomidae;Desmodus rotundus;68.25;71.92;0;12.48;17.66;37.24;Female;None;great groups;hematophagous;Degraded;Forest;310
+3;13/05/2017;79;Malvas_1;Phyllostomidae;Artibeus fraterculus;58.14;67.29;0;11.14;15.92;32.86;Female;None;great groups;frugivorous;Degraded;Forest;306
+3;14/05/2017;80;Cabeza_de_Toro;Phyllostomidae;Artibeus fraterculus;55.33;66.41;0;10.03;15.29;32.93;Female;None;great groups;frugivorous;Natural;Riparian;452
+3;14/05/2017;81;Cabeza_de_Toro;Phyllostomidae;Artibeus fraterculus;54.84;67.11;0;10.11;15.12;34.43;Female;None;great groups;frugivorous;Natural;Riparian;452
+3;15/05/2017;82;La_Manga;Phyllostomidae;Artibeus fraterculus;57.21;65.43;0;10.21;15.71;30.03;Male;None;great groups;frugivorous;Semi-natural;Forest;545
+3;15/05/2017;83;La_Manga;Phyllostomidae;Artibeus fraterculus;55.87;63.86;0;10.14;14.93;31.36;Female;None;great groups;frugivorous;Semi-natural;Forest;559
+3;16/05/2017;84;Balsa_Real_2;Vespertilionidae;Myotis nigricans;33.14;39.79;29.65;4.94;11.89;3.93;Female;gravid;great groups;insectivorous;Natural;Riparian;360
+3;16/05/2017;85;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.71;64.51;0;10.21;15.04;31.82;Female;None;great groups;frugivorous;Natural;Riparian;360
+3;16/05/2017;86;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.43;66.23;0;10.31;15.68;31.11;Female;None;great groups;frugivorous;Natural;Riparian;361
+3;16/05/2017;87;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.38;66.12;0;10.11;15.23;30.18;Female;None;great groups;frugivorous;Natural;Riparian;361
+3;16/05/2017;88;Balsa_Real_2;Molossidae;Molossus molossus;34.9;50.05;30.17;8.12;10.98;12.38;Female;None;great groups;insectivorous;Natural;Riparian;360
+3;17/05/2017;89;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;64.8;77.02;0;15.57;18.66;36.33;Female;None;great groups;hematophagous;Semi-natural;Forest;315
+3;17/05/2017;90;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;57.46;70.42;0;14.66;17.07;30.44;Male;scrotal testicles;great groups;hematophagous;Semi-natural;Riparian;306
+3;17/05/2017;91;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;61.88;76.5;0;15.01;18.01;31.29;Female;None;great groups;hematophagous;Semi-natural;Riparian;308
+3;17/05/2017;92;Balsa_Real_1;Phyllostomidae;Desmodus rotundus;59.94;72.86;0;14.83;17.38;33.02;Male;None;great groups;hematophagous;Semi-natural;Riparian;306
+3;17/05/2017;93;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;57.43;66.91;0;10.98;16.08;29.09;Male;None;great groups;frugivorous;Semi-natural;Riparian;308
+3;17/05/2017;94;Balsa_Real_1;Molossidae;Molossus molossus;34.8;49.55;30.06;8.16;11.01;13.02;Female;gravid;great groups;insectivorous;Semi-natural;Riparian;309
+3;17/05/2017;95;Balsa_Real_1;Molossidae;Molossus molossus;34.5;47.76;28.98;8.02;10.76;13.69;Female;gravid;great groups;insectivorous;Semi-natural;Riparian;309
+3;18/05/2017;96;Chaquiro;Phyllostomidae;Artibeus fraterculus;57.35;56.76;0;10.3;14.86;30.25;Female;None;great groups;frugivorous;Degraded;Riparian;210
+3;18/05/2017;97;Chaquiro;Phyllostomidae;Artibeus fraterculus;52.95;72.83;0;12.26;16.53;36.96;Female;None;great groups;frugivorous;Degraded;Riparian;210
+3;18/05/2017;98;Chaquiro;Phyllostomidae;Artibeus fraterculus;58.14;70.96;0;12.26;14.68;30.35;Female;None;great groups;frugivorous;Degraded;Riparian;210
+3;18/05/2017;99;Chaquiro;Phyllostomidae;Artibeus fraterculus;55.98;68.67;0;10.9;15.3;32.59;Female;None;great groups;frugivorous;Degraded;Riparian;210
+3;19/05/2017;100;Malvas_2;Phyllostomidae;Artibeus fraterculus;55.14;67.91;0;10.88;14.79;29.32;Female;None;great groups;frugivorous;Degraded;Forest;215
+3;19/05/2017;101;Malvas_2;Phyllostomidae;Artibeus fraterculus;57.58;68.94;0;11.27;14.81;30.96;Female;None;great groups;frugivorous;Degraded;Forest;215
+4;9/06/2017;102;Cabeza_de_Toro_2;Phyllostomidae;Artibeus fraterculus;55.2;68.6;0;9.2;16.7;25.5;Male;None;great groups;frugivorous;Natural;Riparian;414
+4;9/06/2017;103;Cabeza_de_Toro_2;Phyllostomidae;Artibeus fraterculus;56.2;66.7;0;10.1;15.7;34.8;Male;None;great groups;frugivorous;Natural;Riparian;412
+4;9/06/2017;104;Cabeza_de_Toro_2;Phyllostomidae;Artibeus fraterculus;56.2;65.2;0;10.5;17.3;32.7;Female;None;great groups;frugivorous;Natural;Forest;425
+4;10/06/2017;105;Cabeza_de_Toro_3;Phyllostomidae;Desmodus rotundus;58.9;73.6;0;14.5;15.2;26.57;Male;None;great groups;hematophagous;Natural;Forest;480
+4;10/06/2017;106;Cabeza_de_Toro_3;Phyllostomidae;Artibeus fraterculus;56.5;64.3;0;12.2;16.4;34.06;Female;None;great groups;frugivorous;Natural;Forest;483
+4;10/06/2017;107;Cabeza_de_Toro_3;Phyllostomidae;Artibeus fraterculus;57.7;72.3;0;10.1;16.8;28.2;Female;None;great groups;frugivorous;Natural;Forest;483
+4;10/06/2017;108;Cabeza_de_Toro_3;Phyllostomidae;Desmodus rotundus;65.4;77.6;0;14.6;16.7;48.63;Male;None;great groups;hematophagous;Natural;Forest;480
+4;10/06/2017;109;Cabeza_de_Toro_3;Phyllostomidae;Artibeus fraterculus;57.2;70.07;0;11.1;15.6;26.12;Female;None;great groups;frugivorous;Natural;Forest;483
+4;10/06/2017;110;Cabeza_de_Toro_3;Phyllostomidae;Artibeus fraterculus;54.8;56.9;0;10.7;16.7;29.2;Male;None;great groups;frugivorous;Natural;Forest;485
+4;10/06/2017;111;Cabeza_de_Toro_3;Phyllostomidae;Artibeus fraterculus;56.6;62.8;0;10.09;16.5;24.26;Female;None;great groups;frugivorous;Natural;Forest;485
+4;11/06/2017;112;Cabeza_de_Toro_4;Vespertilionidae;Rhogeessa velilla;29.7;41.1;24.2;4.1;12;3.74;Female;None;small groups;insectivorous;Natural;Forest;433
+4;11/06/2017;113;Cabeza_de_Toro_4;Phyllostomidae;Artibeus fraterculus;57.8;66.9;0;12.3;18.3;34.2;Male;None;great groups;frugivorous;Natural;Forest;433
+4;11/06/2017;114;Cabeza_de_Toro_4;Phyllostomidae;Desmodus rotundus;61.1;72.1;0;13.7;17.7;36.3;Male;None;great groups;hematophagous;Natural;Riparian;433
+4;11/06/2017;115;Cabeza_de_Toro_4;Phyllostomidae;Desmodus rotundus;66.2;80.8;0;16.5;17.6;57.15;Female;gravid;great groups;hematophagous;Natural;Riparian;433
+4;11/06/2017;116;Cabeza_de_Toro_4;Phyllostomidae;Desmodus rotundus;65.1;72;0;15.1;19.6;41.2;Female;gravid;great groups;hematophagous;Natural;Riparian;433
+4;11/06/2017;117;Cabeza_de_Toro_4;Vespertilionidae;Rhogeessa velilla;29.2;39.9;23.7;4.1;10.9;3.6;Female;None;small groups;insectivorous;Natural;Forest;433
+4;11/06/2017;118;Cabeza_de_Toro_4;Phyllostomidae;Artibeus fraterculus;56.5;67;0;13.8;17.3;33.1;Female;None;great groups;frugivorous;Natural;Riparian;433
+4;11/06/2017;119;Cabeza_de_Toro_4;Phyllostomidae;Artibeus fraterculus;57.3;66.7;0;13;18.7;26.3;Male;None;great groups;frugivorous;Natural;Riparian;433
+4;11/06/2017;120;Cabeza_de_Toro_4;Phyllostomidae;Desmodus rotundus;63.8;79.9;0;12.6;16;60.4;Female;gravid;great groups;hematophagous;Natural;Riparian;433
+4;11/06/2017;121;Cabeza_de_Toro_4;Phyllostomidae;Desmodus rotundus;61.65;82.89;0;15.62;14.43;48.05;Female;gravid;great groups;hematophagous;Natural;Riparian;433
+4;11/06/2017;122;Cabeza_de_Toro_4;Phyllostomidae;Micronycteris megalotis;34.2;38.92;11.78;7.84;17.25;6.94;Female;None;small groups;insectivorous;Natural;Riparian;433
+4;12/06/2017;123;Ceiba_Chica;Phyllostomidae;Artibeus fraterculus;49.9;64.6;0;10.8;17.2;33.49;Male;None;great groups;frugivorous;Degraded;Forest;242
+4;12/06/2017;124;Ceiba_Chica;Phyllostomidae;Artibeus fraterculus;56.3;63.4;0;9;18.1;35.31;Male;None;great groups;frugivorous;Degraded;Forest;242
+4;12/06/2017;125;Ceiba_Chica;Phyllostomidae;Artibeus fraterculus;56.8;63.4;0;11.1;15.1;38.03;Female;None;great groups;frugivorous;Degraded;Forest;242
+4;12/06/2017;126;Ceiba_Chica;Phyllostomidae;Artibeus fraterculus;54.7;61.4;0;11.3;17.2;25.99;Female;None;great groups;frugivorous;Degraded;Forest;242
+4;12/06/2017;127;Ceiba_Chica;Phyllostomidae;Glossophaga soricina;35.26;44.87;4.53;8.11;12.98;9.9;Male;None;small groups;nectarivore;Degraded;Forest;242
+4;12/06/2017;128;Ceiba_Chica;Phyllostomidae;Artibeus fraterculus;53.9;67.4;0;10.06;14;30.32;Male;None;great groups;frugivorous;Degraded;Forest;242
+4;13/06/2017;129;Zapotillo;Phyllostomidae;Desmodus rotundus;60.1;70.02;0;14;17.9;34.09;Male;None;great groups;hematophagous;Degraded;Riparian;282
+4;14/06/2017;130;El_Carrizo;Phyllostomidae;Artibeus fraterculus;54.9;65.07;0;10.05;16.05;33.6;Female;None;great groups;frugivorous;Degraded;Riparian;194
+4;14/06/2017;131;El_Carrizo;Noctilionidae;Noctilio leporinus;85.6;81.19;29.9;27.25;27.5;63.5;Male;None;small groups;piscivorous;Degraded;Riparian;194
+4;14/06/2017;132;El_Carrizo;Noctilionidae;Noctilio leporinus;83.25;86;29.3;27.4;23;69.3;Male;None;small groups;piscivorous;Degraded;Riparian;194
+4;14/06/2017;133;El_Carrizo;Vespertilionidae;Myotis nigricans;35.55;37.9;35.9;4.76;9.75;7.3;Male;None;great groups;insectivorous;Degraded;Riparian;194
+4;14/06/2017;134;El_Carrizo;Vespertilionidae;Myotis nigricans;33.12;35.55;30.52;5.64;10.47;4.1;Male;None;great groups;insectivorous;Degraded;Riparian;194
+5;16/05/2013;135;Valle hermoso;Phyllostomidae;Glossophaga soricina;;;;;;;Female;None;small groups;nectarivore;Degraded;Riparian;180
+6;21/05/2013;136;Chilco;Phyllostomidae;Chrotopterus auritus;;;;;;;Male;None;small groups;carnivorous;Semi-natural;Riparian;270
+6;21/05/2013;137;Chilco;Phyllostomidae;Artibeus fraterculus;;;;;;;Female;None;great groups;frugivorous;Semi-natural;Riparian;270
+6;21/05/2013;138;Chilco;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Semi-natural;Riparian;270
+6;21/05/2013;139;Chilco;Phyllostomidae;Chrotopterus auritus;;;;;;;Male;None;small groups;carnivorous;Semi-natural;Riparian;270
+6;21/05/2013;140;Chilco;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Semi-natural;Riparian;270
+7;29/05/2013;141;Cabeza de Toro 5;Phyllostomidae;Desmodus rotundus;;;;;;;Male;None;great groups;hematophagous;Natural;Forest;478
+7;30/05/2013;142;Cabeza de Toro 5;Phyllostomidae;Phyllostomus discolor;;;;;;;Male;scrotal testicles;small groups;omnivore;Natural;Forest;478
+7;30/05/2013;143;Cabeza de Toro 5;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Natural;Forest;478
+7;30/05/2013;144;Cabeza de Toro 5;Phyllostomidae;Artibeus fraterculus;;;;;;;Female;None;great groups;frugivorous;Natural;Forest;478
+7;30/05/2013;145;Cabeza de Toro 5;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Natural;Forest;478
+7;30/05/2013;146;Cabeza de Toro 5;Phyllostomidae;Artibeus fraterculus;;;;;;;Female;None;great groups;frugivorous;Natural;Forest;478
+6;30/05/2013;147;Cabeza de Toro 5;Phyllostomidae;Artibeus fraterculus;;;;;;;Female;None;great groups;frugivorous;Natural;Forest;478
+7;30/05/2013;148;Cabeza de Toro 5;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Natural;Forest;478
+7;30/05/2013;149;Cabeza de Toro 5;Phyllostomidae;Artibeus fraterculus;;;;;;;Female;None;great groups;frugivorous;Natural;Forest;478
+8;17/07/2013;150;Valle hermoso;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Degraded;Riparian;180
+9;5/08/2013;151;Chilco;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Semi-natural;Riparian;270
+9;6/08/2013;152;Chilco;Phyllostomidae;Desmodus rotundus;;;;;;;Female;None;great groups;hematophagous;Semi-natural;Riparian;270
+9;7/08/2013;153;Chilco;Phyllostomidae;Artibeus fraterculus;;;;;;;Male;None;great groups;frugivorous;Semi-natural;Riparian;270
+9;8/08/2013;154;Chilco;Phyllostomidae;Desmodus rotundus;;;;;;;Male;None;great groups;hematophagous;Semi-natural;Riparian;270
+9;8/08/2013;155;Chilco;Vespertilionidae;Myotis nigricans;;;;;;;Male;None;great groups;insectivorous;Semi-natural;Riparian;270
+9;8/08/2013;156;Chilco;Noctilionidae;Noctilio leporinus;;;;;;;Male;None;small groups;piscivorous;Semi-natural;Riparian;270
+10;26/09/2013;157;Valle hermoso;Phyllostomidae;Glossophaga soricina;;;;;;;Male;None;small groups;nectarivore;Degraded;Riparian;180
+11;20/08/2014;158;Cabeza de Toro 5;Vespertilionidae;Myotis nigricans;;;;;;;Male;None;great groups;insectivorous;Natural;Forest;478
+11;20/08/2014;159;Cabeza de Toro 5;Vespertilionidae;Rhogeessa velilla;;;;;;;Male;None;small groups;insectivorous;Natural;Forest;478
+12;23/08/2017;160;Zapayal;Phyllostomidae;Artibeus fraterculus;55.28;68.79;0;9.27;15.7;38.41;Female;None;great groups;frugivorous;Degraded;Forest;190
+12;23/08/2017;161;Zapayal;Phyllostomidae;Artibeus fraterculus;56.57;71.46;0;9.83;16.23;33.9;Female;None;great groups;frugivorous;Degraded;Riparian;177
+12;23/08/2017;162;Zapayal;Phyllostomidae;Artibeus fraterculus;58.5;77.31;0;10.9;16.44;38.3;Female;None;great groups;frugivorous;Degraded;Riparian;177
+12;23/08/2017;163;Zapayal;Molossidae;Molossus molossus;35.94;52.19;31.5;6.71;11.28;9.93;Female;None;great groups;insectivorous;Degraded;Riparian;177
+12;23/08/2017;164;Zapayal;Phyllostomidae;Glossophaga soricina;37.65;52.25;6.25;9.43;13.96;7.85;Female;None;small groups;nectarivore;Degraded;Riparian;177
+12;23/08/2017;165;Zapayal;Phyllostomidae;Glossophaga soricina;38.14;55.59;7.44;9.57;13.65;11.05;Female;None;small groups;nectarivore;Degraded;Riparian;177
+12;23/08/2017;166;Zapayal;Vespertilionidae;Myotis riparius;36.89;45.55;37.41;6.63;14.32;6.34;Male;None;small groups;insectivorous;Degraded;Riparian;177
+12;23/08/2017;167;Zapayal;Phyllostomidae;Artibeus fraterculus;53.44;68.7;0;10.83;16.84;32.71;Male;None;great groups;frugivorous;Degraded;Riparian;177
+12;24/08/2017;168;Catanas 2;Phyllostomidae;Glossophaga soricina;37.25;56.63;5.47;7.85;13.15;8.16;Male;None;small groups;nectarivore;Natural;Forest;275
+12;24/08/2017;169;Catanas 2;Vespertilionidae;Myotis riparius;32.64;40.29;32.36;5.43;10.99;3.32;Male;None;great groups;insectivorous;Natural;Riparian;234
+12;24/08/2017;170;Catanas 2;Phyllostomidae;Glossophaga soricina;36.32;55.41;7.22;8.2;13.89;8.78;Male;None;great groups;nectarivore;Natural;Riparian;234
+12;24/08/2017;171;Catanas 2;Phyllostomidae;Artibeus fraterculus;54.7;74.48;0;11.86;18.44;35.76;Female;None;great groups;frugivorous;Natural;Riparian;234
+12;24/08/2017;172;Catanas 2;Phyllostomidae;Desmodus rotundus;62.92;75.34;0;16.24;19.16;34.17;Female;None;great groups;hematophagous;Natural;Riparian;270
+12;24/08/2017;173;Catanas 2;Phyllostomidae;Desmodus rotundus;59.55;71.82;0;14.75;17.94;37.3;Female;None;great groups;hematophagous;Natural;Forest;275
+12;24/08/2017;174;Catanas 2;Phyllostomidae;Desmodus rotundus;58.4;73.53;0;14.92;17.72;29.53;Male;None;great groups;hematophagous;Natural;Riparian;270
+12;24/08/2017;175;Catanas 2;Phyllostomidae;Glossophaga soricina;37.91;54.57;5.82;8.25;12.32;8.04;Female;None;small groups;nectarivore;Natural;Riparian;270
+12;25/08/2017;176;Totumitos;Phyllostomidae;Artibeus fraterculus;55.93;77.22;0;11.37;15.36;38.79;Female;None;great groups;frugivorous;Semi-natural;Riparian;201
+12;25/08/2017;177;Totumitos;Phyllostomidae;Artibeus fraterculus;55.9;73.1;0;10.54;13.65;34.33;Male;None;great groups;frugivorous;Semi-natural;Riparian;201
+12;25/08/2017;178;Totumitos;Phyllostomidae;Artibeus fraterculus;56.71;78.25;0;12.66;15.37;31.78;Female;None;great groups;frugivorous;Semi-natural;Riparian;201
+12;25/08/2017;179;Totumitos;Phyllostomidae;Artibeus fraterculus;52.74;75.15;0;10.96;14.51;35.23;Female;None;great groups;frugivorous;Semi-natural;Riparian;201
+12;25/08/2017;180;Totumitos;Phyllostomidae;Artibeus fraterculus;55.83;73.06;0;10.63;16.88;35.72;Male;None;great groups;frugivorous;Semi-natural;Riparian;201
+12;25/08/2017;181;Totumitos;Phyllostomidae;Artibeus fraterculus;53.01;68.17;0;9.76;15.59;31.72;Female;None;great groups;frugivorous;Semi-natural;Riparian;201
+13;24/10/2017;182;Chaquiro;Phyllostomidae;Artibeus fraterculus;54.29;71.44;0;11.55;16.52;27.3;Male;scrotal testicles;great groups;frugivorous;Degraded;Riparian;219
+13;24/10/2017;183;Chaquiro;Phyllostomidae;Artibeus fraterculus;54.56;79.58;0;10.88;16.04;41.96;Female;gravid;great groups;frugivorous;Degraded;Forest;225
+13;24/10/2017;184;Chaquiro;Phyllostomidae;Artibeus fraterculus;56.09;69.15;0;10.77;17.15;30.12;Male;None;great groups;frugivorous;Degraded;Riparian;219
+13;24/10/2017;185;Chaquiro;Phyllostomidae;Artibeus fraterculus;56.71;74.94;0;10.5;16.72;32.77;Male;scrotal testicles;great groups;frugivorous;Degraded;Riparian;219
+13;24/10/2017;186;Chaquiro;Phyllostomidae;Desmodus rotundus;63.98;85.54;0;14.07;20.02;33.63;Female;None;great groups;hematophagous;Degraded;Riparian;219
+13;24/10/2017;187;Chaquiro;Phyllostomidae;Artibeus fraterculus;55.96;72.7;0;9.99;14.58;32.57;Male;scrotal testicles;great groups;frugivorous;Degraded;Riparian;219
+13;24/10/2017;188;Chaquiro;Phyllostomidae;Artibeus fraterculus;55.72;75.3;0;9.97;14.78;42.35;Female;gravid;great groups;frugivorous;Degraded;Forest;225
+13;24/10/2017;189;Chaquiro;Phyllostomidae;Artibeus fraterculus;56.44;76.58;0;10.19;15.58;31.27;Female;None;great groups;frugivorous;Degraded;Forest;225
+13;24/10/2017;190;Chaquiro;Phyllostomidae;Artibeus fraterculus;56.75;77.79;0;10.43;14.77;32.99;Male;scrotal testicles;great groups;frugivorous;Degraded;Forest;225
+13;25/10/2017;191;La_Manga;Phyllostomidae;Artibeus fraterculus;56.9;69.11;0;10.44;15.61;41.56;Female;gravid;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;192;La_Manga;Phyllostomidae;Artibeus fraterculus;54.68;70.3;0;10.55;15.36;43.96;Female;gravid;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;193;La_Manga;Phyllostomidae;Artibeus fraterculus;54.95;76.04;0;9.83;15.16;30.93;Male;None;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;194;La_Manga;Phyllostomidae;Artibeus fraterculus;54.59;75.97;0;9.87;14.89;38.7;Male;None;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;195;La_Manga;Phyllostomidae;Artibeus fraterculus;55.01;73.89;0;9.33;15.09;33.73;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;196;La_Manga;Phyllostomidae;Artibeus fraterculus;57.64;76.57;0;10.18;15.02;37.08;Female;None;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;197;La_Manga;Phyllostomidae;Artibeus fraterculus;58.28;77.98;0;10.24;15.7;43.19;Female;gravid;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;198;La_Manga;Phyllostomidae;Artibeus fraterculus;55.91;77.69;0;10.26;16.92;37.44;Female;None;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;199;La_Manga;Phyllostomidae;Artibeus fraterculus;52.32;68.94;0;10.14;14.48;28;Female;None;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;200;La_Manga;Phyllostomidae;Artibeus fraterculus;53.54;74.62;0;9.56;14.42;40.89;Female;gravid;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;201;La_Manga;Phyllostomidae;Artibeus fraterculus;58.19;73.32;0;10.8;16.02;37.76;Female;None;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;202;La_Manga;Phyllostomidae;Artibeus fraterculus;55.89;74.69;0;10.25;15.19;42.9;Female;gravid;great groups;frugivorous;Semi-natural;Forest;505
+13;25/10/2017;203;La_Manga;Phyllostomidae;Artibeus fraterculus;57.69;74.26;0;10.48;16.47;32.78;Female;None;great groups;frugivorous;Semi-natural;Forest;505
+13;26/10/2017;204;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;57.31;75.89;0;11.14;15.69;32.3;Female;None;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;205;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;59.18;74.94;0;10.67;17.45;37.92;Female;None;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;206;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;58.23;77.25;0;11.03;15.68;39.82;Female;gravid;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;207;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;57.8;74.92;0;11.18;16.21;35.81;Female;None;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;208;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;57.44;76.62;0;11.24;16.07;36.67;Female;gravid;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;209;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;56.04;73.48;0;11.08;14.97;38.08;Female;gravid;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;210;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;57.58;73.02;0;10.18;17.02;29.78;Male;None;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;211;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;57.26;70.14;0;10.01;16.38;32.97;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;212;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;58.55;73.73;0;10.94;15.61;28.3;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Riparian;309
+13;26/10/2017;213;Balsa_Real_1;Phyllostomidae;Artibeus fraterculus;55.32;70.68;0;11.09;16.39;24.26;Female;None;great groups;frugivorous;Semi-natural;Riparian;309
+14;6/11/2017;214;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;57.34;78.8;0;10.62;18.01;46.2;Female;gravid;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;215;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;54.33;73.18;0;9.34;18.01;43.26;Female;gravid;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;216;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;55.24;69.79;0;10.68;17.21;25.98;Male;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;217;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;55.68;71.39;0;10.91;16.38;32.27;Female;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;218;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;53.81;74.4;0;10.75;16.63;35.92;Male;scrotal testicles;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;219;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;56.51;74.65;0;11.03;15.03;39.62;Female;gravid;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;220;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;54.98;78.76;0;11.44;16.87;36.19;Female;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;221;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;57.1;79.21;0;9.37;16.76;28.17;Male;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;222;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;57.78;72.84;0;9.83;15.79;34.3;Male;scrotal testicles;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;223;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;54.95;76.18;0;10.98;18.08;27.15;Male;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;224;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;55.08;73.32;0;11.13;17.16;36.27;Male;scrotal testicles;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;225;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;58.24;76.8;0;10.97;14.99;28.67;Female;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;226;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;55.06;69.82;0;11.4;16.62;34.37;Male;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;227;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;55.02;76.08;0;9.58;16.78;35.05;Male;scrotal testicles;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;228;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;59.79;65.82;0;11.63;18.53;40.94;Male;scrotal testicles;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;229;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;55.49;72.7;0;11.59;17.17;42.08;Female;gravid;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;230;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;54.94;75.01;0;10.37;17.27;37.17;Male;None;great groups;frugivorous;Natural;Forest;401
+14;6/11/2017;231;El_Oro_de_Pilares;Phyllostomidae;Artibeus fraterculus;56.57;74.83;0;10.67;15.41;34.71;Female;None;great groups;frugivorous;Natural;Forest;401
+14;7/11/2017;232;El_Salto;Phyllostomidae;Artibeus fraterculus;57.07;76.42;0;10.95;16.18;46.85;Female;gravid;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;233;El_Salto;Phyllostomidae;Artibeus fraterculus;56.74;73.61;0;9.6;16.72;37.99;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;234;El_Salto;Phyllostomidae;Artibeus fraterculus;54.06;75.23;0;10.27;16.41;42.3;Female;gravid;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;235;El_Salto;Phyllostomidae;Artibeus fraterculus;58.24;67.86;0;11.58;16.2;44.69;Female;gravid;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;236;El_Salto;Phyllostomidae;Artibeus fraterculus;55.73;74.35;0;10.72;17.96;53.52;Female;gravid;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;237;El_Salto;Phyllostomidae;Artibeus fraterculus;56.64;73.6;0;9.43;18.35;35.94;Male;None;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;238;El_Salto;Phyllostomidae;Artibeus fraterculus;56.09;70.28;0;10.57;18.5;41.53;Male;None;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;239;El_Salto;Phyllostomidae;Artibeus fraterculus;53.25;74.18;0;9.74;18.14;41.3;Male;None;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;240;El_Salto;Phyllostomidae;Artibeus fraterculus;58.89;79.32;0;9.74;14.91;47.3;Female;gravid;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;241;El_Salto;Phyllostomidae;Artibeus fraterculus;59.25;68.64;0;11.03;19.51;39.04;Female;None;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;242;El_Salto;Phyllostomidae;Artibeus fraterculus;55.12;77.98;0;9.42;16.47;32.76;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;243;El_Salto;Phyllostomidae;Artibeus fraterculus;54.97;77.95;0;10.1;16.14;40.46;Female;gravid;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;244;El_Salto;Phyllostomidae;Artibeus fraterculus;53.72;71.63;0;10.01;15.76;31.31;Male;None;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;245;El_Salto;Phyllostomidae;Artibeus fraterculus;55.64;75.27;0;10.08;17.41;36.21;Female;None;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;246;El_Salto;Phyllostomidae;Artibeus fraterculus;55.81;73.32;0;10.54;17.55;37.55;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;247;El_Salto;Phyllostomidae;Artibeus fraterculus;56.58;72.27;0;10.51;17.44;40.55;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Forest;435
+14;7/11/2017;248;El_Salto;Phyllostomidae;Artibeus fraterculus;56.56;74.26;0;10.66;15.88;36.23;Male;scrotal testicles;great groups;frugivorous;Semi-natural;Forest;435
+14;8/11/2017;249;Catanas_2;Phyllostomidae;Desmodus rotundus;61.38;78.35;0;15.09;17.49;32.73;Female;None;great groups;hematophagous;Natural;Riparian;234
+14;8/11/2017;250;Catanas_2;Phyllostomidae;Artibeus fraterculus;54.58;74.32;0;10.54;16.91;28.76;Male;scrotal testicles;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;251;Catanas_2;Phyllostomidae;Desmodus rotundus;60.62;79.57;0;14.06;16.74;31.91;Male;scrotal testicles;great groups;hematophagous;Natural;Riparian;234
+14;8/11/2017;252;Catanas_2;Phyllostomidae;Desmodus rotundus;61.69;82.54;0;13.74;15.06;40.16;Female;gravid;great groups;hematophagous;Natural;Riparian;234
+14;8/11/2017;253;Catanas_2;Phyllostomidae;Desmodus rotundus;63.48;85.03;0;13.27;16.69;28.48;Female;None;great groups;hematophagous;Natural;Riparian;234
+14;8/11/2017;254;Catanas_2;Phyllostomidae;Artibeus fraterculus;57.38;76.21;0;10.08;17.14;26.59;Female;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;255;Catanas_2;Phyllostomidae;Artibeus fraterculus;55.27;80.92;0;10.08;15.53;31.33;Female;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;256;Catanas_2;Phyllostomidae;Artibeus fraterculus;55.72;76.3;0;11.6;17.62;34.57;Female;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;257;Catanas_2;Phyllostomidae;Artibeus fraterculus;59.55;72.79;0;11.18;18.05;39.06;Female;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;258;Catanas_2;Phyllostomidae;Lophostoma occidentalis;55.04;70.89;13.41;11.17;28.17;23.71;Female;None;great groups;omnivore;Natural;Riparian;234
+14;8/11/2017;259;Catanas_2;Phyllostomidae;Artibeus fraterculus;44.94;77.76;0;11.47;16.3;40.3;Female;gravid;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;260;Catanas_2;Phyllostomidae;Artibeus fraterculus;53.34;75.47;0;10.7;16.02;39.06;Male;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;261;Catanas_2;Phyllostomidae;Artibeus fraterculus;54.07;73.47;0;9.94;16.75;34.67;Male;scrotal testicles;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;262;Catanas_2;Phyllostomidae;Artibeus fraterculus;54.02;78.54;0;9.77;16.46;35.57;Male;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;263;Catanas_2;Phyllostomidae;Artibeus fraterculus;57.49;73.62;0;9.67;18.62;39.34;Female;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;264;Catanas_2;Phyllostomidae;Artibeus fraterculus;55.3;71.57;0;9.65;17.68;41.34;Female;gravid;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;265;Catanas_2;Phyllostomidae;Artibeus fraterculus;56.9;71.6;0;9.92;18.94;37.72;Female;None;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;266;Catanas_2;Phyllostomidae;Artibeus fraterculus;56.85;78.35;0;9.86;18.11;40.75;Female;gravid;great groups;frugivorous;Natural;Riparian;234
+14;8/11/2017;267;Catanas_2;Phyllostomidae;Lophostoma occidentalis;53.28;71.75;11.84;11.62;30.23;22.28;Female;None;great groups;omnivore;Natural;Riparian;234
+15;20/11/2017;268;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.1;73.4;0;11.1;18.9;36.1;Male;None;great groups;frugivorous;Natural;Riparian;360
+15;20/11/2017;269;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.35;72.75;0;11.99;18.5;42.28;Female;gravid;great groups;frugivorous;Natural;Riparian;360
+15;20/11/2017;270;Balsa_Real_2;Phyllostomidae;Gardnerycteris crenulatum;51.9;58.9;22.5;10.25;25.6;15.79;Female;None;great groups;insectivorous;Natural;Forest;365
+15;20/11/2017;271;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;54.95;67.3;0;9.55;17.5;33.05;Male;None;great groups;frugivorous;Natural;Riparian;360
+15;20/11/2017;272;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;53.3;66.25;0;10.95;15.95;32.28;Male;None;great groups;frugivorous;Natural;Riparian;360
+15;20/11/2017;273;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.15;70.6;0;10.97;16.25;48.97;Female;gravid;great groups;frugivorous;Natural;Riparian;360
+15;20/11/2017;274;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.95;67.45;0;11.15;16.35;36.87;Male;scrotal testicles;great groups;frugivorous;Natural;Riparian;360
+15;20/11/2017;275;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;59.05;68.98;0;9.95;15.1;44.83;Female;gravid;great groups;frugivorous;Natural;Forest;365
+15;20/11/2017;276;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;54.8;73.6;0;10.05;18.2;39.39;Male;scrotal testicles;great groups;frugivorous;Natural;Forest;367
+15;20/11/2017;277;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.1;69.92;0;10.1;19.9;32.85;Male;None;great groups;frugivorous;Natural;Forest;365
+15;20/11/2017;278;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.8;69.97;0;11.45;18.4;35.24;Male;None;great groups;frugivorous;Natural;Forest;365
+15;20/11/2017;279;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.75;67.69;0;12.48;18.81;35.3;Female;infant;great groups;frugivorous;Natural;Forest;367
+15;20/11/2017;280;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;52.99;17.1;0;11.25;17.1;29.25;Male;None;great groups;frugivorous;Natural;Forest;367
+15;20/11/2017;281;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.75;73.7;0;10.15;16.1;44.72;Female;gravid;great groups;frugivorous;Natural;Forest;365
+15;20/11/2017;282;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.6;72.99;0;9.94;18.8;35.94;Male;None;great groups;frugivorous;Natural;Forest;365
+15;20/11/2017;283;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.6;77.81;0;10.66;17.45;37.14;Female;None;great groups;frugivorous;Natural;Forest;367
+15;20/11/2017;284;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;57.45;75.75;0;9.55;16.8;40.62;Female;None;great groups;frugivorous;Natural;Forest;367
+15;20/11/2017;285;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;53.7;66.7;0;9.6;16.6;29.79;Male;None;great groups;frugivorous;Natural;Forest;367
+15;20/11/2017;286;Balsa_Real_2;Phyllostomidae;Artibeus fraterculus;56.94;76.7;0;9.97;19.2;37.93;Female;None;great groups;frugivorous;Natural;Forest;367
+15;21/11/2017;287;Malvas_2;Phyllostomidae;Artibeus fraterculus;53.69;71.25;0;11.65;16.56;34.28;Male;scrotal testicles;great groups;frugivorous;Degraded;Forest;215
+15;21/11/2017;288;Malvas_2;Phyllostomidae;Artibeus fraterculus;54.68;71.05;0;10.62;17.19;31.74;Male;None;great groups;frugivorous;Degraded;Forest;215
+15;21/11/2017;289;Malvas_2;Molossidae;Molossus molossus;30.02;55.07;34.1;6.45;9.77;13.61;Male;None;great groups;insectivorous;Degraded;Forest;215
+15;22/11/2017;290;Malvas_1;Phyllostomidae;Artibeus fraterculus;57.02;77.61;0;11.44;18.25;46.45;Female;gravid;great groups;frugivorous;Degraded;Riparian;310

@@ -1,5 +1,7 @@
-library(ggplot2)
+library(tidyverse)
 library(glmnet)
+library(viridis)
+
 
 # Generar datos aleatorios
 set.seed(123)
@@ -81,5 +83,4 @@ ggplot(data = data, aes(x, s0)) +
   theme_minimal() +
   geom_smooth(data=data %>% 
                 filter(model == "observaciones"), method="lm", color="black",se = FALSE)+
-  facet_wrap(~type) +
-  scale_color_material_d()
+  facet_wrap(~type)
